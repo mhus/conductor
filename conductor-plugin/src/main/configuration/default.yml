@@ -1,0 +1,352 @@
+#
+# Copyright (C) 2020 Mike Hummel (mh@mhus.de)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
+properties:
+
+projects:
+  # default project is current
+  - name: current
+    path: .
+
+lifecycles:
+
+- name: git.pull
+  steps:
+  - title: Clone
+    target: con.git.clone
+  - title: Pull
+    target: con.git
+    arguments:
+    - pull
+
+- name: git.clone
+  steps:
+  - title: Clone
+    target: con.git.clone
+  - title: Pull
+    target: con.git
+    arguments:
+    - ${cmd}
+
+- name: git.reset
+  steps:
+  - title: Reset
+    target: con.git
+    arguments:
+    - "reset --hard"
+    - pull
+
+- name: git
+  steps:
+  - title: Git
+    target: con.git
+    properties:
+      ignoreReturnCode: ${ignoreReturnCode:false}
+    arguments:
+    - ${cmd}
+
+- name: git.add
+  steps:
+  - title: Git
+    target: con.git
+    properties:
+      ignoreReturnCode: ${ignoreReturnCode:true}
+    arguments:
+    - add *
+    
+- name: git.commit
+  description: Commit all projects
+  usage:
+  - m isset Message must be set
+  steps:
+  - title: Commit
+    target: con.git
+    properties:
+      ignoreReturnCode: ${ignoreReturnCode:true}
+    arguments:
+    - commit -m "${m}" 
+    - push
+
+- name: reset
+  steps:
+  - title: Reset Directory Touch
+    target: con.reset
+    properties:
+      touchDirectory: false
+      processSubModules: ${processSubModules:false}
+      modifiedOnly: false
+    sort: order
+
+- name: rebuild
+  steps:
+  - title: Rebuild
+    target: kind
+    sort: order
+    steps:
+    - target: maven
+      steps:
+      - target: include
+        arguments:
+        - maven.rebuild
+    - target: gradel
+      steps:
+      - target: include
+        arguments:
+        - gradel.rebuild
+
+- name: maven.rebuild
+  steps:
+  - title: Maven Rebuild
+    target: con.maven
+    arguments:
+    - clean
+    - install
+    properties:
+      touchDirectory: ${touchDirectory:true}
+      processSubModules: ${processSubModules:false}
+      modifiedOnly: ${modifiedOnly:false}
+    sort: order
+
+- name: maven
+  steps:
+  - title: Maven Rebuild
+    target: con.maven
+    arguments:
+    - ${cmd}
+    properties:
+      touchDirectory: ${touchDirectory:true}
+      processSubModules: ${processSubModules:false}
+      modifiedOnly: ${modifiedOnly:false}
+    sort: order
+
+- name: build
+  steps:
+  - title: Build
+    target: kind
+    sort: order
+    steps:
+    - target: maven
+      steps:
+      - target: include
+        arguments:
+        - maven.build
+    - target: gradel
+      steps:
+      - target: include
+        arguments:
+        - gradel.build
+        
+- name: maven.build
+  steps:
+  - title: Maven Build
+    target: con.maven
+    arguments:
+    - install
+    properties:
+      touchDirectory: ${touchDirectory:true}
+      processSubModules: ${processSubModules:true}
+      modifiedOnly: ${modifiedOnly:true}
+    sort: order
+
+- name: buildall
+  steps:
+  - title: Maven Build
+    target: con.maven
+    arguments:
+    - install
+    properties:
+      touchDirectory: ${touchDirectory:false}
+      processSubModules: ${processSubModules:false}
+      modifiedOnly: ${modifiedOnly:false}
+    sort: order
+
+- name: update
+  steps:
+  - title: Update
+    target: kind
+    sort: order
+    steps:
+    - target: maven
+      steps:
+      - target: include
+        arguments:
+        - maven.update
+    - target: gradel
+      steps:
+      - target: include
+        arguments:
+        - gradel.update
+        
+- name: maven.update
+  steps:
+  - title: Maven Update
+    target: con.maven
+    arguments:
+    - clean
+    - install
+    properties:
+      touchDirectory: ${touchDirectory:true}
+      processSubModules: ${processSubModules:true}
+      modifiedOnly: ${modifiedOnly:true}
+    sort: order
+
+- name: clean
+  steps:
+  - title: Clean
+    target: kind
+    sort: order
+    steps:
+    - target: maven
+      steps:
+      - target: include
+        arguments:
+        - maven.clean
+    - target: gradel
+      steps:
+      - target: include
+        arguments:
+        - gradel. clean
+
+- name: maven.clean
+  steps:
+  - title: Maven Clean
+    target: con.maven
+    arguments:
+    - clean
+    sort: order
+
+- name: docker.build
+  steps:
+  - title: Load Version
+    target: con.loadVersion
+  - title: Docker Build
+    target: con.docker
+    arguments:
+    - build
+    - '-t ${project._name}:${project.version}'
+    - '.'
+    sort: order
+
+- name: test.test1
+  steps:
+  - title: Test Maven Sub-Modules
+    target: con.test
+    properties:
+      processSubModules: true
+
+- name: test.test2
+  steps:
+  - title: Test Modified Maven Sub-Modules
+    target: con.test
+    properties:
+      processSubModules: true
+      modifiedOnly: true
+
+- name: test.cmd
+  steps:
+  - title: Test Maven Sub-Modules
+    target: con.test
+    arguments:
+    - ${cmd}
+
+- name: test.newVersion
+  title: Configure new versions
+  steps:
+  - title: Calculate new versions
+    target: con.calculateNewVersion
+  - title: Set new version properties
+    target: con.updatePomProperties
+    selector:
+      group: parent
+  - title: Set new parent version
+    target: con.updatePomParentVersion
+    selector:
+      version.changed: true
+    properties:
+      version: ${projects.parent.version}
+  - title: Install parent pom
+    target: con.maven
+    arguments:
+     - clean
+     - install
+    selector:
+      group: parent
+  - title: Set new project version
+    target: con.maven
+    arguments:
+      - versions:set
+      - -DnewVersion=${project.version}
+    selector:
+      version.changed: true
+  - title: Save version history
+    target: con.persistNewVersions
+
+
+plugins:
+  - target: con.calculateNewVersion
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: calculateNewVersion
+    scope: step
+  - target: con.nextSnapshotVersions
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: nextSnapshotVersions
+  - target: con.cmd
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: cmd
+  - target: con.git
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: git
+  - target: con.git.clone
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: git.clone
+  - target: con.maven
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: maven
+  - target: con.persistNewVersions
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: persistNewVersions
+    scope: step
+  - target: con.test
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: test
+  - target: con.updatePomProperties
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: updatePomProperties
+  - target: con.updatePomParentVersion
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: updatePomParentVersion
+  - target: con.validateStep
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: con.validate
+    scope: step
+  - target: con.validateProject
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: con.validate
+  - target: con.includeLifecycle
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: con.includeLifecycle
+    scope: step
+  - target: con.reset
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: resetDirectoryTouch
+  - target: con.docker
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: docker
+  - target: con.loadVersion
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: loadPomVersion
+    

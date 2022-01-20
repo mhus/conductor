@@ -1,0 +1,45 @@
+#
+# Copyright (C) 2020 Mike Hummel (mh@mhus.de)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# do not use the scheme vm: - it's not working with JUnit tests
+plugins:
+  - target: con.calculateNewVersion
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: calculateNewVersion
+    scope: step
+  - target: con.cmd
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: cmd
+  - target: con.git
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: git
+  - target: con.maven
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: maven
+  - target: con.persistNewVersions
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: persistNewVersions
+    scope: step
+  - target: con.test
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: test
+  - target: con.updatePomProperties
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: updatePomProperties
+  - target: con.updatePomParentVersion
+    uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+    mojo: updatePomParentVersion
+    

@@ -1,0 +1,50 @@
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+=== Installation
+
+==== Simple
+
+The simple way to install conductor on a unixoide os with wget and bash is 
+to execute the following command:
+
+----
+version=<latest>
+wget -qO- https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/${version}/conductor-launcher-${version}-install.sh | bash
+----
+
+This will install the selected version of conductor in you $HOME/.conductor directory.
+
+NOTE: Conductor is able to install multiple versions in the same time.
+
+Now you have to link the default version of conductor into a bin folder or add the directory to your $PATH variable. Then it is
+possible to use the conductor command 'con'.
+
+For example link the command to /usr/local/bin
+
+----
+sudo ln -s $HOME/.conductor/bin/con /usr/local/bin
+----
+
+==== Build from source
+
+Clone the project from github. You need to download a tag version to fulfill all dependencies
+in release status.
+
+----
+git clone https://github.com/mhus/mhus-conductor.git -b 1.1.0
+cd mhus-conductor
+----
+
+The script './create.sh' will build and install the selected version of conductor.

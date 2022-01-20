@@ -1,0 +1,89 @@
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+== Quick Start
+
+First follow the installation instructions.
+
+You should be able to see the conductor version.
+
+----
+$ con -version
+Conductor Version: 1.1.0
+----
+
+If no configuration file is present conductor uses the default configuration from 
+'https://repo1.maven.org/maven2/de/mhus/conductor/conductor-plugin/${version}/conductor-plugin-${version}-configuration-default.yml'.
+It define a default project under the current path '.'.
+
+Therefore it is possible to use conductor in each project without configuration. Switch into your project directory and execute
+
+----
+con build
+----
+
+To build the project using the lifecycle 'build'. Conductor detects and uses the build tool of the project. For example if a pom.xml 
+present it will use maven to build the project.
+
+NOTE: Detection for a wide range of build tools is build in but support for the tools must be enhanced in custom configurations.
+
+If you need to handle more then one project at once you need to create a configuration file 'conductor.yaml'. Create a list of projects
+like this:
+
+----
+projects:
+  - name: parent
+    path: .
+    labels:
+      sort: 0
+  - name: core
+    path: ../sample-core
+    labels:
+      sort: 1
+  - name: api
+    path: ../sample-product
+    labels:
+      sort: 2
+
+----
+
+Use the project path relative to the configuration file location. Best practice is to create the file in the root of a parent project.
+
+This is a list of lifecycles out of the box:
+
+* 'con git' - clone and pull all projects
+* 'con git.pull' - pull on all projects
+* 'con git.reset' - remove all modifications on projects
+* 'con rebuild' - clean and build all projects
+* 'con update' - build all project with changed files (compare and set the timestamp of the project folder)
+* 'con clean' - clean the project temp files
+
+To test a real live example you can download and build the m.h.u. suite with the following commands:
+
+----
+
+Clone only the parent project:
+
+$ git clone https://github.com/mhus/mhus-parent.git
+
+change into the root directory of the project:
+
+$ cd mhus-parent
+
+now check out and build all other dependent projects with conductor
+
+$ con git - build
+
+----
+

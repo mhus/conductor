@@ -1,0 +1,10 @@
+==== Execute Sub Steps
+
+// /de/mhus/con/plugin/ExecuteMojo.java
+
+
+For each project execute the sub steps in a row.
+
+IMPORTANT: You can't use scope:step plugins as sub steps.
+
+

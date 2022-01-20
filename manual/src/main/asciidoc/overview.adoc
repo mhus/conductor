@@ -1,0 +1,38 @@
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+== Overview
+
+MHUS Conductor is a tool to manage multiple connected software projects
+at the same time.
+
+Projects are connected if they depend on another projects and they are
+in snapshot status in the same time. Usually parent and extending
+projects. 
+
+Managing projects means simple actions like build or rebuild and also
+complex processes like deployment. Actions can be executed on all or
+selected projects in the same time.
+
+For example 
+* Create a git branch for all projects
+* add, commit and push all projects in the same time
+* build or rebuild all projects in correct order with maven
+
+It's designed to process complex release deploy processes creating new versions,
+tags and switch to the next SNAPSHOT version.
+
+In the conductor configurations you define actions as lifecycles. Each lifecycle is
+a list of steps. Conductor can even help you manage single projects.
+

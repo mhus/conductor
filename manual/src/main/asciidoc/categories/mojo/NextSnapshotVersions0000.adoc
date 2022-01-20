@@ -1,0 +1,34 @@
+==== Next Snapshot Version
+
+// /de/mhus/con/plugin/NextSnapshotVersions.java
+
+
+Target: nextSnapshotVersions
+Mojo: nextSnapshotVersions
+Scope: Project
+
+===== Scope
+
+The plugin calculates the new next snapshot version for a project. The property "version" must be set
+in the project properties. It's used as base for the next version. The property "version" is overwritten
+with the new version string. The original version string is stored in "version.original".
+
+Version strings are a set of numbers, separated by dot and maybe a minus followed by a suffix.
+e.g. 1.2.3-SNAPSHOT. The first number is the major, second the minor and last the hotfix counter.
+
+===== Usage
+
+The following step properties are used the will be searched recursively:
+
+* nextVersionStatic: Set a static version string for the project (all other options will be ignored, "version" must not be set)
+* nextVersionStep = major: Will increase the major version, set all other numbers to 0
+* nextVersionStep = minor: Will increase the minor version, set all following numbers to 0
+* nextVersionStep = hotfix: Will increase the hotfix version
+* netVersionSuffix: Add a suffix to the new version. Default is 'SNAPSHOT'. Special values are #date, #timestamp and #buildnr.
+
+* #date will add a date as string
+* #isodate will add a date without time in iso format YYYYMMDD
+* #timestamp will add the current timestamp.
+* #buildnr uses the previous number and increase it by one.
+
+
