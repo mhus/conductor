@@ -128,7 +128,7 @@ public class SchemeTest extends TestCase {
             URI uri = URI.create("file:conductor.yml");
             config.configure(uri, con, null);
 
-            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.conrentVersion());
+            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.currentVersion());
             ((SchemesImpl) con.getSchemes()).put("mvn", new MavenScheme());
 
             StepImpl step = new StepImpl();

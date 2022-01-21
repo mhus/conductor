@@ -21,8 +21,8 @@
   <artifactId>manual</artifactId>
   <packaging>jar</packaging>
   <parent>
-	  	<groupId>de.mhus.conductor</groupId>
-        <artifactId>mhus-conductor</artifactId>
+	  	<groupId>org.summerclouds</groupId>
+        <artifactId>summer-conductor</artifactId>
         <version>1.1.2-SNAPSHOT</version>
   </parent>
     <properties>

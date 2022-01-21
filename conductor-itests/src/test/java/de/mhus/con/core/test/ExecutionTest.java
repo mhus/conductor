@@ -124,7 +124,7 @@ public class ExecutionTest extends TestCase {
 
         String mvnPath = ConUtil.cmdLocationOrNull(con, "mvn");
         if (mvnPath != null) {
-            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.conrentVersion());
+            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.currentVersion());
             ((SchemesImpl) con.getSchemes()).put("mvn", new MavenScheme());
 
             ExecutorImpl executor = new ExecutorImpl();
