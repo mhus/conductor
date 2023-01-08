@@ -37,7 +37,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.4.1</version>
                 <executions>
                     <!-- Run shade goal on package phase -->
                     <execution>
@@ -45,29 +45,26 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                        	<finalName>con</finalName>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-
-                            <transformers>
-                                <!-- add Main-Class to manifest file -->
-                                <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.mhus.con.core.MainCli</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <finalName>con</finalName>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                    <transformers>
+                        <!-- add Main-Class to manifest file -->
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        </transformer>
+                    </transformers>
+                </configuration>
             </plugin>
 	       <plugin>
 	         <artifactId>maven-assembly-plugin</artifactId>
@@ -137,12 +134,5 @@
     </dependency>
 	
   </dependencies>
-  
-  <repositories>
-    <repository>
-        <id>dsol-xml</id>
-        <name>Simulation @ TU Delft</name>
-        <url>http://simulation.tudelft.nl/maven/</url>
-    </repository>  
-  </repositories>
+
 </project>

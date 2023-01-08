@@ -4,3 +4,4 @@
 target/
 .externalToolBuilders
 .idea
+conductor-launcher/dependency-reduced-pom.xml

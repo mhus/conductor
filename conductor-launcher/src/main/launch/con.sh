@@ -185,8 +185,10 @@ export CONDUCTOR_PROJECTBASEDIR
 CONDUCTOR_CMD_LINE_ARGS="$CONDUCTOR_CONFIG $@"
 export CONDUCTOR_CMD_LINE_ARGS
 
+export CP=$CONDUCTOR_JAR
+
 exec "$JAVACMD" \
   $CONDUCTOR_OPTS \
   $CONDUCTOR_DEBUG_OPTS \
   "-Dconductor.home=${CONDUCTOR_HOME}" \
-  -jar ${CONDUCTOR_JAR} "$@"
+  -cp ${CP} de.mhus.con.core.MainCli "$@"
