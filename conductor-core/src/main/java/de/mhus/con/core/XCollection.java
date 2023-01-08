@@ -15,12 +15,12 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.ICollection;
+import org.summerclouds.common.core.error.NotFoundRuntimeException;
+import org.summerclouds.common.core.log.MLog;
+
 import java.util.HashMap;
 import java.util.Iterator;
-
-import de.mhus.con.api.ICollection;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.errors.MRuntimeException;
 
 public class XCollection<T> extends MLog implements ICollection<T> {
 
@@ -34,7 +34,7 @@ public class XCollection<T> extends MLog implements ICollection<T> {
     @Override
     public T get(String name) {
         T ret = collection.get(name);
-        if (ret == null) throw new MRuntimeException(getClass().getSimpleName(), "not found", name);
+        if (ret == null) throw new NotFoundRuntimeException("not found {1}", getClass().getSimpleName(), name);
         return ret;
     }
 

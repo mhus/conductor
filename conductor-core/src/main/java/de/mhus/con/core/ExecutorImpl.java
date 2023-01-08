@@ -15,6 +15,17 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+import de.mhus.con.api.Plugin.SCOPE;
+import de.mhus.con.api.Project.STATUS;
+import org.summerclouds.common.core.error.InternalRuntimeException;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.util.MUri;
+import org.summerclouds.common.core.util.Value;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -22,41 +33,9 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.ConductorPlugin;
-import de.mhus.con.api.DirectLoadScheme;
-import de.mhus.con.api.ErrorInfo;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.ExecutionInterceptorPlugin;
-import de.mhus.con.api.Executor;
-import de.mhus.con.api.Labels;
-import de.mhus.con.api.Lifecycle;
-import de.mhus.con.api.Plugin;
-import de.mhus.con.api.Plugin.SCOPE;
-import de.mhus.con.api.Project;
-import de.mhus.con.api.Project.STATUS;
-import de.mhus.con.api.Scheme;
-import de.mhus.con.api.Step;
-import de.mhus.con.api.Steps;
-import de.mhus.con.api.StopLifecycleException;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.core.util.Value;
-import de.mhus.lib.errors.MRuntimeException;
-import de.mhus.lib.errors.NotFoundException;
 
 public class ExecutorImpl extends MLog implements Executor {
 
@@ -85,7 +64,7 @@ public class ExecutorImpl extends MLog implements Executor {
             execute(lifecycle, steps);
         } catch (Throwable t) {
             printError(t,currentLifecycle);
-            throw new MRuntimeException(currentLifecycle, t);
+            throw new InternalRuntimeException(currentLifecycle, t);
         } finally {
             errors.clear();
         }
@@ -94,13 +73,13 @@ public class ExecutorImpl extends MLog implements Executor {
     private void printError(Throwable t, Object ... list ) {
         log().e("===================================================");
         log().e("*** Error: " + t);
-        log().e(list);
+        log().e("TODO", list);
         while (t != null) {
             t = t.getCause();
             log().e("--- Cause: " + t);
         }
         if (con.isVerboseOutput())
-            log().e(t);
+            log().e("TODO", t);
     }
 
     public void checkUsage() {
@@ -109,7 +88,7 @@ public class ExecutorImpl extends MLog implements Executor {
             String[] parts = arg.split(" ",3);
             log().d("validate",arg,parts);
             if (parts.length < 3)
-                throw new MRuntimeException(currentLifecycle, "Usage rule malformed",arg);
+                throw new InternalRuntimeException("Usage rule malformed", currentLifecycle,arg);
             String name = parts[0];
             String check = parts[1];
             String msg = parts[2];
@@ -143,7 +122,7 @@ public class ExecutorImpl extends MLog implements Executor {
         }
         
         if (error)
-            throw new MRuntimeException(currentLifecycle, "usage checks failed");
+            throw new InternalRuntimeException("usage checks failed", currentLifecycle);
     }
 
     public void execute(String lifecycle, Steps steps) {
@@ -207,7 +186,7 @@ public class ExecutorImpl extends MLog implements Executor {
         } catch (StopLifecycleException t) {
             throw t;
         } catch (Throwable t) {
-            throw new MRuntimeException(step, t);
+            throw new InternalRuntimeException(step, t);
         }
     }
     
@@ -253,7 +232,7 @@ public class ExecutorImpl extends MLog implements Executor {
         } catch (StopLifecycleException t) {
             throw t;
         } catch (Throwable t) {
-            throw new MRuntimeException(step, t);
+            throw new InternalRuntimeException(step, t);
         }
     }
 
@@ -277,7 +256,7 @@ public class ExecutorImpl extends MLog implements Executor {
 
                                     @Override
                                     public void run() {
-                                        log().d(Thread.currentThread().getId(), "Started");
+                                        log().d("TODO", Thread.currentThread().getId(), "Started");
                                         while (queue.size() > 0) {
                                             Project task = null;
                                             synchronized (queue) {
@@ -288,10 +267,10 @@ public class ExecutorImpl extends MLog implements Executor {
                                                 }
                                             }
                                             if (task == null) break; // paranoia
-                                            log().d(Thread.currentThread().getId(), "Task", task);
+                                            log().d("TODO",Thread.currentThread().getId(), "Task", task);
                                             execute(step, task, plugin, projects, 0);
                                         }
-                                        log().d(Thread.currentThread().getId(), "Finished");
+                                        log().d("TODO",Thread.currentThread().getId(), "Finished");
                                     }
                                 });
                 threads[i].start();
@@ -314,7 +293,7 @@ public class ExecutorImpl extends MLog implements Executor {
                                     System.out.println("Wait for tasks to finish");
                                 }
                         } catch (InterruptedException e) {
-                            new MRuntimeException(e);
+                            new InternalRuntimeException(e);
                         }
                 }
             }
@@ -348,7 +327,7 @@ public class ExecutorImpl extends MLog implements Executor {
                 interceptors.forEach(i -> i.executeError(context, t));
                 errors.add(new ErrorsInfoImpl(context, t));
                 if (!(t instanceof StopLifecycleException) && con.getProperties().getBoolean(ConUtil.PROPERTY_FAE, false)) {
-                    log().e(context, t);
+                    log().e("TODO", context, t);
                     return false;
                 } else throw t;
             }
@@ -359,7 +338,7 @@ public class ExecutorImpl extends MLog implements Executor {
             interceptors.forEach(i -> i.executeEnd(context, d));
             return true;
         } catch (Throwable t) {
-            throw new MRuntimeException(project, t);
+            throw new InternalRuntimeException(project, t);
         }
     }
 
@@ -369,7 +348,7 @@ public class ExecutorImpl extends MLog implements Executor {
         try {
             impl = createMojo(con, context.getPlugin());
         } catch (Throwable t) {
-            throw new MRuntimeException(context.getPlugin(), t);
+            throw new InternalRuntimeException(context.getPlugin(), t);
         }
         mojos.put(context.getPlugin().getTarget(), impl);
         return impl;
@@ -408,13 +387,13 @@ public class ExecutorImpl extends MLog implements Executor {
                                                         .replace(".class", ""));
                                     } else if (jarEntry.getName()
                                             .equals("META-INF/dependencies.txt")) {
-                                        metaInfEntry.value = jarEntry;
+                                        metaInfEntry.setValue(jarEntry);
                                     }
                                 });
 
                 // load dependencies information out of META-INF/dependencies.txt
-                if (metaInfEntry.value != null) {
-                    InputStream is = jar.getInputStream(metaInfEntry.value);
+                if (metaInfEntry.getValue() != null) {
+                    InputStream is = jar.getInputStream(metaInfEntry.getValue());
                     for (String line : MFile.readLines(is, true)) {
                         line = line.trim();
                         if (MString.isSet(line) && !line.startsWith("#")) {
@@ -422,7 +401,7 @@ public class ExecutorImpl extends MLog implements Executor {
 
                             if (!uri.getScheme().equals("file")
                                     && uri.getScheme().equals(uriDep.getScheme()))
-                                throw new MRuntimeException(
+                                throw new InternalRuntimeException(
                                         "scheme access denied",
                                         uri.getScheme(),
                                         uriDep.getScheme());

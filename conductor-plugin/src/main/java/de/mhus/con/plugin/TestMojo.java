@@ -15,10 +15,10 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
+
+import java.io.File;
 
 @AMojo(name = "test")
 public class TestMojo extends AbstractMavenExecute {

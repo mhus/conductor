@@ -32,8 +32,8 @@ package de.mhus.con.plugin;
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.StopLifecycleException;
 import de.mhus.con.api.Plugin.SCOPE;
+import de.mhus.con.api.StopLifecycleException;
 
 @AMojo(name = "failed", target="failed",scope=SCOPE.STEP)
 public class FailedMojo implements ExecutePlugin {

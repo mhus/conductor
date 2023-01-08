@@ -15,7 +15,7 @@
  */
 package de.mhus.con.api;
 
-import de.mhus.lib.core.yaml.YMap;
+import org.summerclouds.common.core.yaml.YMap;
 
 public interface ConfigType {
 

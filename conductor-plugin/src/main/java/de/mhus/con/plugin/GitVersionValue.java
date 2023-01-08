@@ -15,18 +15,14 @@
  */
 package de.mhus.con.plugin;
 
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.Log;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.util.IValuesProvider;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.MojoException;
-import de.mhus.con.api.ValuePlugin;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.logging.Log;
-import de.mhus.lib.errors.NotFoundException;
 
 @AMojo(name = "git.version",target = "git.version")
 public class GitVersionValue extends MLog implements ValuePlugin {
@@ -34,7 +30,7 @@ public class GitVersionValue extends MLog implements ValuePlugin {
     private static String version;
     
     @Override
-    public String getValue(Context context, String value, Map<String, Object> attributes) throws Exception {
+    public String getValue(Context context, String value, IValuesProvider attributes) throws Exception {
         initGitVersion(context, log());
         return version;
     }

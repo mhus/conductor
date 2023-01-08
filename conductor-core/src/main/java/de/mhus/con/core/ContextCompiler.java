@@ -15,14 +15,14 @@
  */
 package de.mhus.con.core;
 
-import java.util.Map;
-
 import de.mhus.con.api.Plugin;
 import de.mhus.con.api.ValuePlugin;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.parser.StringCompiler;
-import de.mhus.lib.core.parser.StringPart;
-import de.mhus.lib.errors.MException;
+import org.summerclouds.common.core.error.InternalException;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.parser.StringCompiler;
+import org.summerclouds.common.core.parser.StringPart;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.util.IValuesProvider;
 
 public class ContextCompiler extends StringCompiler {
 
@@ -57,14 +57,14 @@ public class ContextCompiler extends StringCompiler {
         }
 
         @Override
-        public void execute(StringBuilder out, Map<String, Object> attributes) throws MException {
+        public void execute(StringBuilder out, IValuesProvider attributes) throws MException {
             Plugin plugin = context.getConductor().getPlugins().get(name);
             try {
                 ValuePlugin mojo = (ValuePlugin) ((ExecutorImpl)context.getExecutor()).createMojo(context.getConductor(), plugin);
                 String v = mojo.getValue(context, value, attributes);
                 out.append(v);
             } catch (Throwable t) {
-                throw new MException(name,value,t);
+                throw new InternalException(name,value,t);
             }
         }
 

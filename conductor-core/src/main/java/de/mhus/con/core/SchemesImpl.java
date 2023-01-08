@@ -17,7 +17,7 @@ package de.mhus.con.core;
 
 import de.mhus.con.api.Scheme;
 import de.mhus.con.api.Schemes;
-import de.mhus.lib.core.util.MUri;
+import org.summerclouds.common.core.util.MUri;
 
 public class SchemesImpl extends XCollection<Scheme> implements Schemes {
 

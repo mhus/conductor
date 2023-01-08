@@ -15,14 +15,11 @@
  */
 package de.mhus.con.core;
 
-import java.io.File;
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.error.NotFoundException;
 
-import de.mhus.con.api.AValidator;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.Project;
-import de.mhus.con.api.Validator;
-import de.mhus.lib.errors.MException;
+import java.io.File;
 
 @AValidator(name = "maven")
 public class MavenValidator implements Validator {
@@ -43,9 +40,9 @@ public class MavenValidator implements Validator {
     private void validate(Project p) throws MException {
         File rootDir = p.getRootDir();
         if (!rootDir.exists() || !rootDir.isDirectory())
-            throw new MException("project root dir not exists", p, rootDir);
+            throw new NotFoundException("project root dir not exists", p, rootDir);
         // check for pom
         File f = new File(rootDir, "pom.xml");
-        if (!f.exists() || !f.isFile()) throw new MException("project pom file not exists", p, f);
+        if (!f.exists() || !f.isFile()) throw new NotFoundException("project pom file not exists", p, f);
     }
 }

@@ -16,7 +16,7 @@
 
 
 import:
-- mvn:de.mhus.conductor/conductor-configuration/1.0.0/root.yml
+- mvn:org.summerclouds/conductor-configuration/1.0.0/root.yml
 - file:parent.yml
 - file:lifecycle.yml
 

@@ -15,9 +15,9 @@
  */
 package de.mhus.con.core;
 
-import java.util.Iterator;
-
 import de.mhus.con.api.Labels;
+
+import java.util.Iterator;
 
 public class ContextLabels implements Labels {
 

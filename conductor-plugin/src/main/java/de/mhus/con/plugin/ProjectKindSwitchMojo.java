@@ -15,16 +15,16 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.Closeable;
-import java.io.File;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Step;
 import de.mhus.con.core.ContextStep;
 import de.mhus.con.core.ExecutorImpl;
-import de.mhus.lib.core.MLog;
+import org.summerclouds.common.core.log.MLog;
+
+import java.io.Closeable;
+import java.io.File;
 
 @AMojo(name = "projectKindSwitch",target = "kind")
 public class ProjectKindSwitchMojo extends MLog implements ExecutePlugin {

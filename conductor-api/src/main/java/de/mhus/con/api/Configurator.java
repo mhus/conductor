@@ -15,10 +15,10 @@
  */
 package de.mhus.con.api;
 
-import java.net.URI;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.node.IProperties;
 
-import de.mhus.lib.core.IProperties;
-import de.mhus.lib.errors.MException;
+import java.net.URI;
 
 public interface Configurator {
 

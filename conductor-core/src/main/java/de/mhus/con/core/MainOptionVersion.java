@@ -15,12 +15,12 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-
 import de.mhus.con.api.AOption;
 import de.mhus.con.api.Cli;
 import de.mhus.con.api.MainOptionHandler;
 import de.mhus.conductor.api.meta.Version;
+
+import java.util.LinkedList;
 
 @AOption(alias = "-version")
 public class MainOptionVersion implements MainOptionHandler {

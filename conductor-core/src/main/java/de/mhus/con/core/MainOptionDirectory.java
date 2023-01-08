@@ -15,13 +15,13 @@
  */
 package de.mhus.con.core;
 
-import java.io.File;
-import java.util.LinkedList;
-
 import de.mhus.con.api.AOption;
 import de.mhus.con.api.Cli;
 import de.mhus.con.api.MainOptionHandler;
-import de.mhus.lib.core.MLog;
+import org.summerclouds.common.core.log.MLog;
+
+import java.io.File;
+import java.util.LinkedList;
 
 @AOption(alias = {"-d"})
 public class MainOptionDirectory extends MLog implements MainOptionHandler {

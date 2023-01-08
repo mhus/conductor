@@ -15,13 +15,13 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.MojoException;
-import de.mhus.lib.core.MString;
+import org.summerclouds.common.core.tool.MString;
+
+import java.io.File;
 
 @AMojo(name = "maven")
 public class MavenMojo extends AbstractMavenExecute {

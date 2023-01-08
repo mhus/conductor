@@ -15,10 +15,10 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.IList;
+
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import de.mhus.con.api.IList;
 
 public class XList<T> implements IList<T> {
 

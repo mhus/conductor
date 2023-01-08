@@ -15,14 +15,10 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.log.MLog;
 
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.MojoException;
-import de.mhus.lib.core.MLog;
+import java.io.File;
 
 @AMojo(name = "git.clone")
 public class GitCloneMojo extends MLog implements ExecutePlugin {

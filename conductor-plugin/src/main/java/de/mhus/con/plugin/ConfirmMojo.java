@@ -25,18 +25,12 @@ Modes:
  */
 package de.mhus.con.plugin;
 
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.Step;
+import de.mhus.con.api.*;
 import de.mhus.con.api.Plugin.SCOPE;
 import de.mhus.con.core.ContextStep;
 import de.mhus.con.core.ExecutorImpl;
-import de.mhus.con.api.StopLifecycleException;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.console.Console;
-import de.mhus.lib.core.console.Console.COLOR;
+import org.summerclouds.common.core.console.Console;
+import org.summerclouds.common.core.tool.MString;
 
 @AMojo(name = "confirm",target = "confirm", scope = SCOPE.STEP)
 public class ConfirmMojo implements ExecutePlugin {
@@ -55,7 +49,7 @@ public class ConfirmMojo implements ExecutePlugin {
         }
         String prompt = context.getStep().getProperties().getString("prompt", "");
 
-        console.setColor(COLOR.RED, null);
+        console.setColor(Console.COLOR.RED, null);
         console.print(prompt);
         console.cleanup();
         

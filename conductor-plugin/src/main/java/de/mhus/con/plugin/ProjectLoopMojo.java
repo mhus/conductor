@@ -15,19 +15,15 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.Closeable;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.MojoException;
-import de.mhus.con.api.Step;
+import de.mhus.con.api.*;
 import de.mhus.con.core.ContextStep;
 import de.mhus.con.core.ExecutorImpl;
-import de.mhus.lib.core.MCast;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MCast;
+import org.summerclouds.common.core.tool.MString;
+
+import java.io.Closeable;
 
 @AMojo(name = "loopProjects",target = "loop")
 public class ProjectLoopMojo extends MLog implements ExecutePlugin {

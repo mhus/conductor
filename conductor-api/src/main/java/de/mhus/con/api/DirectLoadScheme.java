@@ -15,10 +15,10 @@
  */
 package de.mhus.con.api;
 
-import java.io.IOException;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.util.MUri;
 
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
+import java.io.IOException;
 
 public interface DirectLoadScheme extends Scheme {
 

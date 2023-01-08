@@ -15,29 +15,21 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+import de.mhus.con.api.Project.STATUS;
+import org.summerclouds.common.core.console.Console;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MDate;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.util.StopWatch;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ErrorInfo;
-import de.mhus.con.api.ExecutionInterceptorPlugin;
-import de.mhus.con.api.Project;
-import de.mhus.con.api.Project.STATUS;
-import de.mhus.con.api.Step;
-import de.mhus.con.api.Steps;
-import de.mhus.lib.core.MDate;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MStopWatch;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.console.Console;
-import de.mhus.lib.core.console.Console.COLOR;
 
 public class ExecutionInterceptorDefault extends MLog implements ExecutionInterceptorPlugin {
 
     private LinkedList<Result> results;
-    private MStopWatch watch;
+    private StopWatch watch;
     private LinkedList<Step> subSteps = new LinkedList<>();
 
     @Override
@@ -71,12 +63,12 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
         } else {
             console.print(" --- ");
         }
-        console.setColor(COLOR.RED, null);
+        console.setColor(Console.COLOR.RED, null);
         console.print(step);
         if (context.getProject() != null) {
-            console.setColor(COLOR.BRIGHT_BLACK, null);
+            console.setColor(Console.COLOR.BRIGHT_BLACK, null);
             console.print(" >>> ");
-            console.setColor(COLOR.GREEN, null);
+            console.setColor(Console.COLOR.GREEN, null);
             console.print(context.getProject().getName());
         }
         console.println();
@@ -123,14 +115,14 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
             STATUS status = getStepStatus(step);
             switch (status) {
                 case FAILURE:
-                    console.setColor(COLOR.BRIGHT_RED, null);
+                    console.setColor(Console.COLOR.BRIGHT_RED, null);
                     isError = true;
                     break;
                 case SKIPPED:
-                    console.setColor(COLOR.BRIGHT_YELLOW, null);
+                    console.setColor(Console.COLOR.BRIGHT_YELLOW, null);
                     break;
                 case SUCCESS:
-                    console.setColor(COLOR.BRIGHT_GREEN, null);
+                    console.setColor(Console.COLOR.BRIGHT_GREEN, null);
                     break;
                 default:
                     break;
@@ -152,9 +144,9 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
                         Project p = result.project;
                         String pn = p.getName();
                         if (p.getStatus() == STATUS.SKIPPED) 
-                            console.setColor(COLOR.BRIGHT_BLACK, null);
+                            console.setColor(Console.COLOR.BRIGHT_BLACK, null);
                         else 
-                            console.setColor(COLOR.WHITE, null);
+                            console.setColor(Console.COLOR.WHITE, null);
                         console.print("    ");
                         console.print(pn);
                         console.print(" ");
@@ -163,13 +155,13 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
     
                         switch (p.getStatus()) {
                             case FAILURE:
-                                console.setColor(COLOR.RED, null);
+                                console.setColor(Console.COLOR.RED, null);
                                 break;
                             case SKIPPED:
-                                console.setColor(COLOR.YELLOW, null);
+                                console.setColor(Console.COLOR.YELLOW, null);
                                 break;
                             case SUCCESS:
-                                console.setColor(COLOR.GREEN, null);
+                                console.setColor(Console.COLOR.GREEN, null);
                                 break;
                             default:
                                 break;
@@ -179,9 +171,9 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
                         
                         for (Result sub : subSteps) {
                             if (sub.status == STATUS.SKIPPED)
-                                console.setColor(COLOR.BRIGHT_BLACK, null);
+                                console.setColor(Console.COLOR.BRIGHT_BLACK, null);
                             else 
-                                console.setColor(COLOR.WHITE, null);
+                                console.setColor(Console.COLOR.WHITE, null);
                             console.print("    ");
                             console.print(MString.rep(' ', sub.indent*2));
                             console.print(sub.step.getTitle());
@@ -190,13 +182,13 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
                             console.print(" ");
                             switch (sub.status) {
                             case FAILURE:
-                                console.setColor(COLOR.RED, null);
+                                console.setColor(Console.COLOR.RED, null);
                                 break;
                             case SKIPPED:
-                                console.setColor(COLOR.YELLOW, null);
+                                console.setColor(Console.COLOR.YELLOW, null);
                                 break;
                             case SUCCESS:
-                                console.setColor(COLOR.GREEN, null);
+                                console.setColor(Console.COLOR.GREEN, null);
                                 break;
                             default:
                                 break;
@@ -264,24 +256,24 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
         console.setBold(false);
         if (!errors.isEmpty()) {
             for (ErrorInfo error : errors) {
-                console.setColor(COLOR.RED, null);
+                console.setColor(Console.COLOR.RED, null);
                 System.out.println("ERROR");
                 System.out.println("    Step   : " + error.getContext().getStep());
                 if (error.getContext().getProject() != null)
                     System.out.println("    Project: " + error.getContext().getProject());
                 System.out.println("    Plugin : " + error.getContext().getPlugin().getTarget());
                 if (error.getError() != null) {
-                    console.setColor(COLOR.YELLOW, null);
+                    console.setColor(Console.COLOR.YELLOW, null);
                     System.out.println("Error:");
                     error.getError().printStackTrace();
                 }
             }
         } else {
             if (isError) {
-                console.setColor(COLOR.RED, null);
+                console.setColor(Console.COLOR.RED, null);
                 console.println("  BUILD FAILED");
             } else {
-                console.setColor(COLOR.GREEN, null);
+                console.setColor(Console.COLOR.GREEN, null);
                 console.println("  BUILD SUCCESS");
             }
         }
@@ -311,7 +303,7 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
     @Override
     public void executeBegin(Conductor con, String lifecycle, Steps steps) {
         results = new LinkedList<>();
-        watch = new MStopWatch().start();
+        watch = new StopWatch().start();
     }
 
     static class Result {

@@ -15,7 +15,8 @@
  */
 package de.mhus.con.api;
 
-import de.mhus.lib.errors.MException;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.error.RC;
 
 public class MojoException extends MException {
 
@@ -23,7 +24,7 @@ public class MojoException extends MException {
     private Context context;
 
     public MojoException(Context context, Object... in) {
-        super(in);
+        super(RC.STATUS.INTERNAL_ERROR, in);
         this.context = context;
     }
 

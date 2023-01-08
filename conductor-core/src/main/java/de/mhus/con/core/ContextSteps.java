@@ -15,11 +15,11 @@
  */
 package de.mhus.con.core;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import de.mhus.con.api.Step;
 import de.mhus.con.api.Steps;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ContextSteps implements Steps {
 

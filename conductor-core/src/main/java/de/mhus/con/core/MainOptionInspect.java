@@ -15,21 +15,11 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import de.mhus.con.api.AOption;
-import de.mhus.con.api.Cli;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.ConfigType;
-import de.mhus.con.api.Lifecycle;
-import de.mhus.con.api.MainOptionHandler;
-import de.mhus.con.api.Plugin;
-import de.mhus.con.api.Project;
-import de.mhus.con.api.Scheme;
-import de.mhus.con.api.Step;
-import de.mhus.con.api.Validator;
 
 @AOption(alias = "-inspect")
 public class MainOptionInspect implements MainOptionHandler {

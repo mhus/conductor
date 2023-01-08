@@ -15,29 +15,23 @@
  */
 package de.mhus.con.core.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
-
+import de.mhus.con.core.MainCli;
+import de.mhus.con.core.MainOptionConsole;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.summerclouds.common.core.console.Console;
+import org.summerclouds.common.core.console.SimpleConsole;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.io.YOutputStream;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.junit.TestCase;
 
-import de.mhus.con.core.MainCli;
-import de.mhus.con.core.MainOptionConsole;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.console.Console;
-import de.mhus.lib.core.console.SimpleConsole;
-import de.mhus.lib.core.io.YOutputStream;
-import de.mhus.lib.errors.MException;
-import de.mhus.lib.tests.TestCase;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PluginsTest extends TestCase {
 

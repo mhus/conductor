@@ -15,16 +15,16 @@
  */
 package de.mhus.con.core;
 
-import java.io.File;
-import java.io.IOException;
-
 import de.mhus.con.api.AScheme;
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.Conductor;
 import de.mhus.con.api.Scheme;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.util.MUri;
+
+import java.io.File;
+import java.io.IOException;
 
 @AScheme(name = "mvn")
 public class MavenScheme extends MLog implements Scheme {

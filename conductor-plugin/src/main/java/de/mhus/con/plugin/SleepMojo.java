@@ -19,9 +19,9 @@ import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Plugin.SCOPE;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MPeriod;
-import de.mhus.lib.core.MThread;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MPeriod;
+import org.summerclouds.common.core.tool.MThread;
 
 @AMojo(name = "sleep",target = "sleep", scope = SCOPE.STEP)
 public class SleepMojo extends MLog implements ExecutePlugin {

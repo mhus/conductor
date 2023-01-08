@@ -20,10 +20,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.summerclouds</groupId>
+        <groupId>org.summerclouds.common</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <artifactId>summer-parent</artifactId>
+        <artifactId>common-parent</artifactId>
     </parent>
+	<groupId>org.summerclouds</groupId>
 	<artifactId>summer-conductor</artifactId>
 	<version>1.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -34,6 +35,7 @@
   	   <maven-site-plugin.skip>false</maven-site-plugin.skip>
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
 	   <site.path>.</site.path>
+		<summerclouds.common.version>0.0.1-SNAPSHOT</summerclouds.common.version>
 	</properties>
     <inceptionYear>2020</inceptionYear>
 	<licenses>
@@ -72,5 +74,17 @@
         <module>conductor-launcher</module>
 		<module>manual</module>
 	</modules>
-	
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.summerclouds.common</groupId>
+				<artifactId>common-bom</artifactId>
+				<scope>import</scope>
+				<type>pom</type>
+				<version>${summerclouds.common.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

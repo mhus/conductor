@@ -15,20 +15,16 @@
  */
 package de.mhus.con.plugin;
 
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.Log;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.util.IValuesProvider;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.MojoException;
-import de.mhus.con.api.ValuePlugin;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.logging.Log;
-import de.mhus.lib.errors.NotFoundException;
 
 @AMojo(name = "maven.version",target = "maven.version")
 public class MavenVersionValue extends MLog implements ValuePlugin {
@@ -36,7 +32,7 @@ public class MavenVersionValue extends MLog implements ValuePlugin {
     private static MProperties versions;
 
     @Override
-    public String getValue(Context context, String value, Map<String, Object> attributes) throws Exception {
+    public String getValue(Context context, String value, IValuesProvider attributes) throws Exception {
         initMavenVersion(context,log());
         if (MString.isEmpty(value)) value = "maven.version";
         return versions.getString(value);

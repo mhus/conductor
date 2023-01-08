@@ -15,15 +15,13 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-
 import de.mhus.con.api.AOption;
 import de.mhus.con.api.Cli;
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.MainOptionHandler;
-import de.mhus.lib.core.MApi;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.logging.Log;
+import org.summerclouds.common.core.node.MProperties;
+
+import java.util.LinkedList;
 
 @AOption(alias = {"-v", "-vv", "-vvv","-!v","-vo"})
 public class MainOptionLogDebug implements MainOptionHandler {
@@ -37,19 +35,19 @@ public class MainOptionLogDebug implements MainOptionHandler {
             return;
         }
         if (cmd.equals("-!v")) {
-            MApi.setDirtyTrace(false);
-            MApi.get()
-            .getLogFactory()
-            .setDefaultLevel(Log.LEVEL.INFO);
+//            MApi.setDirtyTrace(false);
+//            MApi.get()
+//            .getLogFactory()
+//            .setDefaultLevel(Log.LEVEL.INFO);
             ((MainCli)cli).getOverlayProperties().setBoolean(ConUtil.PROPERTY_VERBOSE, false);
             if (((MainCli)cli).isConductor())
                 ((MProperties)cli.getConductor().getProperties()).setBoolean(ConUtil.PROPERTY_VERBOSE, false);
             return;
         }
-        MApi.setDirtyTrace(cmd.equals("-vv"));
-        MApi.get()
-                .getLogFactory()
-                .setDefaultLevel(cmd.equals("-vvv") ? Log.LEVEL.TRACE : Log.LEVEL.DEBUG);
+//        MApi.setDirtyTrace(cmd.equals("-vv"));
+//        MApi.get()
+//                .getLogFactory()
+//                .setDefaultLevel(cmd.equals("-vvv") ? Log.LEVEL.TRACE : Log.LEVEL.DEBUG);
         ((MainCli)cli).getOverlayProperties().setBoolean(ConUtil.PROPERTY_VERBOSE, true);
         if (((MainCli)cli).isConductor())
             ((MProperties)cli.getConductor().getProperties()).setBoolean(ConUtil.PROPERTY_VERBOSE, true);

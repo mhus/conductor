@@ -15,13 +15,13 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import de.mhus.con.api.Conductor;
 import de.mhus.con.api.Labels;
 import de.mhus.con.api.Project;
 import de.mhus.con.api.Projects;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProjectsImpl extends XCollection<Project> implements Projects {
 

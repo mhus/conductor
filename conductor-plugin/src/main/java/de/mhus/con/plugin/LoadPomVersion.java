@@ -15,18 +15,17 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.core.ContextProject;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MXml;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MXml;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.File;
 
 @AMojo(name = "loadPomVersion")
 public class LoadPomVersion extends MLog implements ExecutePlugin {
@@ -62,7 +61,7 @@ public class LoadPomVersion extends MLog implements ExecutePlugin {
             return false;
         }
 
-        log().i(context.getProject(), "version", version);
+        log().i("TODO", context.getProject(), "version", version);
         ((MProperties) ((ContextProject) context.getProject()).getInstance().getProperties())
                 .setString("version", version);
 

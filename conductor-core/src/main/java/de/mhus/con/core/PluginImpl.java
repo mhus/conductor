@@ -17,7 +17,7 @@ package de.mhus.con.core;
 
 import de.mhus.con.api.Conductor;
 import de.mhus.con.api.Plugin;
-import de.mhus.lib.core.MSystem;
+import org.summerclouds.common.core.tool.MSystem;
 
 public class PluginImpl implements Plugin {
 

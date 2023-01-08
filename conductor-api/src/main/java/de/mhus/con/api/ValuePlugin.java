@@ -15,10 +15,12 @@
  */
 package de.mhus.con.api;
 
+import org.summerclouds.common.core.util.IValuesProvider;
+
 import java.util.Map;
 
 public interface ValuePlugin extends ConductorPlugin {
 
-    String getValue(Context context, String value, Map<String, Object> attributes) throws Exception;
+    String getValue(Context context, String value, IValuesProvider attributes) throws Exception;
     
 }

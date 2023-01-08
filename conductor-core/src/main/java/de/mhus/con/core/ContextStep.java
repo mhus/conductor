@@ -15,15 +15,15 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-import java.util.Map.Entry;
-
 import de.mhus.con.api.Context;
 import de.mhus.con.api.Labels;
 import de.mhus.con.api.Step;
 import de.mhus.con.api.Steps;
-import de.mhus.lib.core.IProperties;
-import de.mhus.lib.core.MProperties;
+import org.summerclouds.common.core.node.IProperties;
+import org.summerclouds.common.core.node.MProperties;
+
+import java.util.LinkedList;
+import java.util.Map.Entry;
 
 public class ContextStep implements Step {
 

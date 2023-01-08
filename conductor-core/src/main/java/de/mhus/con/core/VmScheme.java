@@ -15,22 +15,16 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+import org.reflections.Reflections;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.util.MUri;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
-import org.reflections.Reflections;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.AScheme;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.ConductorPlugin;
-import de.mhus.con.api.DirectLoadScheme;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
 
 @AScheme(name = "vm")
 public class VmScheme extends MLog implements DirectLoadScheme {

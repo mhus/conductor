@@ -15,22 +15,17 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.error.MRuntimeException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.IReadProperties;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.parser.StringCompiler;
+import org.summerclouds.common.core.tool.MSystem;
+
 import java.util.List;
 import java.util.Map;
-
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.Executor;
-import de.mhus.con.api.Plugin;
-import de.mhus.con.api.Project;
-import de.mhus.con.api.Step;
-import de.mhus.lib.core.IReadProperties;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MSystem;
-import de.mhus.lib.core.parser.StringCompiler;
-import de.mhus.lib.errors.MException;
-import de.mhus.lib.errors.MRuntimeException;
 
 public class ContextImpl extends MLog implements Context {
 
@@ -73,7 +68,7 @@ public class ContextImpl extends MLog implements Context {
             return ret;
         } catch (MException e) {
             log().t(in, e);
-            throw new MRuntimeException(in, e);
+            throw new MRuntimeException(e, in);
         }
     }
     

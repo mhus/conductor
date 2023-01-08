@@ -17,10 +17,9 @@ package de.mhus.con.api;
 
 import java.io.File;
 
+import org.summerclouds.common.core.tool.MXml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import de.mhus.lib.core.MXml;
 
 public class MavenPom {
 

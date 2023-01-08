@@ -15,21 +15,17 @@
  */
 package de.mhus.con.core;
 
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.error.InternalRuntimeException;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.matcher.Condition;
+import org.summerclouds.common.core.node.IProperties;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.tool.MSystem;
+
 import java.util.LinkedList;
 import java.util.Map;
-
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.Labels;
-import de.mhus.con.api.Step;
-import de.mhus.con.api.Steps;
-import de.mhus.lib.core.IProperties;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.MSystem;
-import de.mhus.lib.core.matcher.Condition;
-import de.mhus.lib.errors.MException;
-import de.mhus.lib.errors.MRuntimeException;
 
 public class StepImpl implements Step {
 
@@ -98,7 +94,7 @@ public class StepImpl implements Step {
             Condition filter = new Condition(condStr);
             return filter.matches((Map<String, Object>) context.getProperties());
         } catch (MException e) {
-            throw new MRuntimeException(this, condStr, e);
+            throw new InternalRuntimeException(this, condStr, e);
         }
     }
 

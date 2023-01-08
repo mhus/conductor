@@ -15,11 +15,11 @@
  */
 package de.mhus.con.api;
 
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.util.MUri;
+
 import java.io.File;
 import java.io.IOException;
-
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
 
 public interface Scheme {
 

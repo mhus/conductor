@@ -15,22 +15,17 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Project;
-import de.mhus.lib.core.IReadProperties;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MXml;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.IReadProperties;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.tool.MXml;
+import org.w3c.dom.*;
+
+import java.io.File;
 
 @AMojo(name = "updatePomProperties")
 public class UpdatePomProperties extends MLog implements ExecutePlugin {

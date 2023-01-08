@@ -15,7 +15,8 @@
  */
 package de.mhus.con.api;
 
-import de.mhus.lib.errors.MRuntimeException;
+import org.summerclouds.common.core.error.MRuntimeException;
+import org.summerclouds.common.core.error.RC;
 
 public class StopLifecycleException extends MRuntimeException {
 
@@ -23,7 +24,7 @@ public class StopLifecycleException extends MRuntimeException {
     private Context context;
 
     public StopLifecycleException(Context context, Object... in) {
-        super(in);
+        super(RC.STATUS.INTERNAL_ERROR ,in);
         this.context = context;
     }
 

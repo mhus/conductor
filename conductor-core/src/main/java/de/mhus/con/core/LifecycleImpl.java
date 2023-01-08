@@ -15,12 +15,12 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-
 import de.mhus.con.api.Conductor;
 import de.mhus.con.api.Lifecycle;
 import de.mhus.con.api.Steps;
-import de.mhus.lib.core.MSystem;
+import org.summerclouds.common.core.tool.MSystem;
+
+import java.util.LinkedList;
 
 public class LifecycleImpl implements Lifecycle {
 

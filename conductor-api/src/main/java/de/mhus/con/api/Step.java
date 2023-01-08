@@ -15,9 +15,9 @@
  */
 package de.mhus.con.api;
 
-import java.util.LinkedList;
+import org.summerclouds.common.core.node.IProperties;
 
-import de.mhus.lib.core.IProperties;
+import java.util.LinkedList;
 
 public interface Step {
 

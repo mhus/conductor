@@ -1,11 +1,11 @@
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-
 import de.mhus.con.api.AOption;
 import de.mhus.con.api.Cli;
 import de.mhus.con.api.Lifecycle;
 import de.mhus.con.api.MainOptionHandler;
+
+import java.util.LinkedList;
 
 @AOption(alias = "-desc")
 public class MainOptionDescribe implements MainOptionHandler {

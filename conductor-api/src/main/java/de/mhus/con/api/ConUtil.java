@@ -15,27 +15,20 @@
  */
 package de.mhus.con.api;
 
+import de.mhus.conductor.api.meta.Version;
+import org.summerclouds.common.core.console.Console;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.log.Log;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.*;
+import org.summerclouds.common.core.util.MUri;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-
-import de.mhus.conductor.api.meta.Version;
-import de.mhus.lib.core.MCast;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.MSystem;
-import de.mhus.lib.core.MSystem.ExecuteControl;
-import de.mhus.lib.core.MThread;
-import de.mhus.lib.core.MValidator;
-import de.mhus.lib.core.console.Console;
-import de.mhus.lib.core.console.Console.COLOR;
-import de.mhus.lib.core.logging.Log;
-import de.mhus.lib.core.logging.Log.LEVEL;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
 
 public class ConUtil {
 
@@ -103,7 +96,7 @@ public class ConUtil {
 
         final String shortName = MString.truncateNice(name, 40, 15);
         final Console console = getConsole();
-        final boolean output = infoOut || log.isLevelEnabled(LEVEL.DEBUG);
+        final boolean output = infoOut || log.isLevelEnabled(Log.LEVEL.DEBUG);
 
         
         final StringBuilder stdOutBuilder = new StringBuilder();
@@ -114,7 +107,7 @@ public class ConUtil {
                         shortName,
                         rootDir,
                         cmd,
-                        new ExecuteControl() {
+                        new MSystem.ExecuteControl() {
 
                             @Override
                             public void stdin(PrintWriter writer) {}
@@ -124,7 +117,7 @@ public class ConUtil {
                                 if (output)
                                     synchronized (consoleLock) {
                                         console.print("[");
-                                        console.setColor(COLOR.GREEN, null);
+                                        console.setColor(Console.COLOR.GREEN, null);
                                         console.print(shortName);
                                         console.cleanup();
                                         console.print("] ");
@@ -140,7 +133,7 @@ public class ConUtil {
                                 if (output)
                                     synchronized (consoleLock) {
                                         console.print("[");
-                                        console.setColor(COLOR.RED, null);
+                                        console.setColor(Console.COLOR.RED, null);
                                         console.print(shortName);
                                         console.cleanup();
                                         console.print("] ");
@@ -161,7 +154,7 @@ public class ConUtil {
     public static boolean confirmAction(Conductor con, Step step, List<Project> projects, String msg) {
         final Console console = getConsole();
         console.cleanup();
-        console.setColor(COLOR.BRIGHT_RED, COLOR.BRIGHT_BLACK);
+        console.setColor(Console.COLOR.BRIGHT_RED, Console.COLOR.BRIGHT_BLACK);
         console.println("================================================");
         console.println(" ENTER - run, c - cancel, s - skip, i - inspect ");
         console.println(" x - run and disable configrmation mode");
@@ -301,7 +294,7 @@ public class ConUtil {
         name = MString.beforeLastIndex(name, '.');
         MUri uri =
                 MUri.toUri(
-                        "mvn:de.mhus.conductor/conductor-plugin/"
+                        "mvn:org.summerclouds/conductor-plugin/"
                                 + Version.VERSION
                                 + "/"
                                 + ext

@@ -22,25 +22,25 @@ properties:
 
 plugins:
 - target: newVersion
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
 - target: newParent
-  uri: mvn:de.mhus.conductor/conductor-plugins/1.0.0
+  uri: mvn:org.summerclouds/conductor-plugins/1.0.0
   mojo: newParent
 - target: test
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
   scope: step
 - target: git
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
 - target: maven
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
 - target: validateSnapshots
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
 - target: incraseToSnapshots
-  uri: mvn:de.mhus.conductor/conductor-plugin/${conductor.version}
+  uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
   mojo: test
    

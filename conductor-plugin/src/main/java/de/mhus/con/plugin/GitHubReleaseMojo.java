@@ -1,24 +1,22 @@
 package de.mhus.con.plugin;
 
-import java.io.File;
-
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import de.mhus.con.api.AMojo;
+import de.mhus.con.api.Context;
+import de.mhus.con.api.ExecutePlugin;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.summerclouds.common.core.error.InternalException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.tool.MJson;
+import org.summerclouds.common.core.tool.MString;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MJson;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.io.http.MHttpClientBuilder;
-import de.mhus.lib.errors.MException;
+import java.io.File;
 
 // https://docs.github.com/en/rest/reference/repos
 
@@ -50,7 +48,7 @@ public class GitHubReleaseMojo extends MLog implements ExecutePlugin {
         // https://github.com/mhus/mhus-reactive.git
         String apiUrl = "https://api." + MString.beforeLastIndex(gitUrl.substring(8), '.') + "/releases";
         
-        HttpClient client = new MHttpClientBuilder().setUseSystemProperties(true).getHttpClient();
+        HttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(apiUrl);
         request.setHeader("Accept", "application/vnd.github.v3+json");
         ObjectNode load = MJson.createObjectNode();
@@ -61,8 +59,8 @@ public class GitHubReleaseMojo extends MLog implements ExecutePlugin {
         HttpResponse resp = client.execute(request);
         try {
             if (resp.getStatusLine().getStatusCode() != 201) {
-                log().e(resp);
-                throw new MException("Creation of github release failed");
+                log().e("TODO", resp);
+                throw new InternalException("Creation of github release failed");
             }
             
             String respContent = MFile.readFile( resp.getEntity().getContent() );
@@ -70,7 +68,7 @@ public class GitHubReleaseMojo extends MLog implements ExecutePlugin {
             if (context.getConductor().isVerboseOutput())
                 log().i(respContent);
         } finally {
-            MHttpClientBuilder.close(resp);
+//            HttpClientBuilder.close(resp);
         }
         return false;
     }

@@ -15,15 +15,11 @@
  */
 package de.mhus.con.plugin;
 
-import java.util.Map;
-
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.MojoException;
-import de.mhus.con.api.Validator;
+import de.mhus.con.api.*;
 import de.mhus.con.core.ConductorImpl;
-import de.mhus.lib.core.MLog;
+import org.summerclouds.common.core.log.MLog;
+
+import java.util.Map;
 
 @AMojo(name = "con.validate")
 public class ValidateMojo extends MLog implements ExecutePlugin {

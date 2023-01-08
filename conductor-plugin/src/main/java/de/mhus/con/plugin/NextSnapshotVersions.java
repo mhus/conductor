@@ -47,18 +47,18 @@
  */
 package de.mhus.con.plugin;
 
-import java.util.Date;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Project;
 import de.mhus.con.core.ContextProject;
-import de.mhus.lib.core.MCast;
-import de.mhus.lib.core.MDate;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MCast;
+import org.summerclouds.common.core.tool.MDate;
+import org.summerclouds.common.core.tool.MString;
+
+import java.util.Date;
 
 @AMojo(name = "nextSnapshotVersions",target="nextSnapshotVersions")
 public class NextSnapshotVersions extends MLog implements ExecutePlugin {

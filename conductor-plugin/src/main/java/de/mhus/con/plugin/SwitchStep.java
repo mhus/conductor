@@ -21,7 +21,7 @@ import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Step;
 import de.mhus.con.core.ContextStep;
 import de.mhus.con.core.ExecutorImpl;
-import de.mhus.lib.core.MLog;
+import org.summerclouds.common.core.log.MLog;
 
 @AMojo(name = "switch",target = "switch")
 public class SwitchStep extends MLog implements ExecutePlugin {

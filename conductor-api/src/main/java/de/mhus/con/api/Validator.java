@@ -15,7 +15,7 @@
  */
 package de.mhus.con.api;
 
-import de.mhus.lib.errors.MException;
+import org.summerclouds.common.core.error.MException;
 
 public interface Validator {
 

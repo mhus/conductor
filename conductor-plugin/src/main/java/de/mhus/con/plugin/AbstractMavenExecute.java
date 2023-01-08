@@ -15,18 +15,17 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-import java.util.LinkedList;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.MXml;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.tool.MXml;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * Step Properties: * processSubModules (bool): Scan an process single sub modules (leafs) *
@@ -112,7 +111,7 @@ public abstract class AbstractMavenExecute extends MLog implements ExecutePlugin
                 Document pomDoc = MXml.loadXml(pomFile);
                 return pomDoc.getDocumentElement().getElementsByTagName("module").getLength() > 0;
             } catch (Throwable t) {
-                log().d(pomFile, t);
+                log().d("TODO", pomFile, t);
             }
         }
         return false;
@@ -164,7 +163,7 @@ public abstract class AbstractMavenExecute extends MLog implements ExecutePlugin
                     }
                 }
             } catch (Throwable t) {
-                log().d(rootDir, t);
+                log().d("TODO", rootDir, t);
             }
         }
         return isLeaf;

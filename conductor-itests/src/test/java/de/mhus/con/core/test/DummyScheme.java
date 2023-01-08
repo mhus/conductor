@@ -15,15 +15,15 @@
  */
 package de.mhus.con.core.test;
 
-import java.io.File;
-import java.io.IOException;
-
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.Conductor;
 import de.mhus.con.api.Scheme;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.tests.TestCase;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.util.MUri;
+import org.summerclouds.common.junit.TestCase;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DummyScheme extends TestCase implements Scheme {
 

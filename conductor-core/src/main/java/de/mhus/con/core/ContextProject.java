@@ -15,14 +15,14 @@
  */
 package de.mhus.con.core;
 
-import java.io.File;
-import java.util.Map.Entry;
-
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.Labels;
 import de.mhus.con.api.Project;
-import de.mhus.lib.core.IReadProperties;
-import de.mhus.lib.core.MProperties;
+import org.summerclouds.common.core.node.IReadProperties;
+import org.summerclouds.common.core.node.MProperties;
+
+import java.io.File;
+import java.util.Map.Entry;
 
 public class ContextProject implements Project {
 

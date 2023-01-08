@@ -19,7 +19,7 @@ import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
 import de.mhus.con.api.Plugin.SCOPE;
-import de.mhus.lib.core.MLog;
+import org.summerclouds.common.core.log.MLog;
 
 @AMojo(name = "con.includeLifecycle",target="lifecycle",scope=SCOPE.STEP)
 public class Lifecycle extends MLog implements ExecutePlugin {

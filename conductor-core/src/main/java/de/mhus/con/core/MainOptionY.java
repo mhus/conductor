@@ -15,13 +15,13 @@
  */
 package de.mhus.con.core;
 
-import java.util.LinkedList;
-
 import de.mhus.con.api.AOption;
 import de.mhus.con.api.Cli;
 import de.mhus.con.api.ConUtil;
 import de.mhus.con.api.MainOptionHandler;
-import de.mhus.lib.core.MProperties;
+import org.summerclouds.common.core.node.MProperties;
+
+import java.util.LinkedList;
 
 @AOption(alias = {"-y", "-!y"})
 public class MainOptionY implements MainOptionHandler {

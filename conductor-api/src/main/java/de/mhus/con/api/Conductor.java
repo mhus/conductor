@@ -18,7 +18,7 @@ package de.mhus.con.api;
 import java.io.Closeable;
 import java.io.File;
 
-import de.mhus.lib.core.IReadProperties;
+import org.summerclouds.common.core.node.IReadProperties;
 
 public interface Conductor extends Closeable {
 

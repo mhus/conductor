@@ -15,15 +15,11 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
+import de.mhus.con.api.*;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MString;
 
-import de.mhus.con.api.AMojo;
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Context;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.MojoException;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MString;
+import java.io.File;
 
 @AMojo(name = "docker")
 public class DockerMojo extends MLog implements ExecutePlugin {

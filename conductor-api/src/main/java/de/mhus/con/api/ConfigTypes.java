@@ -15,7 +15,7 @@
  */
 package de.mhus.con.api;
 
-import de.mhus.lib.core.MString;
+import org.summerclouds.common.core.tool.MString;
 
 public interface ConfigTypes extends ICollection<ConfigType> {
 

@@ -15,9 +15,9 @@
  */
 package de.mhus.con.api;
 
-import java.io.File;
+import org.summerclouds.common.core.node.IReadProperties;
 
-import de.mhus.lib.core.IReadProperties;
+import java.io.File;
 
 public interface Project {
 

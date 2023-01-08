@@ -15,40 +15,25 @@
  */
 package de.mhus.con.core.test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import de.mhus.con.api.*;
+import de.mhus.con.core.*;
+import org.junit.jupiter.api.Test;
+import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.node.MProperties;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.util.MUri;
+import org.summerclouds.common.junit.TestCase;
+import org.summerclouds.common.junit.TestUtil;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
-
-import de.mhus.con.api.ConUtil;
-import de.mhus.con.api.Conductor;
-import de.mhus.con.api.ConductorPlugin;
-import de.mhus.con.api.ExecutePlugin;
-import de.mhus.con.api.Plugin;
-import de.mhus.con.core.ConductorImpl;
-import de.mhus.con.core.ConfigTypesImpl;
-import de.mhus.con.core.ConfiguratorImpl;
-import de.mhus.con.core.ContextImpl;
-import de.mhus.con.core.ExecutorImpl;
-import de.mhus.con.core.FileScheme;
-import de.mhus.con.core.MavenScheme;
-import de.mhus.con.core.SchemesImpl;
-import de.mhus.con.core.StepImpl;
-import de.mhus.con.core.YmlConfigType;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MProperties;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.util.MUri;
-import de.mhus.lib.errors.NotFoundException;
-import de.mhus.lib.tests.TestCase;
-import de.mhus.lib.tests.TestUtil;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SchemeTest extends TestCase {
 
@@ -128,7 +113,7 @@ public class SchemeTest extends TestCase {
             URI uri = URI.create("file:conductor.yml");
             config.configure(uri, con, null);
 
-            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.currentVersion());
+            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.conrentVersion());
             ((SchemesImpl) con.getSchemes()).put("mvn", new MavenScheme());
 
             StepImpl step = new StepImpl();

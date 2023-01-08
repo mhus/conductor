@@ -15,10 +15,10 @@
  */
 package de.mhus.con.api;
 
-import java.util.List;
+import org.summerclouds.common.core.error.MException;
+import org.summerclouds.common.core.node.IReadProperties;
 
-import de.mhus.lib.core.IReadProperties;
-import de.mhus.lib.errors.MException;
+import java.util.List;
 
 public interface Context {
 

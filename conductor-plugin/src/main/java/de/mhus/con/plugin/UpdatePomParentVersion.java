@@ -15,22 +15,17 @@
  */
 package de.mhus.con.plugin;
 
-import java.io.File;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-
 import de.mhus.con.api.AMojo;
 import de.mhus.con.api.Context;
 import de.mhus.con.api.ExecutePlugin;
-import de.mhus.lib.core.MFile;
-import de.mhus.lib.core.MLog;
-import de.mhus.lib.core.MString;
-import de.mhus.lib.core.MXml;
-import de.mhus.lib.errors.MException;
+import org.summerclouds.common.core.error.InternalException;
+import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MFile;
+import org.summerclouds.common.core.tool.MString;
+import org.summerclouds.common.core.tool.MXml;
+import org.w3c.dom.*;
+
+import java.io.File;
 
 @AMojo(name = "updatePomParentVersion")
 public class UpdatePomParentVersion extends MLog implements ExecutePlugin {
@@ -59,7 +54,7 @@ public class UpdatePomParentVersion extends MLog implements ExecutePlugin {
         String version = context.getStep().getProperties().getString("version");
         log().t("parent version", version);
         if (MString.isEmptyTrim(version))
-            throw new MException("parent version is empty, skip. Tip: set step property 'version'");
+            throw new InternalException("parent version is empty, skip. Tip: set step property 'version'");
 
         if (MXml.getValue(versionE, false).equals(version)) {
             log().i("version not changed", version);
