@@ -184,9 +184,10 @@ export CONDUCTOR_PROJECTBASEDIR
 # work with both Windows and non-Windows executions.
 CONDUCTOR_CMD_LINE_ARGS="$CONDUCTOR_CONFIG $@"
 export CONDUCTOR_CMD_LINE_ARGS
+export CP=$CONDUCTOR_JAR
 
 exec "$JAVACMD" \
   $CONDUCTOR_OPTS \
   $CONDUCTOR_DEBUG_OPTS \
   "-Dconductor.home=${CONDUCTOR_HOME}" \
-  -jar ${CONDUCTOR_JAR} "$@"
+  -cp ${CP} org.summerclouds.conductor.core.MainCli "$@"

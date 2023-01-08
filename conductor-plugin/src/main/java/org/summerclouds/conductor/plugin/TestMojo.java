@@ -1,0 +1,33 @@
+/**
+ * Copyright (C) 2020 Mike Hummel (mh@mhus.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.summerclouds.conductor.plugin;
+
+import org.summerclouds.conductor.api.AMojo;
+import org.summerclouds.conductor.api.Context;
+
+import java.io.File;
+
+@AMojo(name = "test")
+public class TestMojo extends AbstractMavenExecute {
+
+    @Override
+    public boolean execute2(File dir, String moduleName, Context context) {
+        System.err.println("TestPlugin for: " + context + "/" + moduleName + " - Dir: " + dir);
+        System.out.println("Test: " + context.getStep().getProperties().getString("message", "Hello"));
+        System.out.println("Arguments: " + context.getStep().getArguments());
+        return true;
+    }
+}
