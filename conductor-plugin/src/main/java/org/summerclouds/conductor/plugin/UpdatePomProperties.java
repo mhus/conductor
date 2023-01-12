@@ -52,11 +52,18 @@ public class UpdatePomProperties extends MLog implements ExecutePlugin {
         for (Project project : context.getConductor().getProjects()) {
             String version = project.getProperties().getString("version", null);
             String name = project.getName();
+            if (context.getConductor().isVerboseOutput())
+                System.out.println(">>> " + name + ":" + version);
             if (version != null) {
-                String propKey = pp.getString("property." + name, name); // custom mapping
+                String propProjectKey = "property." + name;
+                String propKey = pp.getString(propProjectKey, name); // custom mapping
                 Element propKeyE = MXml.getElementByPath(propE, propKey);
+                if (context.getConductor().isVerboseOutput())
+                    System.out.println("--- " + propProjectKey + "=" + propKey + "=" + propKeyE);
                 if (propKeyE != null) {
                     String propValue = MXml.getValue(propKeyE, false);
+                    if (context.getConductor().isVerboseOutput())
+                        System.out.println("--- ==> " + propValue);
                     if (!version.equals(propValue)) {
                         changed = true;
                         // remove all

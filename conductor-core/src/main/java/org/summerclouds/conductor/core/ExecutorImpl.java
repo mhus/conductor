@@ -59,7 +59,7 @@ public class ExecutorImpl extends MLog implements Executor {
         currentLifecycle = con.getLifecycles().get(lifecycle);
         checkUsage();
         try {
-            log().d("executeLifecycle", currentLifecycle);
+            log().i("executeLifecycle", currentLifecycle);
             Steps steps = currentLifecycle.getSteps();
             execute(lifecycle, steps);
         } catch (Throwable t) {
@@ -305,6 +305,8 @@ public class ExecutorImpl extends MLog implements Executor {
 
     protected boolean execute(
             Step step, Project project, Plugin plugin, LinkedList<Project> projectList, int callLevel) {
+        if (con.isVerboseOutput())
+            System.out.println(">>> execute " + currentLifecycle.getName() + "." + step.getTitle() + "[" + (project == null ? "?" : project.getName()) + "] " + plugin.getMojo() + "]"  );
         log().d(">>>", step.getTitle(), project == null ? "-none-" : project.getName());
         log().t("execute", step, project, plugin);
         try {

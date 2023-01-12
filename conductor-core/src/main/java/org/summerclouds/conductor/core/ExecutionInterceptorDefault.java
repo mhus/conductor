@@ -153,7 +153,7 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
                         console.print(MString.rep('.', 57 - pn.length()));
                         console.print(" ");
     
-                        switch (p.getStatus()) {
+                        switch (result.status) {
                             case FAILURE:
                                 console.setColor(Console.COLOR.RED, null);
                                 break;
@@ -166,7 +166,7 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
                             default:
                                 break;
                         }
-                        console.println(p.getStatus());
+                        console.println(result.status);
                         console.cleanup();
                         
                         for (Result sub : subSteps) {
@@ -201,55 +201,6 @@ public class ExecutionInterceptorDefault extends MLog implements ExecutionInterc
             }
         }
 
-        /* Per Project view
-                for (Project p : con.getProjects()) {
-                    String name = p.getName() + " ";
-                    console.print("  ");
-                    console.print(name);
-                    console.print(MString.rep('.', 60 - name.length()));
-                    console.print(" ");
-                    switch (p.getStatus()) {
-                    case FAILURE:
-                        console.setColor(COLOR.RED, null);
-                        isError = true;
-                        break;
-                    case SKIPPED:
-                        console.setColor(COLOR.YELLOW, null);
-                        break;
-                    case SUCCESS:
-                        console.setColor(COLOR.GREEN, null);
-                        break;
-                    default:
-                        break;
-                    }
-                    console.println(p.getStatus());
-                    console.cleanup();
-                    for (Result result : results) {
-                        if (result.project != null && result.project.getName().equals(p.getName())) {
-                            String stepTitle = result.step.getTitle();
-                            console.print("    ");
-                            console.setColor(COLOR.BRIGHT_BLACK, null);
-                            console.print(stepTitle);
-                            console.print(" ");
-                            console.print(MString.rep('.', 57 - stepTitle.length()));
-                            console.print(" ");
-                            switch (result.status) {
-                            case FAILURE:
-                                console.setColor(COLOR.RED, null);
-                                isError = true;
-                                break;
-                            case SUCCESS:
-                                console.setColor(COLOR.GREEN, null);
-                                break;
-                            default:
-                                break;
-                            }
-                            console.println(result.status);
-                            console.cleanup();
-                        }
-                    }
-                }
-        */
         console.println();
         console.setBold(true);
         console.println("------------------------------------------------------------------------");

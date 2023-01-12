@@ -17,14 +17,14 @@
 
 # config
 
-REPO_PATH_ZIP="de/mhus/conductor/conductor-launcher/{{project.version}}/conductor-launcher-{{project.version}}-install.zip"
+REPO_PATH_ZIP="org/summerclouds/conductor-launcher/±project_version±/conductor-launcher-±project_version±-install.zip"
 LOCAL_REPO_PATH_ZIP="$HOME/.m2/repository/$REPO_PATH_ZIP"
 REMOTE_REPO_PATH_ZIP="https://repo1.maven.org/maven2/$REPO_PATH_ZIP"
 
 # init
 
-if [ ! -d $HOME/.conductor/bin/{{project.version}} ]; then
-  mkdir -p $HOME/.conductor/bin/{{project.version}}
+if [ ! -d $HOME/.conductor/bin/±project_version± ]; then
+  mkdir -p $HOME/.conductor/bin/±project_version±
 fi
 if [ ! -d $HOME/.conductor/tmp ]; then
   mkdir -p $HOME/.conductor/tmp
@@ -35,7 +35,7 @@ fi
 if [ ! -e $LOCAL_REPO_PATH_ZIP ]; then
   if command -v mvn &> /dev/null; then
     mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get \
-      -Dartifact=de.mhus.conductor:conductor-launcher:{{project.version}}:zip:install
+      -Dartifact=org.summerclouds.conductor:conductor-launcher:±project_version±:zip:install
   elif command -v curl &> /dev/null; then
     if [ -e $HOME/.conductor/tmp/con-install.zip ]; then
       rm $HOME/.conductor/tmp/con-install.zip
@@ -56,14 +56,14 @@ fi
 
 # unpack and setup
 
-cd $HOME/.conductor/bin/{{project.version}}
+cd $HOME/.conductor/bin/±project_version±
 unzip -o $LOCAL_REPO_PATH_ZIP
-chmod +x $HOME/.conductor/bin/{{project.version}}/*.sh
+chmod +x $HOME/.conductor/bin/±project_version±/*.sh
 
 if [ -e $HOME/.conductor/bin/con ]; then
   rm $HOME/.conductor/bin/con
 fi
-ln -s $HOME/.conductor/bin/{{project.version}}/con.sh $HOME/.conductor/bin/con
+ln -s $HOME/.conductor/bin/±project_version±/con.sh $HOME/.conductor/bin/con
 
 # cleanup
 
@@ -71,5 +71,5 @@ if [ -e $HOME/.conductor/tmp/con-install.zip ]; then
   rm $HOME/.conductor/tmp/con-install.zip
 fi
 
-echo "Installed {{project.version}} in $HOME/.conductor"
-echo "Add directory $HOME/.conductor/bin to \$PATH or link $HOME/.conductor/bin/con in a binary directory like /usr/local/bin"
+echo "Installed ±project_version± in $HOME/.conductor"
+echo "Add directory $HOME/.conductor/bin to \$PATH (export PATH=$PATH:$HOME/.conductor/bin/con) or link $HOME/.conductor/bin/con in a binary directory like /usr/local/bin"

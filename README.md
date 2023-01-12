@@ -7,18 +7,18 @@ The Conductor is created to handle multiple projects.
 
 Define projects and lifecycle steps to process actions.
 
-The 1.1.1 Version.
+The  Version.
 
 ## Install
 
 Install using the install script from maven central
 
 ```
-curl https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/1.1.1/conductor-launcher-1.1.1-install.sh | bash
+curl https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/1.1.2-SNAPSHOT/conductor-launcher-1.1.2-SNAPSHOT-install.sh | bash
 
 or with wget:
 
-wget -qO- https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/1.1.1/conductor-launcher-1.1.1-install.sh | bash
+wget -qO- https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/1.1.2-SNAPSHOT/conductor-launcher-1.1.2-SNAPSHOT-install.sh | bash
 
 ```
 
