@@ -15,6 +15,7 @@
  */
 package org.summerclouds.conductor.plugin;
 
+import org.summerclouds.common.core.M;
 import org.summerclouds.common.core.tool.MString;
 import org.summerclouds.conductor.api.AMojo;
 import org.summerclouds.conductor.api.ConUtil;
@@ -37,8 +38,8 @@ public class MavenMojo extends AbstractMavenExecute {
                 cmd, 
                 true);
         if (!res[2].equals("0")
-                && !context.getProperties()
-                        .getBoolean(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, false))
+                && !M.to(context.make(context.getProperties()
+                .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
             throw new MojoException(context, "not successful", cmd, res[1], res[2]);
         return true;
     }

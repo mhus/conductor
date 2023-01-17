@@ -53,9 +53,10 @@ public class UpdatePomParentVersion extends MLog implements ExecutePlugin {
 
         String version = context.getStep().getProperties().getString("version");
         log().t("parent version", version);
-        if (MString.isEmptyTrim(version))
-            throw new InternalException("parent version is empty, skip. Tip: set step property 'version'");
-
+        if (MString.isEmptyTrim(version) || version.equals("null")) {
+            log().w("new parent version is empty, skip. Tip: set step property 'version'");
+            return false;
+        }
         if (MXml.getValue(versionE, false).equals(version)) {
             log().i("version not changed", version);
             return false;
