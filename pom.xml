@@ -35,7 +35,7 @@
   	   <maven-site-plugin.skip>false</maven-site-plugin.skip>
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
 	   <site.path>.</site.path>
-		<summerclouds.common.version>0.0.1-SNAPSHOT</summerclouds.common.version>
+		<summerclouds.common.version>0.1.0-SNAPSHOT</summerclouds.common.version>
 	</properties>
     <inceptionYear>2020</inceptionYear>
 	<licenses>

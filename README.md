@@ -36,17 +36,3 @@ or include it in the $PATH variabe to execute it without using the directory. e.
 ln -s $HOME/.conductor/bin/con /usr/local/bin/con
 ```
 
-## Examples
-
-```
-con git.add
-con git.commit m="snapshot"
-con git cmd=push
-```
-
-```
-con clean
-con buildall
-con rebuild # rebuild all
-con maven cmd=package
-```

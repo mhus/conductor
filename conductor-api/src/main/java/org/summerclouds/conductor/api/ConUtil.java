@@ -94,7 +94,7 @@ public class ConUtil {
         
         log.i(name, "execute", cmd, rootDir);
 
-        final String shortName = MString.truncateNice(name, 40, 15);
+        final String shortName = shorten(name);
         final Console console = getConsole();
         final boolean output = infoOut || log.isLevelEnabled(Log.LEVEL.DEBUG);
 
@@ -149,6 +149,17 @@ public class ConUtil {
         String stdout = stdOutBuilder.toString();
         log.i(name, "exitCode", exitCode);
         return new String[] {stdout, stderr, String.valueOf(exitCode)};
+    }
+
+    private static String shorten(String name) {
+        if (name == null) return "";
+        if (name.length() < 40) return name;
+        if (name.endsWith("-spring-boot-starter"))
+            name = name.substring(0, name.length() - 13);
+        else
+        if (name.endsWith("-maven-plugin"))
+            name = name.substring(0, name.length() - 7);
+        return MString.truncateNice(name, 40, 15);
     }
 
     public static boolean confirmAction(Conductor con, Step step, List<Project> projects, String msg) {
