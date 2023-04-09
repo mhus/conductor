@@ -28,21 +28,20 @@ public class MainOptionHelp implements MainOptionHandler {
 
     @Override
     public void execute(Cli cli, String cmd, LinkedList<String> queue) {
-        System.out.println("Arguments:");
-        System.out.println(" <lifecycle> [property] ...");
-        System.out.println(
-                " Cascade [options] [arguments] [options] [arguments] ... to execute multiple lifecycles, use th empty Option '-' to separate.");
-        System.out.println(
-                " The arguments and options are in a queue. Define options then a lifecycle. If you start with options again (start with ',') then the lifecycle will be executed first befor the next option take effect. And the following lifecycle can be defined.");
-        System.out.println();
-        System.out.println("Property:");
-        System.out.println(" key=value  - Set the value of the key");
-        System.out.println(" key        - Set the key to true");
-        System.out.println();
-        System.out.println("Options:");
-        System.out.println(" -");
-        System.out.println(
-                "     Dummy Option has not effect but will end a lifecycle definition and execute it.");
+        System.out.println("""
+                Usage:
+                  con [options] <lifecycle name> [arguments/properties]
+                  options: Prepare the execution of the lifecycle or options of the engine. Starting with '-'.
+                  lifecycle name: Name of the lifecycle to execute.
+                  arguments: arguments for the execution depending on the lifecycle to execute.
+                  properties: key=value configuration of the lifecycle.
+                  
+                Casacade:
+                  To cascade multiple lifecycles start a new argument with a slash '-'. To cleanup
+                  all options for a new lifecycle use '--'.
+                  con [options] <lifecycle name> [arguments/properties] - [options] <lifecycle name> [arguments/properties] ...
+                """);
+
         for (Entry<String, MainOptionHandler> handler :
                 new TreeMap<>(cli.getOptions()).entrySet()) {
             String usage = handler.getValue().getUsage(handler.getKey());

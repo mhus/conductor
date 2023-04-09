@@ -145,12 +145,15 @@ public class MainCli extends MLog implements Cli {
 
         MProperties execProperties = null;
         String execLifecycle = null;
+        int directPropIndex = 0;
 
         while (queue.size() > 0) {
             String next = queue.removeFirst();
             if (next.startsWith("-")) {
                 if (execLifecycle != null) {
+                    prepareDirectPropAll(execProperties, directPropIndex);
                     executeLifecycle(execLifecycle, execProperties);
+                    directPropIndex = 0;
                     execLifecycle = null;
                     execProperties = null;
                 }
@@ -163,16 +166,31 @@ public class MainCli extends MLog implements Cli {
                 if (MString.isIndex(next, '='))
                     execProperties.put(
                             MString.beforeIndex(next, '=').trim(), MString.afterIndex(next, '='));
+                else {
+                    execProperties.put(String.valueOf(directPropIndex), next);
+                    directPropIndex++;
+                }
+
             }
         }
 
         if (execLifecycle != null) {
+            prepareDirectPropAll(execProperties, directPropIndex);
             executeLifecycle(execLifecycle, execProperties);
             execLifecycle = null;
             execProperties = null;
         }
 
         resetCon();
+    }
+
+    private void prepareDirectPropAll(MProperties execProperties, int directPropIndex) {
+        StringBuilder buf = new StringBuilder();
+        for (int i = 0; i < directPropIndex; i++) {
+            if (buf.length() > 0) buf.append(" ");
+            buf.append(execProperties.get(String.valueOf(i)));
+        }
+        execProperties.put("@", buf.toString()); //TODO escape space and quotes?
     }
 
     private void executeOption(String next, LinkedList<String> queue) throws NotFoundException {
