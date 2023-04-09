@@ -20,6 +20,17 @@ properties:
   overwriteMe: 3
 
 lifecycles:
+- name: version2
+  title: Switch to version 2.0.0
+  steps:
+  - title: Switch to version 2.0.0
+    target: file.replace
+    selector:
+      group: parent
+    properties:
+      files: versions.properties
+      regex_core: core=1\.0\.0
+      replace_core: core=2.0.0
 - name: newVersion
   title: Configure new versions
   steps:

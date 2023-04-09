@@ -30,16 +30,17 @@ public class MainOptionHelp implements MainOptionHandler {
     public void execute(Cli cli, String cmd, LinkedList<String> queue) {
         System.out.println("""
                 Usage:
-                  con [options] <lifecycle name> [arguments/properties]
+                  con [options/properties] <lifecycle name> [arguments]
                   options: Prepare the execution of the lifecycle or options of the engine. Starting with '-'.
                   lifecycle name: Name of the lifecycle to execute.
                   arguments: arguments for the execution depending on the lifecycle to execute.
                   properties: key=value configuration of the lifecycle.
                   
-                Casacade:
-                  To cascade multiple lifecycles start a new argument with a slash '-'. To cleanup
-                  all options for a new lifecycle use '--'.
-                  con [options] <lifecycle name> [arguments/properties] - [options] <lifecycle name> [arguments/properties] ...
+                Concatenate:
+                  To concatenate multiple lifecycles enable concatenation with the option '-co'. To start a new lifecycle use 
+                  a slash '-'. To cleanup all options for a new lifecycle use '--'.
+                  To disable concatenion (will ignore - and --) use the -noco option.
+                  con -co [options/properties] <lifecycle name> [arguments] - [options/properties] <lifecycle name> [arguments] ...
                 """);
 
         for (Entry<String, MainOptionHandler> handler :

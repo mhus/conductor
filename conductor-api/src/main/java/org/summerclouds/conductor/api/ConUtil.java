@@ -58,6 +58,7 @@ public class ConUtil {
     public static final String PROPERTY_CONFIRM_CMDS = "conductor.confirm.cmds";
     public static final String PROPERTY_CONFIRM_BEEP = "conductor.confirm.beep";
     public static final String PROPERTY_VERBOSE = "conductor.verbose";
+    public static final String PROPERTY_CONCATENATE = "conductor.concatenate";
 
     public static void orderProjects(List<Project> projects, String order, boolean orderAsc) {
         projects.sort(

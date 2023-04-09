@@ -147,38 +147,49 @@ public class MainCli extends MLog implements Cli {
         String execLifecycle = null;
         int directPropIndex = 0;
 
+        // prepare
+        execProperties = new MProperties();
         while (queue.size() > 0) {
             String next = queue.removeFirst();
-            if (next.startsWith("-")) {
-                if (execLifecycle != null) {
+            if (execLifecycle == null) {
+                if (next.startsWith("-")) {
+                    // option
+                    executeOption(next, queue);
+                } else if (next.contains("=")) {
+                    // propertiy
+                    execProperties.put(
+                        MString.beforeIndex(next, '=').trim(), MString.afterIndex(next, '='));
+                } else {
+                    // lifecycle name
+                    execLifecycle = next;
+                }
+            } else {
+                if (overlayProperties.getBoolean(ConUtil.PROPERTY_CONCATENATE, false) &&
+                (next.equals("-") || next.equals("--") ) )  {
+                    // concatenated lifecycle, execute and reset
                     prepareDirectPropAll(execProperties, directPropIndex);
                     executeLifecycle(execLifecycle, execProperties);
-                    directPropIndex = 0;
                     execLifecycle = null;
-                    execProperties = null;
-                }
-                executeOption(next, queue);
-
-            } else if (execLifecycle == null) {
-                execLifecycle = next;
-                execProperties = new MProperties();
-            } else {
-                if (MString.isIndex(next, '='))
-                    execProperties.put(
-                            MString.beforeIndex(next, '=').trim(), MString.afterIndex(next, '='));
-                else {
+                    execProperties = new MProperties();
+                    directPropIndex = 0;
+                    if (next.equals("--")) {
+                        executeOption("--", null);
+                    }
+                } else {
+                    // argument
                     execProperties.put(String.valueOf(directPropIndex), next);
                     directPropIndex++;
                 }
-
             }
         }
 
+        // execute last lifecycle - not concatenated
         if (execLifecycle != null) {
             prepareDirectPropAll(execProperties, directPropIndex);
             executeLifecycle(execLifecycle, execProperties);
             execLifecycle = null;
             execProperties = null;
+            directPropIndex=0;
         }
 
         resetCon();
