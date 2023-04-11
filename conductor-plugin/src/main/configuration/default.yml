@@ -32,32 +32,37 @@ lifecycles:
     target: con.git
     arguments:
     - pull
+    - @
 
-- name: git.clone
+- name: git.push
+  steps:
+    - title: Push
+      target: con.git
+      arguments:
+        - push
+        - @
+
+- name: git
   steps:
   - title: Clone
     target: con.git.clone
   - title: Pull
     target: con.git
     arguments:
-    - ${cmd}
+    - @
 
 - name: git.reset
   steps:
   - title: Reset
     target: con.git
     arguments:
-    - "reset --hard"
-    - pull
-
-- name: git
-  steps:
-  - title: Git
+    - reset
+    - "--hard"
+  - title: Pull
     target: con.git
-    properties:
-      ignoreReturnCode: ${ignoreReturnCode:false}
     arguments:
-    - ${cmd}
+      - pull
+      - @
 
 - name: git.add
   steps:
@@ -66,20 +71,22 @@ lifecycles:
     properties:
       ignoreReturnCode: ${ignoreReturnCode:true}
     arguments:
-    - add *
+    - add
+    - *
     
 - name: git.commit
   description: Commit all projects
   usage:
-  - m isset Message must be set
+  - 0 isset Message must be set
   steps:
   - title: Commit
     target: con.git
     properties:
       ignoreReturnCode: ${ignoreReturnCode:true}
     arguments:
-    - commit -m "${m}" 
-    - push
+    - commit
+    - -m
+    - @
 
 - name: reset
   steps:
@@ -114,7 +121,7 @@ lifecycles:
     target: con.maven
     arguments:
     - clean
-    - install
+    - ${mavenBuildTarget:install}
     properties:
       touchDirectory: ${touchDirectory:true}
       processSubModules: ${processSubModules:false}

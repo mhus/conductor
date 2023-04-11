@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -344,5 +345,52 @@ public class ConUtil {
 
     public static Object[] getMainPackageName() {
         return SCAN_PACKAGES;
+    }
+
+    public static String escapeArgumentsForShell(Context context, List<String> args) {
+        StringBuffer out = new StringBuffer();
+        // TODO linux vs. windows ?
+        for (String arg : args) {
+            if (arg.startsWith("\\@"))
+                arg = arg.substring(1);
+            else
+            if (arg.equals("@")) {
+                for (String arg2 : getContextArgs(context)) {
+                    arg2 = escapeArgument(arg2);
+                    if (out.length() > 0)
+                        out.append(' ');
+                    out.append(arg2);
+                }
+                continue;
+            } // TODO more options, like @1-9
+            arg = escapeArgument(arg);
+            if (out.length() > 0)
+                out.append(' ');
+            out.append(arg);
+        }
+        return out.toString();
+    }
+
+    private static String escapeArgument(String arg) {
+//        arg = arg.replaceAll("\\\\", "\\\\\\\\"); // '\' -> '\\'
+//        arg = arg.replaceAll("\\ ", "\\\\ "); // ' ' -> '\ '
+//        arg = arg.replaceAll("\\(", "\\\\("); // '(' -> '\('
+//        arg = arg.replaceAll("\\)", "\\\\)"); // ')' -> '\)'
+//        arg = arg.replaceAll("\\$", "\\\\$"); // '$' -> '\$'
+//        arg = arg.replaceAll("\\|", "\\\\|"); // '|' -> '\|'
+//        if (arg.startsWith("-")) return arg;
+//        arg = arg.replaceAll("\\\"", "\\\\\""); // '"' -> '\"'
+        if (!arg.matches(".*[\\s|&;<>()$`\"'\\[\\]*?#~=%+\\\\].*")) return arg;
+        arg = arg.replaceAll("\\'", "'\\\\''"); // ' -> '\''
+        arg = '\'' + arg + '\'';
+        return arg;
+    }
+
+    private static List<String> getContextArgs(Context context) {
+        LinkedList<String> out = new LinkedList<>();
+        for (int i = 0; context.getProperties().containsKey(String.valueOf(i)); i++ ) {
+            out.add( context.getProperties().getString(String.valueOf(i), "") );
+        }
+        return out;
     }
 }

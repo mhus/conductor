@@ -201,7 +201,7 @@ public class MainCli extends MLog implements Cli {
             if (buf.length() > 0) buf.append(" ");
             buf.append(execProperties.get(String.valueOf(i)));
         }
-        execProperties.put("@", buf.toString()); //TODO escape space and quotes?
+        execProperties.put("@", buf.toString());
     }
 
     private void executeOption(String next, LinkedList<String> queue) throws NotFoundException {

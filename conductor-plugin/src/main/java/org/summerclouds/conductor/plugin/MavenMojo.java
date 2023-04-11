@@ -30,7 +30,7 @@ public class MavenMojo extends AbstractMavenExecute {
     @Override
     public boolean execute2(File dir, String moduleName, Context context) throws Exception {
         String mvnPath = ConUtil.cmdLocation(context.getConductor(), "mvn");
-        String cmd = mvnPath + " " + MString.join(context.getStep().getArguments(), " ");
+        String cmd = mvnPath + " " + ConUtil.escapeArgumentsForShell(context, context.getStep().getArguments());
         String[] res = ConUtil.execute(
                 context.getConductor(),
                 getCmdName(context, moduleName), 

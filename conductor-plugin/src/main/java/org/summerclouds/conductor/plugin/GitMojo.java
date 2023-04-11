@@ -28,20 +28,20 @@ public class GitMojo extends MLog implements ExecutePlugin {
     public boolean execute(Context context) throws Exception {
         File dir = context.getProject().getRootDir();
         String gitPath = ConUtil.cmdLocation(context.getConductor(), "git");
-        for (String arg : context.getStep().getArguments()) {
-            String cmd = gitPath + " " + arg;
-            String[] res =
-                    ConUtil.execute(
-                            context.getConductor(),
-                            context.getStep().getTitle() + " " + context.getProject().getName(),
-                            dir,
-                            cmd,
-                            true);
-            if (!res[2].equals("0")
-                    && !M.to(context.make(context.getProperties()
-                            .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
-                throw new MojoException(context, "not successful", cmd, res[1], res[2]);
-        }
+        String args = ConUtil.escapeArgumentsForShell(context, context.getStep().getArguments());
+        String cmd = gitPath + " " + args;
+        String[] res =
+                ConUtil.execute(
+                        context.getConductor(),
+                        context.getStep().getTitle() + " " + context.getProject().getName(),
+                        dir,
+                        cmd,
+                        true);
+        if (!res[2].equals("0")
+                && !M.to(context.make(context.getProperties()
+                        .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
+            throw new MojoException(context, "not successful", cmd, res[1], res[2]);
+
         return true;
     }
 }
