@@ -372,17 +372,22 @@ public class ConUtil {
     }
 
     private static String escapeArgument(String arg) {
-//        arg = arg.replaceAll("\\\\", "\\\\\\\\"); // '\' -> '\\'
-//        arg = arg.replaceAll("\\ ", "\\\\ "); // ' ' -> '\ '
-//        arg = arg.replaceAll("\\(", "\\\\("); // '(' -> '\('
-//        arg = arg.replaceAll("\\)", "\\\\)"); // ')' -> '\)'
-//        arg = arg.replaceAll("\\$", "\\\\$"); // '$' -> '\$'
-//        arg = arg.replaceAll("\\|", "\\\\|"); // '|' -> '\|'
-//        if (arg.startsWith("-")) return arg;
-//        arg = arg.replaceAll("\\\"", "\\\\\""); // '"' -> '\"'
+        if (MSystem.isWindows())
+            return escapeArgumentCmd(arg);
+        else
+            return escapeArgumentBash(arg);
+    }
+    private static String escapeArgumentBash(String arg) {
         if (!arg.matches(".*[\\s|&;<>()$`\"'\\[\\]*?#~=%+\\\\].*")) return arg;
         arg = arg.replaceAll("\\'", "'\\\\''"); // ' -> '\''
         arg = '\'' + arg + '\'';
+        return arg;
+    }
+
+    private static String escapeArgumentCmd(String arg) {
+        if (!arg.matches(".*[\\s|&<>\"'^].*")) return arg;
+        arg = arg.replaceAll("([|&<>\"^])", "^$1"); // ' -> '^''
+        arg = '"' + arg + '"';
         return arg;
     }
 
