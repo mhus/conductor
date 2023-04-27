@@ -17,6 +17,7 @@ package org.summerclouds.conductor.core;
 
 import org.summerclouds.conductor.api.*;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -91,9 +92,8 @@ public class MainOptionInspect implements MainOptionHandler {
                 System.out.println("      Selector  : " + step.getSelector());
                 System.out.println(
                         "      Order     : "
-                                + step.getSortBy()
-                                + " "
-                                + (step.isOrderAsc() ? "ASC" : "DESC"));
+                                + Arrays.toString(step.getSortBy())
+                );
                 System.out.println("      Properties: " + step.getProperties());
             }
         }

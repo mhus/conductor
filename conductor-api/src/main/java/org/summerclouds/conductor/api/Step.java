@@ -25,9 +25,7 @@ public interface Step {
 
     Labels getSelector();
 
-    String getSortBy();
-
-    boolean isOrderAsc();
+    String[] getSortBy();
 
     String getTarget();
 

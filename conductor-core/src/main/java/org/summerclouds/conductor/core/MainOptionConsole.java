@@ -83,7 +83,7 @@ public class MainOptionConsole implements MainOptionHandler {
             } else {
                 LabelsImpl selector = new LabelsImpl();
                 String[] parts = line.split(" ");
-                String orderBy = null;
+                String[] orderBy = null;
                 for (int i = 1; i < parts.length; i++) {
                     String part = parts[i];
                     if (MString.isIndex(part, '=')) {
@@ -91,12 +91,12 @@ public class MainOptionConsole implements MainOptionHandler {
                                 MString.beforeIndex(part, '='),
                                 MString.afterIndex(part, '='));
                     } else {
-                        orderBy = part;
+                        orderBy = part.split(",");
                     }
                 }
                 List<Project> list = con().getProjects().select(selector);
                 if (orderBy != null) {
-                    ConUtil.orderProjects(list, orderBy, true);
+                    ConUtil.orderProjects(con(), list, orderBy);
                 }
                 for (Project p : list) {
                     System.out.println(p.getName());

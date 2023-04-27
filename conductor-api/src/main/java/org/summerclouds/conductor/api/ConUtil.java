@@ -26,10 +26,7 @@ import org.summerclouds.common.core.util.MUri;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ConUtil {
 
@@ -61,21 +58,48 @@ public class ConUtil {
     public static final String PROPERTY_VERBOSE = "conductor.verbose";
     public static final String PROPERTY_CONCATENATE = "conductor.concatenate";
 
-    public static void orderProjects(List<Project> projects, String order, boolean orderAsc) {
+    public static void orderProjects(Conductor con, List<Project> projects, String[] orders) {
         projects.sort(
                 new Comparator<Project>() {
 
                     @Override
                     public int compare(Project o1, Project o2) {
-                        int ret =
-                                compare(
-                                        o1.getLabels().getOrNull(order),
-                                        o2.getLabels().getOrNull(order));
-                        if (!orderAsc) ret = ret * -1;
-                        return ret;
+                        for (String order : orders) {
+                            boolean orderAsc = true;
+                            if (order.endsWith(" desc")) {
+                                orderAsc = false;
+                                order = order.substring(0, order.length()-5);
+                            } else
+                            if (order.endsWith(" asc")) {
+                                order = order.substring(0, order.length()-4);
+                            }
+                            order = order.trim();
+                            if (order.startsWith("@")) {
+                                int partial =
+                                        compareDependency(
+                                                con.getProjects(),
+                                                order.substring(1),
+                                                o1,
+                                                o2);
+                                if (partial != 0) {
+                                    if (!orderAsc) partial = partial * -1;
+                                    return partial;
+                                }
+                            } else {
+                                int partial =
+                                        compareNumber(
+                                                o1.getLabels().getOrNull(order),
+                                                o2.getLabels().getOrNull(order));
+                                if (partial != 0) {
+                                    if (!orderAsc) partial = partial * -1;
+                                    return partial;
+                                }
+                            }
+                        }
+                        return 0;
                     }
 
-                    private int compare(String[] o1, String[] o2) {
+                    private int compareNumber(String[] o1, String[] o2) {
                         if (o1 == null && o2 == null) return 0;
                         if (o1 == null || o1.length == 0) return -1;
                         if (o2 == null || o2.length == 0) return 1;
@@ -83,6 +107,21 @@ public class ConUtil {
                             return Double.compare(MCast.todouble(o1[0], 0), MCast.todouble(o2[0], 0));
                         return o1[0].compareTo(o2[0]);
                     }
+
+                    private static int compareDependency(Projects all, String labelName, Project o1, Project o2) {
+                        if (o1 == null && o2 == null) return 0;
+                        if (o1 == null) return -1;
+                        if (o2 == null) return 1;
+
+                        for ( String dependency : o2.getLabels().getOrNull(labelName)) {
+                            if (dependency.equals(o1.getName())) return -1;
+                            Project depProject = all.get(dependency);
+                            if (compareDependency(all, labelName, o1, depProject) < 0) return -1;
+                        }
+
+                        return 1;
+                    }
+
                 });
     }
 
@@ -212,9 +251,8 @@ public class ConUtil {
                     System.out.println("    Selector  : " + step.getSelector());
                     System.out.println(
                             "    Order     : "
-                                    + step.getSortBy()
-                                    + " "
-                                    + (step.isOrderAsc() ? "ASC" : "DESC"));
+                                    + Arrays.toString(step.getSortBy())
+                    );
                     System.out.println("    Properties: " + step.getProperties());
                 }
             }

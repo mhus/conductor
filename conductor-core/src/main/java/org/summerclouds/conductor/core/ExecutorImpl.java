@@ -18,6 +18,7 @@ package org.summerclouds.conductor.core;
 import org.summerclouds.common.core.error.InternalRuntimeException;
 import org.summerclouds.common.core.error.NotFoundException;
 import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MCollection;
 import org.summerclouds.common.core.tool.MFile;
 import org.summerclouds.common.core.tool.MString;
 import org.summerclouds.common.core.util.MUri;
@@ -223,9 +224,9 @@ public class ExecutorImpl extends MLog implements Executor {
             }
 
             // order
-            String order = step.getSortBy();
-            if (MString.isSet(order)) {
-                ConUtil.orderProjects(projects, order, step.isOrderAsc());
+            String[] order = step.getSortBy();
+            if (MCollection.isSet(order)) {
+                ConUtil.orderProjects(con, projects, order);
             }
 
             execute(step, projects, plugin);

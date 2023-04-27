@@ -55,13 +55,8 @@ public class ContextStep implements Step {
     }
 
     @Override
-    public String getSortBy() {
+    public String[] getSortBy() {
         return context.make(inst.getSortBy());
-    }
-
-    @Override
-    public boolean isOrderAsc() {
-        return inst.isOrderAsc();
     }
 
     @Override

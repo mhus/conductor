@@ -31,8 +31,7 @@ public class StepImpl implements Step {
 
     protected LinkedList<String> arguments;
     protected LabelsImpl selector;
-    protected String sort;
-    protected boolean orderAsc = true;
+    protected String[] sort;
     protected String target;
     protected Conductor con;
     protected String condition;
@@ -53,13 +52,8 @@ public class StepImpl implements Step {
     }
 
     @Override
-    public String getSortBy() {
+    public String[] getSortBy() {
         return sort;
-    }
-
-    @Override
-    public boolean isOrderAsc() {
-        return orderAsc;
     }
 
     @Override

@@ -17,6 +17,7 @@ package org.summerclouds.conductor.core;
 
 import org.summerclouds.common.core.error.NotFoundException;
 import org.summerclouds.common.core.log.MLog;
+import org.summerclouds.common.core.tool.MSystem;
 import org.summerclouds.common.core.util.MUri;
 import org.summerclouds.conductor.api.AScheme;
 import org.summerclouds.conductor.api.ConUtil;
@@ -42,7 +43,7 @@ public class MavenScheme extends MLog implements Scheme {
                     ConUtil.execute(
                             con,
                             "MVN",
-                            con.getRoot(),
+                            new File(MSystem.getUserHome(), ".conductor"),
                             mvnPath
                                     + " help:evaluate -Dexpression=settings.localRepository -q -DforceStdout",
                             false)[0];
