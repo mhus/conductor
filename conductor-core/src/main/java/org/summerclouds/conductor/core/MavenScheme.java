@@ -43,7 +43,7 @@ public class MavenScheme extends MLog implements Scheme {
                     ConUtil.execute(
                             con,
                             "MVN",
-                            new File(MSystem.getUserHome(), ".conductor"),
+                            ConUtil.getHome(),
                             mvnPath
                                     + " help:evaluate -Dexpression=settings.localRepository -q -DforceStdout",
                             false)[0];
