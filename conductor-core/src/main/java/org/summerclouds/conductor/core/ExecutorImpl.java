@@ -224,7 +224,7 @@ public class ExecutorImpl extends MLog implements Executor {
             }
 
             // order
-            String[] order = step.getSortBy();
+            String[] order = step.getOrderBy();
             if (MCollection.isSet(order)) {
                 ConUtil.orderProjects(con, projects, order);
             }

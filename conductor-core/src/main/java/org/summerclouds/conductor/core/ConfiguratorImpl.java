@@ -290,7 +290,7 @@ public class ConfiguratorImpl extends MLog implements Configurator {
             }
 
             // order:
-            step.sort = map.getStringArray("sort");
+            step.order = map.getStringArray("order");
 
             // condition
             step.condition = map.getString("condition");

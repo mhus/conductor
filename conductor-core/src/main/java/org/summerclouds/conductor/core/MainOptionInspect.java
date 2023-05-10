@@ -92,7 +92,7 @@ public class MainOptionInspect implements MainOptionHandler {
                 System.out.println("      Selector  : " + step.getSelector());
                 System.out.println(
                         "      Order     : "
-                                + Arrays.toString(step.getSortBy())
+                                + Arrays.toString(step.getOrderBy())
                 );
                 System.out.println("      Properties: " + step.getProperties());
             }

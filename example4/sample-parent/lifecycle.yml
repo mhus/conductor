@@ -19,7 +19,7 @@ lifecycles:
   steps:
   # reset and pull all projects
   - target: con.test
-    order: "@dependencies"
+    order: dependencies
 
 plugins:
 - target: con.test

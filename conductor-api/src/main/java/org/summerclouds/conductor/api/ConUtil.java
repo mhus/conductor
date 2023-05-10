@@ -16,8 +16,10 @@
 package org.summerclouds.conductor.api;
 
 import de.mhus.conductor.api.meta.Version;
+import org.summerclouds.common.core.M;
 import org.summerclouds.common.core.console.Console;
 import org.summerclouds.common.core.error.NotFoundException;
+import org.summerclouds.common.core.error.UsageException;
 import org.summerclouds.common.core.log.Log;
 import org.summerclouds.common.core.node.MProperties;
 import org.summerclouds.common.core.tool.*;
@@ -58,40 +60,42 @@ public class ConUtil {
     public static final String PROPERTY_VERBOSE = "conductor.verbose";
     public static final String PROPERTY_CONCATENATE = "conductor.concatenate";
 
-    public static void orderProjects(Conductor con, List<Project> projects, String[] orders) {
+    public static void orderProjects(Conductor con, List<Project> projects, String[] orderStrings) {
+        final OrderImpl[] orders = new OrderImpl[orderStrings.length];
+        for (int i = 0; i < orderStrings.length; i++) {
+            orders[i] = new OrderImpl(con, orderStrings[i], projects);
+        }
+
         projects.sort(
                 new Comparator<Project>() {
 
                     @Override
                     public int compare(Project o1, Project o2) {
-                        for (String order : orders) {
-                            boolean orderAsc = true;
-                            if (order.endsWith(" desc")) {
-                                orderAsc = false;
-                                order = order.substring(0, order.length()-5);
-                            } else
-                            if (order.endsWith(" asc")) {
-                                order = order.substring(0, order.length()-4);
-                            }
-                            order = order.trim();
-                            if (order.startsWith("@")) {
+                        for (OrderImpl order : orders) {
+
+                            if (order.getType() == OrderImpl.ORDER_TYPE.DEPENDENCY) {
+                                if (con.isVerboseOutput())
+                                    System.out.println(" >>> Order: " + o1.getName() + " vs. " + o2.getName());
                                 int partial =
                                         compareDependency(
-                                                con.getProjects(),
-                                                order.substring(1),
+                                                con,
+                                                order.getName(),
                                                 o1,
-                                                o2);
+                                                o2,
+                                                0);
+                                if (con.isVerboseOutput())
+                                    System.out.println(" === Order: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
                                 if (partial != 0) {
-                                    if (!orderAsc) partial = partial * -1;
+                                    if (!order.isOrderAsc()) partial = partial * -1;
                                     return partial;
                                 }
                             } else {
                                 int partial =
                                         compareNumber(
-                                                o1.getLabels().getOrNull(order),
-                                                o2.getLabels().getOrNull(order));
+                                                o1.getLabels().getOrNull(order.getName()),
+                                                o2.getLabels().getOrNull(order.getName()));
                                 if (partial != 0) {
-                                    if (!orderAsc) partial = partial * -1;
+                                    if (!order.isOrderAsc()) partial = partial * -1;
                                     return partial;
                                 }
                             }
@@ -108,15 +112,31 @@ public class ConUtil {
                         return o1[0].compareTo(o2[0]);
                     }
 
-                    private static int compareDependency(Projects all, String labelName, Project o1, Project o2) {
+                    private static int compareDependency(Conductor con, String labelName, Project o1, Project o2, int depth) {
+                        if (depth > 1000)
+                            throw new UsageException("dependencies too deep");
                         if (o1 == null && o2 == null) return 0;
                         if (o1 == null) return -1;
                         if (o2 == null) return 1;
 
-                        for ( String dependency : o2.getLabels().getOrNull(labelName)) {
-                            if (dependency.equals(o1.getName())) return -1;
-                            Project depProject = all.get(dependency);
-                            if (compareDependency(all, labelName, o1, depProject) < 0) return -1;
+                        for ( String dependency2 : o2.getLabels().getOrDefault(labelName, M.EMPTY_STRING_ARRAY)) {
+                            if (dependency2.equals(o1.getName())) return -1;
+                            Project depProject2 = con.getProjects().get(dependency2);
+                            int parentCompare2 = compareDependency(con, labelName, o1, depProject2, depth+1);
+                            if (con.isVerboseOutput())
+                                System.out.println(" --> Order: " + o1.getName() + " vs. " + o2.getName() + ": " + parentCompare2);
+                            if (parentCompare2 < 0) return -1;
+                            if (parentCompare2 > 0) {
+                                for ( String dependency1 : o1.getLabels().getOrDefault(labelName, M.EMPTY_STRING_ARRAY)) {
+                                    if (dependency1.equals(o2.getName())) return 1;
+                                    Project depProject1 = con.getProjects().get(dependency1);
+                                    int parentCompare1 = compareDependency(con, labelName, o2, depProject1, depth+1) * -1;
+                                    if (con.isVerboseOutput())
+                                        System.out.println(" <-- Order: " + o2.getName() + " vs. " + o1.getName() + ": " + parentCompare1);
+                                    if (parentCompare1 < 0) return -1;
+                                }
+
+                            }
                         }
 
                         return 1;
@@ -251,7 +271,7 @@ public class ConUtil {
                     System.out.println("    Selector  : " + step.getSelector());
                     System.out.println(
                             "    Order     : "
-                                    + Arrays.toString(step.getSortBy())
+                                    + Arrays.toString(step.getOrderBy())
                     );
                     System.out.println("    Properties: " + step.getProperties());
                 }

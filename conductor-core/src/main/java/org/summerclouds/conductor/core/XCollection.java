@@ -32,6 +32,13 @@ public class XCollection<T> extends MLog implements ICollection<T> {
     }
 
     @Override
+    public T getOrDefault(String name, T def) {
+        T value = collection.get(name);
+        if (value == null) return def;
+        return value;
+    }
+
+    @Override
     public T get(String name) {
         T ret = collection.get(name);
         if (ret == null) throw new NotFoundRuntimeException("not found {1}", getClass().getSimpleName(), name);

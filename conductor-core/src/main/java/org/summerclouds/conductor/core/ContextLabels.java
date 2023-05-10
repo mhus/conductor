@@ -45,6 +45,10 @@ public class ContextLabels implements Labels {
     }
 
     @Override
+    public String[] getOrDefault(String name, String[] def) {
+        return context.make(inst.getOrDefault(name, def));
+    }
+    @Override
     public int size() {
         return inst.size();
     }

@@ -25,7 +25,7 @@ public interface Step {
 
     Labels getSelector();
 
-    String[] getSortBy();
+    String[] getOrderBy();
 
     String getTarget();
 

@@ -23,5 +23,7 @@ public interface ICollection<T> extends Iterable<T> {
 
     T getOrNull(String name);
 
+    T getOrDefault(String name, T def);
+
     int size();
 }
