@@ -32,15 +32,15 @@ lifecycles:
     target: con.git
     arguments:
     - pull
-    - @
+    - '@'
 
 - name: git.push
   steps:
     - title: Push
       target: con.git
       arguments:
-        - push
-        - @
+      - push
+      - '@'
 
 - name: git
   steps:
@@ -49,7 +49,7 @@ lifecycles:
   - title: Pull
     target: con.git
     arguments:
-    - @
+    - '@'
 
 - name: git.reset
   steps:
@@ -61,8 +61,8 @@ lifecycles:
   - title: Pull
     target: con.git
     arguments:
-      - pull
-      - @
+    - pull
+    - '@'
 
 - name: git.add
   steps:
@@ -72,7 +72,7 @@ lifecycles:
       ignoreReturnCode: ${ignoreReturnCode:true}
     arguments:
     - add
-    - *
+    - .
     
 - name: git.commit
   description: Commit all projects
@@ -86,7 +86,7 @@ lifecycles:
     arguments:
     - commit
     - -m
-    - @
+    - '@'
 
 - name: reset
   steps:
@@ -96,13 +96,17 @@ lifecycles:
       touchDirectory: false
       processSubModules: ${processSubModules:false}
       modifiedOnly: false
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: rebuild
   steps:
   - title: Rebuild
     target: kind
-    sort: order
+    order:
+      - dependencies
+      - order
     steps:
     - target: maven
       steps:
@@ -126,7 +130,9 @@ lifecycles:
       touchDirectory: ${touchDirectory:true}
       processSubModules: ${processSubModules:false}
       modifiedOnly: ${modifiedOnly:false}
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: maven
   steps:
@@ -138,26 +144,28 @@ lifecycles:
       touchDirectory: ${touchDirectory:true}
       processSubModules: ${processSubModules:false}
       modifiedOnly: ${modifiedOnly:false}
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: build
   steps:
   - title: Build
     target: kind
-    sort: order
+    order: dependencies
     steps:
     - target: maven
       steps:
       - target: include
         arguments:
-        - maven.build
+        - mvn.build
     - target: gradel
       steps:
       - target: include
         arguments:
         - gradel.build
         
-- name: maven.build
+- name: mvn.build
   steps:
   - title: Maven Build
     target: con.maven
@@ -165,40 +173,46 @@ lifecycles:
     - install
     properties:
       touchDirectory: ${touchDirectory:true}
-      processSubModules: ${processSubModules:true}
-      modifiedOnly: ${modifiedOnly:true}
-    sort: order
-
-- name: buildall
-  steps:
-  - title: Maven Build
-    target: con.maven
-    arguments:
-    - install
-    properties:
-      touchDirectory: ${touchDirectory:false}
       processSubModules: ${processSubModules:false}
-      modifiedOnly: ${modifiedOnly:false}
-    sort: order
+      modifiedOnly: ${modifiedOnly:true}
+    order:
+      - dependencies
+      - order
 
+- name: mvn.buildall
+  steps:
+    - title: Maven Build
+      target: con.maven
+      arguments:
+        - install
+      properties:
+        touchDirectory: ${touchDirectory:true}
+        processSubModules: ${processSubModules:false}
+        modifiedOnly: ${modifiedOnly:false}
+      order:
+        - dependencies
+        - order
+        -
 - name: update
   steps:
   - title: Update
     target: kind
-    sort: order
+    order:
+      - dependencies
+      - order
     steps:
     - target: maven
       steps:
       - target: include
         arguments:
-        - maven.update
+        - mvn.update
     - target: gradel
       steps:
       - target: include
         arguments:
         - gradel.update
         
-- name: maven.update
+- name: mvn.update
   steps:
   - title: Maven Update
     target: con.maven
@@ -209,32 +223,38 @@ lifecycles:
       touchDirectory: ${touchDirectory:true}
       processSubModules: ${processSubModules:true}
       modifiedOnly: ${modifiedOnly:true}
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: clean
   steps:
   - title: Clean
     target: kind
-    sort: order
+    order:
+      - dependencies
+      - order
     steps:
     - target: maven
       steps:
       - target: include
         arguments:
-        - maven.clean
+        - mvn.clean
     - target: gradel
       steps:
       - target: include
         arguments:
         - gradel. clean
 
-- name: maven.clean
+- name: mvn.clean
   steps:
   - title: Maven Clean
     target: con.maven
     arguments:
     - clean
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: docker.build
   steps:
@@ -246,7 +266,9 @@ lifecycles:
     - build
     - '-t ${project._name}:${project.version}'
     - '.'
-    sort: order
+    order:
+      - dependencies
+      - order
 
 - name: test.test1
   steps:
