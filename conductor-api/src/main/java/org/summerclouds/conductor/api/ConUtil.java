@@ -71,33 +71,32 @@ public class ConUtil {
 
                     @Override
                     public int compare(Project o1, Project o2) {
+                        int orderIdx = 0;
                         for (OrderImpl order : orders) {
-
+                            orderIdx++;
                             if (order.getType() == OrderImpl.ORDER_TYPE.DEPENDENCY) {
                                 if (con.isVerboseOutput())
-                                    System.out.println(" >>> Order: " + o1.getName() + " vs. " + o2.getName());
+                                    System.out.println(" >>> DOrder: " + o1.getName() + " vs. " + o2.getName());
                                 int partial =
                                         compareDependency(
                                                 con,
                                                 order.getName(),
                                                 o1,
                                                 o2,
-                                                0);
+                                                0, orderIdx >= orders.length);
                                 if (con.isVerboseOutput())
-                                    System.out.println(" === Order: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
+                                    System.out.println(" === DOrder: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
                                 if (partial != 0) {
                                     if (!order.isOrderAsc()) partial = partial * -1;
                                     return partial;
                                 }
                             } else {
-                                if (con.isVerboseOutput())
-                                    System.out.println(" >>> Order: " + o1.getName() + " vs. " + o2.getName());
                                 int partial =
                                         compareNumber(
                                                 o1.getLabels().getOrNull(order.getName()),
                                                 o2.getLabels().getOrNull(order.getName()));
                                 if (con.isVerboseOutput())
-                                    System.out.println(" === Order: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
+                                    System.out.println(" === IOrder: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
                                 if (partial != 0) {
                                     if (!order.isOrderAsc()) partial = partial * -1;
                                     return partial;
@@ -116,7 +115,7 @@ public class ConUtil {
                         return o1[0].compareTo(o2[0]);
                     }
 
-                    private static int compareDependency(Conductor con, String labelName, Project o1, Project o2, int depth) {
+                    private static int compareDependency(Conductor con, String labelName, Project o1, Project o2, int depth, boolean reverse) {
                         if (depth > 1000)
                             throw new UsageException("dependencies too deep");
                         if (o1 == null && o2 == null) return 0;
@@ -126,24 +125,23 @@ public class ConUtil {
                         for ( String dependency2 : o2.getLabels().getOrDefault(labelName, M.EMPTY_STRING_ARRAY)) {
                             if (dependency2.equals(o1.getName())) return -1;
                             Project depProject2 = con.getProjects().get(dependency2);
-                            int parentCompare2 = compareDependency(con, labelName, o1, depProject2, depth+1);
+                            int parentCompare2 = compareDependency(con, labelName, o1, depProject2, depth+1, false);
                             if (con.isVerboseOutput())
                                 System.out.println(" --> Order: " + o1.getName() + " vs. " + o2.getName() + ": " + parentCompare2);
                             if (parentCompare2 < 0) return -1;
-                            if (parentCompare2 > 0) {
-                                for ( String dependency1 : o1.getLabels().getOrDefault(labelName, M.EMPTY_STRING_ARRAY)) {
-                                    if (dependency1.equals(o2.getName())) return 1;
-                                    Project depProject1 = con.getProjects().get(dependency1);
-                                    int parentCompare1 = compareDependency(con, labelName, o2, depProject1, depth+1) * -1;
-                                    if (con.isVerboseOutput())
-                                        System.out.println(" <-- Order: " + o2.getName() + " vs. " + o1.getName() + ": " + parentCompare1);
-                                    if (parentCompare1 < 0) return -1;
-                                }
-
-                            }
                         }
 
-                        return 1;
+                        if (reverse) {
+                            for (String dependency1 : o1.getLabels().getOrDefault(labelName, M.EMPTY_STRING_ARRAY)) {
+                                if (dependency1.equals(o2.getName())) return 1;
+                                Project depProject1 = con.getProjects().get(dependency1);
+                                int parentCompare1 = compareDependency(con, labelName, o2, depProject1, depth + 1, true);
+                                if (con.isVerboseOutput())
+                                    System.out.println(" <-- Order: " + o2.getName() + " vs. " + o1.getName() + ": " + parentCompare1);
+                                if (parentCompare1 > 0) return -1;
+                            }
+                        }
+                        return 0;
                     }
 
                 });

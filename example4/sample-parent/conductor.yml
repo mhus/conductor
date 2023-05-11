@@ -29,6 +29,8 @@ projects:
     labels:
       group: parent
       sort: 0
+      combi:
+        - itest
     properties:
       version: 1.2.3
       a: b
@@ -39,6 +41,8 @@ projects:
       sort: 1
       dependencies:
         - parent
+      combi:
+        - itest
   - name: api
     path: ../sample-product
     labels:
@@ -47,6 +51,8 @@ projects:
       dependencies:
         - parent
         - core
+      combi:
+        - itest
   - name: itest
     path: ../sample-test
     labels:

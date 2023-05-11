@@ -31,6 +31,12 @@ lifecycles:
   steps:
     - target: con.test
       order: sort desc
+- name: combi
+  steps:
+    - target: con.test
+      order:
+        - combi
+        - sort
 
 plugins:
 - target: con.test
