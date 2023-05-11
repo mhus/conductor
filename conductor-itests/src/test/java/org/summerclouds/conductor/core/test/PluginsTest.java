@@ -63,7 +63,7 @@ public class PluginsTest extends TestCase {
             
             assertEquals(
                     "Message\n" + 
-                    "Choose (y/n) y", parts[2].trim());
+                    "Choose (y/n) - y", parts[2].trim());
         } finally {
             System.setIn(in);
         }

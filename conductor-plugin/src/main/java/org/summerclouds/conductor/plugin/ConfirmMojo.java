@@ -32,6 +32,9 @@ import org.summerclouds.conductor.api.Plugin.SCOPE;
 import org.summerclouds.conductor.core.ContextStep;
 import org.summerclouds.conductor.core.ExecutorImpl;
 
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
 @AMojo(name = "confirm",target = "confirm", scope = SCOPE.STEP)
 public class ConfirmMojo implements ExecutePlugin {
 
@@ -49,22 +52,25 @@ public class ConfirmMojo implements ExecutePlugin {
         }
         String prompt = context.getStep().getProperties().getString("prompt", "");
 
-        console.setColor(Console.COLOR.RED, null);
-        console.print(prompt);
-        console.cleanup();
-        
-        console.print(" (y/n) ");
-        console.flush();
         while (true) {
-            int input = System.in.read();
-            console.print((char)input);
-            if (input == 'n') {
+
+            console.setColor(Console.COLOR.RED, null);
+            console.print(prompt);
+            console.cleanup();
+
+            console.print(" (y/n) ");
+            console.flush();
+
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = (char)br.read();
+            console.println("- " + ch);
+            if (ch == 'n') {
                 console.println();
                 if (mode.equals("exit"))
                     throw new StopLifecycleException(context, "Not Confirmed",prompt);
                 return false;
             }
-            if (input == 'y') {
+            if (ch == 'y') {
                 console.println();
                 if (mode.equals("execute")) {
                     for (Step caze : context.getStep().getSubSteps()) {
