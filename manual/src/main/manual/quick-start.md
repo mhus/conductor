@@ -82,7 +82,7 @@ cd common-root
 Now check out and build all other dependent projects with conductor
 
 ```bash
-con git.pull - mvn.build
+con -co git.pull - mvn.build
 ```
 
 Try again build, it should not build again:
@@ -94,5 +94,5 @@ con mvn.build
 Then clean and build
 
 ```bash
-con mvn.clean - reset - mvn.build
+con -co mvn.clean - reset - mvn.build
 ```

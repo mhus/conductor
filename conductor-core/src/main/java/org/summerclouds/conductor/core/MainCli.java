@@ -254,7 +254,7 @@ public class MainCli extends MLog implements Cli {
         if (file.exists() && file.isFile()) config = "file:conductor.yml";
         else
             config =
-                    "mvn:de.mhus.conductor/conductor-plugin/"
+                    "mvn:" + MString.beforeLastIndex(MString.beforeLastIndex(MainCli.class.getPackageName(), '.'), '.') + "/conductor-plugin/"
                             + Version.VERSION
                             + "/yml/configuration-default";
         return config;
