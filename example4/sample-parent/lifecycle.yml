@@ -17,9 +17,20 @@
 lifecycles:
 - name: dependencies
   steps:
-  # reset and pull all projects
   - target: con.test
     order: dependencies
+- name: dependencies_desc
+  steps:
+    - target: con.test
+      order: dependencies desc
+- name: indexes
+  steps:
+    - target: con.test
+      order: sort
+- name: indexes_desc
+  steps:
+    - target: con.test
+      order: sort desc
 
 plugins:
 - target: con.test

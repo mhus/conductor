@@ -90,10 +90,14 @@ public class ConUtil {
                                     return partial;
                                 }
                             } else {
+                                if (con.isVerboseOutput())
+                                    System.out.println(" >>> Order: " + o1.getName() + " vs. " + o2.getName());
                                 int partial =
                                         compareNumber(
                                                 o1.getLabels().getOrNull(order.getName()),
                                                 o2.getLabels().getOrNull(order.getName()));
+                                if (con.isVerboseOutput())
+                                    System.out.println(" === Order: " + o1.getName() + " vs. " + o2.getName() + ": " + partial);
                                 if (partial != 0) {
                                     if (!order.isOrderAsc()) partial = partial * -1;
                                     return partial;

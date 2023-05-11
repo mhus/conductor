@@ -51,6 +51,7 @@ projects:
     path: ../sample-test
     labels:
       group: itests
+      sort: 5
       dependencies:
         - core
         - api
