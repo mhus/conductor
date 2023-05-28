@@ -411,9 +411,9 @@ public class ConUtil {
         StringBuffer out = new StringBuffer();
         // TODO linux vs. windows ?
         for (String arg : args) {
-            if (arg.startsWith("\\@"))
-                arg = arg.substring(1);
-            else
+            if (arg == null) {
+                arg = "";
+            } else
             if (arg.equals("@")) {
                 for (String arg2 : getContextArgs(context)) {
                     arg2 = escapeArgument(arg2);
@@ -422,7 +422,11 @@ public class ConUtil {
                     out.append(arg2);
                 }
                 continue;
-            } // TODO more options, like @1-9
+            } else
+            if (arg.startsWith("\\@")) {
+                // TODO more options, like @1-9
+                arg = arg.substring(1);
+            }
             arg = escapeArgument(arg);
             if (out.length() > 0)
                 out.append(' ');
