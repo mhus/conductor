@@ -21,12 +21,12 @@
 	<modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.summerclouds.common</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.0.9</version>
         <artifactId>common-parent</artifactId>
     </parent>
 	<groupId>org.summerclouds</groupId>
 	<artifactId>summer-conductor</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<packaging>pom</packaging>
 	<name>MHUS Conductor</name>
 	<description>MHUS tools to work with multiple projects in complex scenarios</description>
@@ -35,7 +35,7 @@
   	   <maven-site-plugin.skip>false</maven-site-plugin.skip>
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
 	   <site.path>.</site.path>
-		<summerclouds.common.version>0.1.0-SNAPSHOT</summerclouds.common.version>
+		<summerclouds.common.version>0.0.6</summerclouds.common.version>
 	</properties>
     <inceptionYear>2020</inceptionYear>
 	<licenses>
