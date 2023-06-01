@@ -100,7 +100,7 @@ if [ ! -x "$JAVACMD" ] ; then
   exit 1
 fi
 
-CONDUCTOR_JAR=`echo "${CONDUCTOR_HOME}"/bin/1.2.0/con.jar`
+CONDUCTOR_JAR=`echo "${CONDUCTOR_HOME}"/bin/1.2.1-SNAPSHOT/con.jar`
 
 # For Cygwin, switch paths to Windows format before running java
 if $cygwin ; then
