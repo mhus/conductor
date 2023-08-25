@@ -35,7 +35,10 @@ fi
 if [ ! -e $LOCAL_REPO_PATH_ZIP ]; then
   if command -v mvn &> /dev/null; then
     mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get \
-      -Dartifact=org.summerclouds.conductor:conductor-launcher:±project_version±:zip:install
+      -Dartifact=org.summerclouds:conductor-launcher:±project_version±:zip:install
+    mvn dependency:get -DartifactId=conductor-plugin \
+      -DgroupId=org.summerclouds -Dversion=±project_version± -Dpackaging=yml -Dclassifier=configuration-default -DrepoUrl=
+
   elif command -v curl &> /dev/null; then
     if [ -e $HOME/.conductor/tmp/con-install.zip ]; then
       rm $HOME/.conductor/tmp/con-install.zip
