@@ -15,14 +15,14 @@
  */
 package de.mhus.conductor.core.test;
 
+import de.mhus.conductor.core.test.util.TestCase;
+import de.mhus.conductor.core.test.util.TestUtil;
 import org.junit.jupiter.api.Test;
 import de.mhus.commons.errors.MException;
 import de.mhus.commons.tree.MProperties;
 import de.mhus.commons.tools.MFile;
 import de.mhus.commons.tools.MSystem;
 import de.mhus.commons.tools.MXml;
-import de.mhus.common.junit.TestCase;
-import de.mhus.common.junit.TestUtil;
 import de.mhus.conductor.api.ConUtil;
 import de.mhus.conductor.api.Conductor;
 import de.mhus.conductor.core.*;
@@ -85,9 +85,9 @@ public class ExecutionTest extends TestCase {
         }
         {
             MProperties hist = MProperties.load(new File(to, "sample-parent/history.properties"));
-            assertEquals("1.0.0", hist.getString("core"));
-            assertEquals("1.0.0", hist.getString("parent"));
-            assertEquals("0.0.1", hist.getString("api"));
+            assertEquals("1.0.0", hist.getString("core").get());
+            assertEquals("1.0.0", hist.getString("parent").get());
+            assertEquals("0.0.1", hist.getString("api").get());
         }
     }
 
@@ -113,7 +113,7 @@ public class ExecutionTest extends TestCase {
 
         String mvnPath = ConUtil.cmdLocationOrNull(con, "mvn");
         if (mvnPath != null) {
-            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.conrentVersion());
+//            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.currentVersion());
             ((SchemesImpl) con.getSchemes()).put("mvn", new MavenScheme());
 
             ExecutorImpl executor = new ExecutorImpl();

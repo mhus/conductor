@@ -1,22 +1,18 @@
 package de.mhus.conductor.core.test;
 
-import org.apache.commons.codec.Charsets;
+import de.mhus.conductor.core.test.util.TestCase;
 import org.junit.jupiter.api.Test;
 import de.mhus.commons.console.Console;
 import de.mhus.commons.console.SimpleConsole;
 import de.mhus.commons.io.YOutputStream;
-import de.mhus.commons.io.YWriter;
-import de.mhus.commons.tools.Collection;
+import de.mhus.commons.tools.MCollection;
 import de.mhus.commons.tools.MFile;
 import de.mhus.commons.tools.MString;
-import de.mhus.common.junit.TestCase;
 import de.mhus.conductor.core.MainCli;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
-import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;

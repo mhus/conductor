@@ -1,8 +1,8 @@
 package de.mhus.conductor.core.test;
 
+import de.mhus.conductor.core.test.util.TestCase;
 import org.junit.jupiter.api.Test;
 import de.mhus.commons.tree.MProperties;
-import de.mhus.common.junit.TestCase;
 import de.mhus.conductor.api.ConUtil;
 import de.mhus.conductor.core.ConductorImpl;
 import de.mhus.conductor.core.ContextImpl;

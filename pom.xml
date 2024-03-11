@@ -37,6 +37,8 @@
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
 	   <site.path>.</site.path>
 		<commons.version>8.0.0-SNAPSHOT</commons.version>
+		<bouncycastle.version>1.77</bouncycastle.version>
+		<maven.java.version>21</maven.java.version>
 	</properties>
     <inceptionYear>2020</inceptionYear>
 	<licenses>
@@ -77,6 +79,11 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>1.18.30</version>
+			</dependency>
+			<dependency>
+				<artifactId>bcprov-jdk18on</artifactId>
+				<groupId>org.bouncycastle</groupId>
+				<version>${bouncycastle.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

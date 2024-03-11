@@ -15,14 +15,14 @@
  */
 package de.mhus.conductor.core.test;
 
+import de.mhus.conductor.core.test.util.TestCase;
+import de.mhus.conductor.core.test.util.TestUtil;
 import org.junit.jupiter.api.Test;
 import de.mhus.commons.errors.NotFoundException;
 import de.mhus.commons.tree.MProperties;
 import de.mhus.commons.tools.MFile;
 import de.mhus.commons.tools.MString;
 import de.mhus.commons.util.MUri;
-import de.mhus.common.junit.TestCase;
-import de.mhus.common.junit.TestUtil;
 import de.mhus.conductor.api.*;
 import de.mhus.conductor.core.*;
 import org.xml.sax.SAXException;
@@ -113,7 +113,7 @@ public class SchemeTest extends TestCase {
             URI uri = URI.create("file:conductor.yml");
             config.configure(uri, con, null);
 
-            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.conrentVersion());
+//            ((MProperties) con.getProperties()).put("conductor.version", TestUtil.currentVersion());
             ((SchemesImpl) con.getSchemes()).put("mvn", new MavenScheme());
 
             StepImpl step = new StepImpl();

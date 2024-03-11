@@ -17,10 +17,10 @@ package de.mhus.conductor.core.test;
 
 import de.mhus.commons.tools.MFile;
 import de.mhus.commons.util.MUri;
-import de.mhus.common.junit.TestCase;
 import de.mhus.conductor.api.ConUtil;
 import de.mhus.conductor.api.Conductor;
 import de.mhus.conductor.api.Scheme;
+import de.mhus.conductor.core.test.util.TestCase;
 
 import java.io.File;
 import java.io.IOException;

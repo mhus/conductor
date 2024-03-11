@@ -32,6 +32,25 @@
   
    <build>
     <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <source>${maven.java.version}</source>
+                <target>${maven.java.version}</target>
+                <annotationProcessorPaths>
+                    <annotationProcessorPath>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.30</version>
+                    </annotationProcessorPath>
+                </annotationProcessorPaths>
+                <compilerArgs>
+                    <arg>-parameters</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
 	   <plugin>
 	       <groupId>org.codehaus.mojo</groupId>
 	       <artifactId>build-helper-maven-plugin</artifactId>

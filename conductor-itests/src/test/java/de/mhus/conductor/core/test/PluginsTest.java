@@ -15,6 +15,7 @@
  */
 package de.mhus.conductor.core.test;
 
+import de.mhus.conductor.core.test.util.TestCase;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,6 @@ import de.mhus.commons.console.SimpleConsole;
 import de.mhus.commons.errors.MException;
 import de.mhus.commons.io.YOutputStream;
 import de.mhus.commons.tools.MString;
-import de.mhus.common.junit.TestCase;
 import de.mhus.conductor.core.MainCli;
 import de.mhus.conductor.core.MainOptionConsole;
 

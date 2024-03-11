@@ -17,7 +17,7 @@
 
 # config
 
-REPO_PATH_ZIP="de.mhus/conductor-launcher/±project_version±/conductor-launcher-±project_version±-install.zip"
+REPO_PATH_ZIP="de/mhus/conductor-launcher/±project_version±/conductor-launcher-±project_version±-install.zip"
 LOCAL_REPO_PATH_ZIP="$HOME/.m2/repository/$REPO_PATH_ZIP"
 REMOTE_REPO_PATH_ZIP="https://repo1.maven.org/maven2/$REPO_PATH_ZIP"
 

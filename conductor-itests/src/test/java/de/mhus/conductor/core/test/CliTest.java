@@ -1,10 +1,10 @@
 package de.mhus.conductor.core.test;
 
+import de.mhus.conductor.core.test.util.TestCase;
 import org.junit.jupiter.api.Test;
 import de.mhus.commons.tree.MProperties;
 import de.mhus.commons.tools.MFile;
 import de.mhus.commons.tools.MXml;
-import de.mhus.common.junit.TestCase;
 import de.mhus.conductor.core.MainCli;
 import org.w3c.dom.Element;
 
@@ -67,9 +67,9 @@ public class CliTest extends TestCase {
         }
         {
             MProperties hist = MProperties.load(new File(to, "sample-parent/history.properties"));
-            assertEquals("1.0.0", hist.getString("core"));
-            assertEquals("1.0.0", hist.getString("parent"));
-            assertEquals("0.0.1", hist.getString("api"));
+            assertEquals("1.0.0", hist.getString("core").get());
+            assertEquals("1.0.0", hist.getString("parent").get());
+            assertEquals("0.0.1", hist.getString("api").get());
         }
 
     }
@@ -127,9 +127,9 @@ public class CliTest extends TestCase {
         }
         {
             MProperties hist = MProperties.load(new File(to, "sample-parent/history.properties"));
-            assertEquals("2.0.0", hist.getString("core"));
-            assertEquals("1.0.0", hist.getString("parent"));
-            assertEquals("0.0.1", hist.getString("api"));
+            assertEquals("2.0.0", hist.getString("core").get());
+            assertEquals("1.0.0", hist.getString("parent").get());
+            assertEquals("0.0.1", hist.getString("api").get());
         }
 
     }

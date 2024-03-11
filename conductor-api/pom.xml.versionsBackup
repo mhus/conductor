@@ -53,14 +53,10 @@
         <groupId>de.mhus.lib</groupId>
         <artifactId>lib-core</artifactId>
     </dependency>
-	<dependency>
-	    <groupId>org.bouncycastle</groupId>
-	    <artifactId>bcprov-jdk16</artifactId>
-	</dependency>
-	<dependency>
-	    <groupId>org.bouncycastle</groupId>
-	    <artifactId>bcmail-jdk16</artifactId>
-	</dependency>
+		<dependency>
+			<artifactId>bcprov-jdk18on</artifactId>
+			<groupId>org.bouncycastle</groupId>
+		</dependency>
 	<dependency>
 		<groupId>org.apache.httpcomponents</groupId>
 		<artifactId>httpclient</artifactId>
