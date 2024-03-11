@@ -73,11 +73,19 @@
         <artifactId>conductor-core</artifactId>
         <version>${project.version}</version>
     </dependency>
+      <dependency>
+          <groupId>de.mhus.lib</groupId>
+          <artifactId>mhus-commons</artifactId>
+      </dependency>
 
 	<dependency>
 	    <groupId>org.yaml</groupId>
 	    <artifactId>snakeyaml</artifactId>
 	</dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+      </dependency>
 
 
 	

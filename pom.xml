@@ -26,6 +26,12 @@
 	<name>MHUS Conductor</name>
 	<description>MHUS tools to work with multiple projects in complex scenarios</description>
 	<url>http://www.mhus.de</url>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.1</version>
+		<relativePath/>
+	</parent>
 	<properties>
   	   <maven-site-plugin.skip>false</maven-site-plugin.skip>
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
@@ -60,6 +66,20 @@
 	        </plugin>
         </plugins>
     </build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.mhus.lib</groupId>
+				<artifactId>mhus-commons</artifactId>
+				<version>${commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.30</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
     
 	<modules>
 		<module>conductor-api</module>

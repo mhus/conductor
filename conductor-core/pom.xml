@@ -36,6 +36,14 @@
         <artifactId>conductor-api</artifactId>
         <version>${project.version}</version>
     </dependency>
+      <dependency>
+          <groupId>de.mhus.lib</groupId>
+          <artifactId>mhus-commons</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+      </dependency>
 	<!--
 	<dependency>
 	    <groupId>org.bouncycastle</groupId>
