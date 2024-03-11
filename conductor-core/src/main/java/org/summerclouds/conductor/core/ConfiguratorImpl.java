@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
 import de.mhus.conductor.api.meta.Version;
-import org.summerclouds.common.core.error.InternalException;
-import org.summerclouds.common.core.error.InternalRuntimeException;
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.error.NotFoundException;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.node.IProperties;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.core.tool.MCast;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.tool.MValidator;
-import org.summerclouds.common.core.util.MUri;
-import org.summerclouds.common.core.yaml.YList;
-import org.summerclouds.common.core.yaml.YMap;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.api.Plugin.SCOPE;
+import de.mhus.common.core.error.InternalException;
+import de.mhus.common.core.error.InternalRuntimeException;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.error.NotFoundException;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.node.IProperties;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.core.tool.MCast;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.tool.MValidator;
+import de.mhus.common.core.util.MUri;
+import de.mhus.common.core.yaml.YList;
+import de.mhus.common.core.yaml.YMap;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.api.Plugin.SCOPE;
 
 import java.io.File;
 import java.io.IOException;

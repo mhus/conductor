@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.Conductor;
-import org.summerclouds.conductor.api.Lifecycle;
-import org.summerclouds.conductor.api.Lifecycles;
+import de.mhus.conductor.api.Conductor;
+import de.mhus.conductor.api.Lifecycle;
+import de.mhus.conductor.api.Lifecycles;
 
 public class LifecyclesImpl extends XCollection<Lifecycle> implements Lifecycles {
 

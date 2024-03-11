@@ -1,11 +1,11 @@
-package org.summerclouds.conductor.core.test;
+package de.mhus.conductor.core.test;
 
 import org.junit.jupiter.api.Test;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.junit.TestCase;
-import org.summerclouds.conductor.api.ConUtil;
-import org.summerclouds.conductor.core.ConductorImpl;
-import org.summerclouds.conductor.core.ContextImpl;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.junit.TestCase;
+import de.mhus.conductor.api.ConUtil;
+import de.mhus.conductor.core.ConductorImpl;
+import de.mhus.conductor.core.ContextImpl;
 
 import java.io.File;
 import java.util.ArrayList;

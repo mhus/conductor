@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.error.NotFoundException;
-import org.summerclouds.common.core.util.MUri;
+import de.mhus.common.core.error.NotFoundException;
+import de.mhus.common.core.util.MUri;
 
 import java.io.File;
 import java.io.IOException;

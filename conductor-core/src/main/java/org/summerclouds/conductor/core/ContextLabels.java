@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.Labels;
+import de.mhus.conductor.api.Labels;
 
 import java.util.Iterator;
 

@@ -105,5 +105,5 @@ lifecycles:
 
 plugins:
 - target: conductor
-  url: mvn:org.summerclouds/conductor-plugins/${newVersion.version}
+  url: mvn:de.mhus/conductor-plugins/${newVersion.version}
   mojo: conductor

@@ -27,13 +27,13 @@ Properties:
 * reason: Message why execution is stopped.
 
 */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
-import org.summerclouds.conductor.api.Plugin.SCOPE;
-import org.summerclouds.conductor.api.StopLifecycleException;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
+import de.mhus.conductor.api.Plugin.SCOPE;
+import de.mhus.conductor.api.StopLifecycleException;
 
 @AMojo(name = "failed", target="failed",scope=SCOPE.STEP)
 public class FailedMojo implements ExecutePlugin {

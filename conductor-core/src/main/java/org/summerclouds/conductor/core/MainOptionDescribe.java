@@ -1,9 +1,9 @@
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.AOption;
-import org.summerclouds.conductor.api.Cli;
-import org.summerclouds.conductor.api.Lifecycle;
-import org.summerclouds.conductor.api.MainOptionHandler;
+import de.mhus.conductor.api.AOption;
+import de.mhus.conductor.api.Cli;
+import de.mhus.conductor.api.Lifecycle;
+import de.mhus.conductor.api.MainOptionHandler;
 
 import java.util.LinkedList;
 

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.error.InternalException;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.tool.MXml;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
+import de.mhus.common.core.error.InternalException;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.tool.MXml;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
 import org.w3c.dom.*;
 
 import java.io.File;

@@ -59,7 +59,7 @@
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.summerclouds.conductor.core.MainCli</mainClass>
+                                    <mainClass>de.mhus.conductor.core.MainCli</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -84,7 +84,7 @@
                 <jar>target/con.jar</jar>
                 <errTitle>con</errTitle>
                 <classPath>
-                  <mainClass>org.summerclouds.conductor.core.MainCli</mainClass>
+                  <mainClass>de.mhus.conductor.core.MainCli</mainClass>
                   <addDependencies>false</addDependencies>
                   <preCp>anything</preCp>
                 </classPath>

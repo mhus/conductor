@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.tool.MString;
+import de.mhus.common.core.tool.MString;
 
 public interface ConfigTypes extends ICollection<ConfigType> {
 

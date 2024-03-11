@@ -1,4 +1,4 @@
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.http.HttpResponse;
@@ -7,14 +7,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.summerclouds.common.core.error.InternalException;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.common.core.tool.MJson;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
+import de.mhus.common.core.error.InternalException;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.common.core.tool.MJson;
+import de.mhus.common.core.tool.MString;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
 
 import java.io.File;
 

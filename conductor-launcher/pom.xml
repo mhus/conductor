@@ -21,8 +21,8 @@
   <artifactId>conductor-launcher</artifactId>
   <packaging>jar</packaging>
   <parent>
-	  	<groupId>org.summerclouds</groupId>
-        <artifactId>summer-conductor</artifactId>
+	  	<groupId>de.mhus</groupId>
+        <artifactId>conductor</artifactId>
         <version>1.2.1-SNAPSHOT</version>
   </parent>
   <properties>
@@ -118,17 +118,17 @@
   
   <dependencies>
     <dependency>
-        <groupId>org.summerclouds</groupId>
+        <groupId>de.mhus</groupId>
         <artifactId>conductor-api</artifactId>
         <version>${project.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.summerclouds</groupId>
+        <groupId>de.mhus</groupId>
         <artifactId>conductor-core</artifactId>
         <version>${project.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.summerclouds</groupId>
+        <groupId>de.mhus</groupId>
         <artifactId>conductor-plugin</artifactId>
         <version>${project.version}</version>
     </dependency>

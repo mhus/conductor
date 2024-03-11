@@ -17,29 +17,29 @@
 # do not use the scheme vm: - it's not working with JUnit tests
 plugins:
   - target: con.calculateNewVersion
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: calculateNewVersion
     scope: step
   - target: con.cmd
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: cmd
   - target: con.git
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: git
   - target: con.maven
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: maven
   - target: con.persistNewVersions
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: persistNewVersions
     scope: step
   - target: con.test
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: test
   - target: con.updatePomProperties
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: updatePomProperties
   - target: con.updatePomParentVersion
-    uri: mvn:org.summerclouds/conductor-plugin/${conductor.version}
+    uri: mvn:de.mhus/conductor-plugin/${conductor.version}
     mojo: updatePomParentVersion
     

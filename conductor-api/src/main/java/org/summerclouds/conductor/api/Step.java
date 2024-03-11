@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.node.IProperties;
+import de.mhus.common.core.node.IProperties;
 
 import java.util.LinkedList;
 

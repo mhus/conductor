@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.conductor.api.Lifecycle;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.core.ExecutorImpl;
+import de.mhus.common.core.log.MLog;
+import de.mhus.conductor.api.Lifecycle;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.core.ExecutorImpl;
 
 @AMojo(name = "con.includeLifecycle",target="include")
 public class IncludeLifecycle extends MLog implements ExecutePlugin {

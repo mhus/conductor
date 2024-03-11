@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.node.IReadProperties;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.conductor.api.*;
+import de.mhus.common.core.node.IReadProperties;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.conductor.api.*;
 
 import java.io.File;
 import java.util.Map;

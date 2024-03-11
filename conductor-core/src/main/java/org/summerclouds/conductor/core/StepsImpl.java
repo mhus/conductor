@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.Step;
-import org.summerclouds.conductor.api.Steps;
+import de.mhus.conductor.api.Step;
+import de.mhus.conductor.api.Steps;
 
 public class StepsImpl extends XList<Step> implements Steps {}

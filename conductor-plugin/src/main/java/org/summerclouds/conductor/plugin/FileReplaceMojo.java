@@ -1,11 +1,11 @@
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
 
 import java.io.File;
 import java.util.HashSet;

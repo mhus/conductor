@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.error.InternalException;
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.parser.StringCompiler;
-import org.summerclouds.common.core.parser.StringPart;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.util.IValuesProvider;
-import org.summerclouds.conductor.api.Plugin;
-import org.summerclouds.conductor.api.ValuePlugin;
+import de.mhus.common.core.error.InternalException;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.parser.StringCompiler;
+import de.mhus.common.core.parser.StringPart;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.util.IValuesProvider;
+import de.mhus.conductor.api.Plugin;
+import de.mhus.conductor.api.ValuePlugin;
 
 public class ContextCompiler extends StringCompiler {
 

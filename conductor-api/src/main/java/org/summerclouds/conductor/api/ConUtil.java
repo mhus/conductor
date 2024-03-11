@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
 import de.mhus.conductor.api.meta.Version;
-import org.summerclouds.common.core.M;
-import org.summerclouds.common.core.console.Console;
-import org.summerclouds.common.core.error.NotFoundException;
-import org.summerclouds.common.core.error.UsageException;
-import org.summerclouds.common.core.log.Log;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.core.tool.*;
-import org.summerclouds.common.core.util.MUri;
+import de.mhus.common.core.M;
+import de.mhus.common.core.console.Console;
+import de.mhus.common.core.error.NotFoundException;
+import de.mhus.common.core.error.UsageException;
+import de.mhus.common.core.log.Log;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.core.tool.*;
+import de.mhus.common.core.util.MUri;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class ConUtil {
     public static final String PROPERTY_VALIDATORS = "conductor.validators";
     public static final String PROPERTY_PARALLEL = "conductor.parallel";
     public static final String PROPERTY_THREADS = "conductor.threads";
-    private static final Object[] SCAN_PACKAGES = new Object[] {"org.summerclouds.conductor"};
+    private static final Object[] SCAN_PACKAGES = new Object[] {"de.mhus.conductor"};
     public static final String PROPERTY_STEP_IGNORE_RETURN_CODE = "step.ignoreReturnCode";
     public static final String PROPERTY_Y = "conductor.confirm.confirm";
     public static final String PROPERTY_CONFIRM_STEPS = "conductor.confirm.steps";
@@ -367,7 +367,7 @@ public class ConUtil {
         name = MString.beforeLastIndex(name, '.');
         MUri uri =
                 MUri.toUri(
-                        "mvn:org.summerclouds/conductor-plugin/"
+                        "mvn:de.mhus/conductor-plugin/"
                                 + Version.VERSION
                                 + "/"
                                 + ext

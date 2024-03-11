@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ErrorInfo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ErrorInfo;
 
 public class ErrorsInfoImpl implements ErrorInfo {
 

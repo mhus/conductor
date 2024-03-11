@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.error.InternalRuntimeException;
-import org.summerclouds.common.core.error.NotFoundException;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.tool.MCollection;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.util.MUri;
-import org.summerclouds.common.core.util.Value;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.api.Plugin.SCOPE;
-import org.summerclouds.conductor.api.Project.STATUS;
+import de.mhus.common.core.error.InternalRuntimeException;
+import de.mhus.common.core.error.NotFoundException;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.tool.MCollection;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.util.MUri;
+import de.mhus.common.core.util.Value;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.api.Plugin.SCOPE;
+import de.mhus.conductor.api.Project.STATUS;
 
 import java.io.Closeable;
 import java.io.File;

@@ -191,4 +191,4 @@ exec "$JAVACMD" \
   $CONDUCTOR_OPTS \
   $CONDUCTOR_DEBUG_OPTS \
   "-Dconductor.home=${CONDUCTOR_HOME}" \
-  -cp ${CP} org.summerclouds.conductor.core.MainCli "$@"
+  -cp ${CP} de.mhus.conductor.core.MainCli "$@"

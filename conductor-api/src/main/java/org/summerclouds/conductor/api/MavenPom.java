@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
 import java.io.File;
 
-import org.summerclouds.common.core.tool.MXml;
+import de.mhus.common.core.tool.MXml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core.test;
+package de.mhus.conductor.core.test;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.summerclouds.common.core.console.Console;
-import org.summerclouds.common.core.console.SimpleConsole;
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.io.YOutputStream;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.junit.TestCase;
-import org.summerclouds.conductor.core.MainCli;
-import org.summerclouds.conductor.core.MainOptionConsole;
+import de.mhus.common.core.console.Console;
+import de.mhus.common.core.console.SimpleConsole;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.io.YOutputStream;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.junit.TestCase;
+import de.mhus.conductor.core.MainCli;
+import de.mhus.conductor.core.MainOptionConsole;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;

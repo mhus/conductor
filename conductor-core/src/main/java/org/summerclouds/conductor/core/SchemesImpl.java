@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.util.MUri;
-import org.summerclouds.conductor.api.Scheme;
-import org.summerclouds.conductor.api.Schemes;
+import de.mhus.common.core.util.MUri;
+import de.mhus.conductor.api.Scheme;
+import de.mhus.conductor.api.Schemes;
 
 public class SchemesImpl extends XCollection<Scheme> implements Schemes {
 

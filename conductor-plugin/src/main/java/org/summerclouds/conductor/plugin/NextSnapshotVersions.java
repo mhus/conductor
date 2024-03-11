@@ -45,18 +45,18 @@
  * * #buildnr uses the previous number and increase it by one.
  * 
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.core.tool.MCast;
-import org.summerclouds.common.core.tool.MDate;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
-import org.summerclouds.conductor.api.Project;
-import org.summerclouds.conductor.core.ContextProject;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.core.tool.MCast;
+import de.mhus.common.core.tool.MDate;
+import de.mhus.common.core.tool.MString;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
+import de.mhus.conductor.api.Project;
+import de.mhus.conductor.core.ContextProject;
 
 import java.util.Date;
 

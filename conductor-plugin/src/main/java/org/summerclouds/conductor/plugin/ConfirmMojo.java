@@ -23,14 +23,14 @@ Modes:
 
 
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.console.Console;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.api.Plugin.SCOPE;
-import org.summerclouds.conductor.core.ContextStep;
-import org.summerclouds.conductor.core.ExecutorImpl;
+import de.mhus.common.core.console.Console;
+import de.mhus.common.core.tool.MString;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.api.Plugin.SCOPE;
+import de.mhus.conductor.core.ContextStep;
+import de.mhus.conductor.core.ExecutorImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

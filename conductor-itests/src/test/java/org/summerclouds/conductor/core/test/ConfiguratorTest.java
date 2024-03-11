@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core.test;
+package de.mhus.conductor.core.test;
 
 import org.junit.jupiter.api.Test;
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.junit.TestCase;
-import org.summerclouds.common.junit.TestUtil;
-import org.summerclouds.conductor.api.ConUtil;
-import org.summerclouds.conductor.api.Conductor;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.Lifecycle;
-import org.summerclouds.conductor.core.*;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.junit.TestCase;
+import de.mhus.common.junit.TestUtil;
+import de.mhus.conductor.api.ConUtil;
+import de.mhus.conductor.api.Conductor;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.Lifecycle;
+import de.mhus.conductor.core.*;
 
 import java.io.File;
 import java.net.URI;

@@ -11,7 +11,7 @@ Conductor Version: ...
 
 If no configuration file is present conductor uses the 
 default configuration from
-'https://repo1.maven.org/maven2/org/summerclouds/conductor/conductor-plugin/${version}/conductor-plugin-${version}-configuration-default.yml'.
+'https://repo1.maven.org/maven2/de.mhus/conductor/conductor-plugin/${version}/conductor-plugin-${version}-configuration-default.yml'.
 It define a default project under the current path '.'.
 
 However, it is possible to use conductor in each 
@@ -70,7 +70,7 @@ To test a real live example you can download and build the m.h.u. suite with the
 Clone the common root directory:
 
 ```bash
-git clone https://github.com/summerclouds/common-root.git
+git clone https://github.com/mhus/project-root.git
 ```
 
 change into the root directory of the project:

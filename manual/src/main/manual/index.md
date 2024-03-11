@@ -1,6 +1,6 @@
 ## Overview
 
-Summerclouds Conductor is a tool to manage multiple connected software projects
+Conductor is a tool to manage multiple connected software projects
 at the same time.
 
 Projects are connected if they depend on another projects and they are

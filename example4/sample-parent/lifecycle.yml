@@ -40,5 +40,5 @@ lifecycles:
 
 plugins:
 - target: con.test
-  uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+  uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
   mojo: test

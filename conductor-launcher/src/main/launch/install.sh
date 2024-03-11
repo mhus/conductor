@@ -17,7 +17,7 @@
 
 # config
 
-REPO_PATH_ZIP="org/summerclouds/conductor-launcher/1.2.1-SNAPSHOT/conductor-launcher-1.2.1-SNAPSHOT-install.zip"
+REPO_PATH_ZIP="de.mhus/conductor-launcher/1.2.1-SNAPSHOT/conductor-launcher-1.2.1-SNAPSHOT-install.zip"
 LOCAL_REPO_PATH_ZIP="$HOME/.m2/repository/$REPO_PATH_ZIP"
 REMOTE_REPO_PATH_ZIP="https://repo1.maven.org/maven2/$REPO_PATH_ZIP"
 
@@ -35,7 +35,7 @@ fi
 if [ ! -e $LOCAL_REPO_PATH_ZIP ]; then
   if command -v mvn &> /dev/null; then
     mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get \
-      -Dartifact=org.summerclouds.conductor:conductor-launcher:1.2.1-SNAPSHOT:zip:install
+      -Dartifact=de.mhus.conductor:conductor-launcher:1.2.1-SNAPSHOT:zip:install
   elif command -v curl &> /dev/null; then
     if [ -e $HOME/.conductor/tmp/con-install.zip ]; then
       rm $HOME/.conductor/tmp/con-install.zip

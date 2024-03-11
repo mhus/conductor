@@ -327,55 +327,55 @@ lifecycles:
 
 plugins:
   - target: con.calculateNewVersion
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: calculateNewVersion
     scope: step
   - target: con.nextSnapshotVersions
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: nextSnapshotVersions
   - target: con.cmd
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: cmd
   - target: con.git
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: git
   - target: con.git.clone
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: git.clone
   - target: con.maven
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: maven
   - target: con.persistNewVersions
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: persistNewVersions
     scope: step
   - target: con.test
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: test
   - target: con.updatePomProperties
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: updatePomProperties
   - target: con.updatePomParentVersion
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: updatePomParentVersion
   - target: con.validateStep
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: con.validate
     scope: step
   - target: con.validateProject
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: con.validate
   - target: con.includeLifecycle
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: con.includeLifecycle
     scope: step
   - target: con.reset
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: resetDirectoryTouch
   - target: con.docker
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: docker
   - target: con.loadVersion
-    uri: vm:org.summerclouds.conductor/conductor-plugin/${conductor.version}
+    uri: vm:de.mhus.conductor/conductor-plugin/${conductor.version}
     mojo: loadPomVersion
     

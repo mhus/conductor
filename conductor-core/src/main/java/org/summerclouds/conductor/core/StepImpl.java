@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.error.InternalRuntimeException;
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.matcher.Condition;
-import org.summerclouds.common.core.node.IProperties;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.tool.MSystem;
-import org.summerclouds.conductor.api.*;
+import de.mhus.common.core.error.InternalRuntimeException;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.matcher.Condition;
+import de.mhus.common.core.node.IProperties;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.tool.MSystem;
+import de.mhus.conductor.api.*;
 
 import java.util.LinkedList;
 import java.util.Map;

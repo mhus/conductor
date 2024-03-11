@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.node.IProperties;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.Labels;
-import org.summerclouds.conductor.api.Step;
-import org.summerclouds.conductor.api.Steps;
+import de.mhus.common.core.node.IProperties;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.Labels;
+import de.mhus.conductor.api.Step;
+import de.mhus.conductor.api.Steps;
 
 import java.util.LinkedList;
 import java.util.Map.Entry;

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.common.core.yaml.MYaml;
-import org.summerclouds.common.core.yaml.YMap;
-import org.summerclouds.conductor.api.Conductor;
-import org.summerclouds.conductor.api.ConfigType;
+import de.mhus.common.core.yaml.MYaml;
+import de.mhus.common.core.yaml.YMap;
+import de.mhus.conductor.api.Conductor;
+import de.mhus.conductor.api.ConfigType;
 
 public class YmlConfigType implements ConfigType {
 

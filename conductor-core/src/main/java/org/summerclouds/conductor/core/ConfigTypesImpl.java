@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.ConfigType;
-import org.summerclouds.conductor.api.ConfigTypes;
+import de.mhus.conductor.api.ConfigType;
+import de.mhus.conductor.api.ConfigTypes;
 
 public class ConfigTypesImpl extends XCollection<ConfigType> implements ConfigTypes {}

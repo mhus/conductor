@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.tool.MPeriod;
-import org.summerclouds.common.core.tool.MThread;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.ExecutePlugin;
-import org.summerclouds.conductor.api.Plugin.SCOPE;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.tool.MPeriod;
+import de.mhus.common.core.tool.MThread;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.ExecutePlugin;
+import de.mhus.conductor.api.Plugin.SCOPE;
 
 @AMojo(name = "sleep",target = "sleep", scope = SCOPE.STEP)
 public class SleepMojo extends MLog implements ExecutePlugin {

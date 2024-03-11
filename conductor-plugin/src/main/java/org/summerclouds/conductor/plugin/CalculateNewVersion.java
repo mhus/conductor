@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.core.LabelsImpl;
+import de.mhus.common.core.log.MLog;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.core.LabelsImpl;
 
 import java.io.File;
 

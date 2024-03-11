@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.error.MRuntimeException;
-import org.summerclouds.common.core.error.RC;
+import de.mhus.common.core.error.MRuntimeException;
+import de.mhus.common.core.error.RC;
 
 public class StopLifecycleException extends MRuntimeException {
 

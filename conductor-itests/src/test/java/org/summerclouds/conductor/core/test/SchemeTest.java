@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core.test;
+package de.mhus.conductor.core.test;
 
 import org.junit.jupiter.api.Test;
-import org.summerclouds.common.core.error.NotFoundException;
-import org.summerclouds.common.core.node.MProperties;
-import org.summerclouds.common.core.tool.MFile;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.common.core.util.MUri;
-import org.summerclouds.common.junit.TestCase;
-import org.summerclouds.common.junit.TestUtil;
-import org.summerclouds.conductor.api.*;
-import org.summerclouds.conductor.core.*;
+import de.mhus.common.core.error.NotFoundException;
+import de.mhus.common.core.node.MProperties;
+import de.mhus.common.core.tool.MFile;
+import de.mhus.common.core.tool.MString;
+import de.mhus.common.core.util.MUri;
+import de.mhus.common.junit.TestCase;
+import de.mhus.common.junit.TestUtil;
+import de.mhus.conductor.api.*;
+import de.mhus.conductor.core.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;

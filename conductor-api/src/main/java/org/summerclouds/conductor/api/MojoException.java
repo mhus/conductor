@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.error.MException;
-import org.summerclouds.common.core.error.RC;
+import de.mhus.common.core.error.MException;
+import de.mhus.common.core.error.RC;
 
 public class MojoException extends MException {
 

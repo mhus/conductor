@@ -1,7 +1,7 @@
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
-import org.summerclouds.common.core.console.Console;
-import org.summerclouds.common.core.tool.MValidator;
+import de.mhus.common.core.console.Console;
+import de.mhus.common.core.tool.MValidator;
 
 import java.util.List;
 

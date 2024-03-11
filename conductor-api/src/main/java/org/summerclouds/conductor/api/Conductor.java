@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.api;
+package de.mhus.conductor.api;
 
 import java.io.Closeable;
 import java.io.File;
 
-import org.summerclouds.common.core.node.IReadProperties;
+import de.mhus.common.core.node.IReadProperties;
 
 public interface Conductor extends Closeable {
 

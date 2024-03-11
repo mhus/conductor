@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.M;
-import org.summerclouds.common.core.tool.MString;
-import org.summerclouds.conductor.api.AMojo;
-import org.summerclouds.conductor.api.ConUtil;
-import org.summerclouds.conductor.api.Context;
-import org.summerclouds.conductor.api.MojoException;
+import de.mhus.common.core.M;
+import de.mhus.common.core.tool.MString;
+import de.mhus.conductor.api.AMojo;
+import de.mhus.conductor.api.ConUtil;
+import de.mhus.conductor.api.Context;
+import de.mhus.conductor.api.MojoException;
 
 import java.io.File;
 

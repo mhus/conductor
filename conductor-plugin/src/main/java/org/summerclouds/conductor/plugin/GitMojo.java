@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.plugin;
+package de.mhus.conductor.plugin;
 
-import org.summerclouds.common.core.M;
-import org.summerclouds.common.core.log.MLog;
-import org.summerclouds.conductor.api.*;
+import de.mhus.common.core.M;
+import de.mhus.common.core.log.MLog;
+import de.mhus.conductor.api.*;
 
 import java.io.File;
 

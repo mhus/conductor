@@ -26,11 +26,11 @@
  * If schema is not found the schema 'default' will be added by default.
  * 
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.AOption;
-import org.summerclouds.conductor.api.Cli;
-import org.summerclouds.conductor.api.MainOptionHandler;
+import de.mhus.conductor.api.AOption;
+import de.mhus.conductor.api.Cli;
+import de.mhus.conductor.api.MainOptionHandler;
 
 import java.util.LinkedList;
 

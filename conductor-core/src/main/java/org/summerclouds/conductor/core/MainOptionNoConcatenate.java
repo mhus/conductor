@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.summerclouds.conductor.core;
+package de.mhus.conductor.core;
 
-import org.summerclouds.conductor.api.AOption;
-import org.summerclouds.conductor.api.Cli;
-import org.summerclouds.conductor.api.ConUtil;
-import org.summerclouds.conductor.api.MainOptionHandler;
+import de.mhus.conductor.api.AOption;
+import de.mhus.conductor.api.Cli;
+import de.mhus.conductor.api.ConUtil;
+import de.mhus.conductor.api.MainOptionHandler;
 
 import java.util.LinkedList;
 
