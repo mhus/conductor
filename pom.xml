@@ -23,7 +23,7 @@
 	<artifactId>conductor</artifactId>
 	<version>1.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>MHUS Conductor</name>
+	<name>conductor</name>
 	<description>MHUS tools to work with multiple projects in complex scenarios</description>
 	<url>http://www.mhus.de</url>
 	<parent>
