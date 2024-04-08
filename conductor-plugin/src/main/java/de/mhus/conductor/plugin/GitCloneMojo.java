@@ -37,6 +37,21 @@ public class GitCloneMojo  implements ExecutePlugin {
         }
         if (dir.exists() && dir.isDirectory()) {
             LOGGER.info("project exists, nothing to do");
+            if (gitBranch != null) {
+                LOGGER.debug("Checkout branch: {}", gitBranch);
+                String gitPath = ConUtil.cmdLocation(context.getConductor(), "git");
+                String cmd = gitPath + " checkout " + gitBranch;
+                String[] res =
+                        ConUtil.execute(
+                                context.getConductor(),
+                                context.getStep().getTitle() + " " + context.getProject().getName(),
+                                dir,
+                                cmd,
+                                true);
+                if (!res[2].equals("0"))
+                    throw new MojoException(context, "checkout branch not successful", cmd, res[1], res[2]);
+                return true;
+            }
             return false;
         }
 
@@ -58,7 +73,7 @@ public class GitCloneMojo  implements ExecutePlugin {
                         cmd,
                         true);
         if (!res[2].equals("0"))
-            throw new MojoException(context, "not successful", cmd, res[1], res[2]);
+            throw new MojoException(context, "clone not successful", cmd, res[1], res[2]);
         return true;
     }
 }

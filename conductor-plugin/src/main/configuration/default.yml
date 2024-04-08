@@ -44,9 +44,7 @@ lifecycles:
 
 - name: git
   steps:
-  - title: Clone
-    target: con.git.clone
-  - title: Pull
+  - title: Execute
     target: con.git
     arguments:
     - '@'
