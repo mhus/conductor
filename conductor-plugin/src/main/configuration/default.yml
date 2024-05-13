@@ -30,6 +30,9 @@ lifecycles:
     target: con.git.clone
   - title: Pull
     target: con.git
+    properties:
+      ignoreReturnCode: true
+      nothingDone: Already up to date.
     arguments:
     - pull
     - '@'
@@ -64,27 +67,59 @@ lifecycles:
 
 - name: git.add
   steps:
-  - title: Git
+  - title: Git Add
     target: con.git
     properties:
       ignoreReturnCode: ${ignoreReturnCode:true}
     arguments:
     - add
     - .
-    
+
+- name: git.st
+  steps:
+    - title: Git
+      target: con.git
+      properties:
+        ignoreReturnCode: true
+        nothingDone: nothing to commit
+      arguments:
+        - status
+        - .
+
 - name: git.commit
   description: Commit all projects
   usage:
   - 0 isset Message must be set
   steps:
-  - title: Commit
-    target: con.git
-    properties:
-      ignoreReturnCode: ${ignoreReturnCode:true}
-    arguments:
-    - commit
-    - -m
-    - '@'
+    - title: Commit
+      target: con.git
+      properties:
+        ignoreReturnCode: ${ignoreReturnCode:true}
+      arguments:
+      - commit
+      - -m
+      - '@'
+
+- name: git.aco
+  description: Add and Commit for all projects
+  usage:
+    - 0 isset Message must be set
+  steps:
+    - title: Git Add
+      target: con.git
+      properties:
+        ignoreReturnCode: ${ignoreReturnCode:true}
+      arguments:
+        - add
+        - .
+    - title: Commit
+      target: con.git
+      properties:
+        ignoreReturnCode: ${ignoreReturnCode:true}
+      arguments:
+        - commit
+        - -m
+        - '@'
 
 - name: reset
   steps:

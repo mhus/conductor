@@ -55,6 +55,7 @@ public class ConUtil {
     public static final String PROPERTY_VALIDATORS = "conductor.validators";
     public static final String PROPERTY_PARALLEL = "conductor.parallel";
     public static final String PROPERTY_THREADS = "conductor.threads";
+    public static final String PROPERTY_STEP_NOTHING_DONE = "step.nothingDone" ;
     private static final Object[] SCAN_PACKAGES = new Object[] {"de.mhus.conductor"};
     public static final String PROPERTY_STEP_IGNORE_RETURN_CODE = "step.ignoreReturnCode";
     public static final String PROPERTY_Y = "conductor.confirm.confirm";

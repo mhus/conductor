@@ -16,6 +16,7 @@
 package de.mhus.conductor.plugin;
 
  
+import de.mhus.commons.tools.MCast;
 import de.mhus.conductor.api.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,9 +49,13 @@ public class GitCloneMojo  implements ExecutePlugin {
                                 dir,
                                 cmd,
                                 true);
-                if (!res[2].equals("0"))
+                if (!res[2].equals("0")
+                        && !MCast.toboolean(context.make(context.getProperties()
+                        .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
                     throw new MojoException(context, "checkout branch not successful", cmd, res[1], res[2]);
-                return true;
+                if (res[0].contains("Your branch is up to date"))
+                    return false; // nothing done
+                return true; // done
             }
             return false;
         }
@@ -72,8 +77,10 @@ public class GitCloneMojo  implements ExecutePlugin {
                         dir,
                         cmd,
                         true);
-        if (!res[2].equals("0"))
+        if (!res[2].equals("0")
+                && !MCast.toboolean(context.make(context.getProperties()
+                .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
             throw new MojoException(context, "clone not successful", cmd, res[1], res[2]);
-        return true;
+        return true; // done
     }
 }

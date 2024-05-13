@@ -42,7 +42,14 @@ public class GitMojo  implements ExecutePlugin {
                 && !MCast.toboolean(context.make(context.getProperties()
                         .getString(ConUtil.PROPERTY_STEP_IGNORE_RETURN_CODE, "false")), false))
             throw new MojoException(context, "not successful", cmd, res[1], res[2]);
-
+        {
+            var nothingDone =context.getProperties()
+                    .getString(ConUtil.PROPERTY_STEP_NOTHING_DONE);
+            if (nothingDone.isPresent()) {
+                if (res[0].contains(context.make(nothingDone.get())))
+                    return false;
+            }
+        }
         return true;
     }
 }
