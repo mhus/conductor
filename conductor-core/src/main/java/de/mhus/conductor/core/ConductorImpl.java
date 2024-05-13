@@ -20,6 +20,7 @@ import de.mhus.commons.tree.MProperties;
 import de.mhus.conductor.api.*;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 public class ConductorImpl implements Conductor {
@@ -31,6 +32,8 @@ public class ConductorImpl implements Conductor {
     protected File root;
     protected Schemes schemes = new SchemesImpl();
     public Map<String, Validator> validators;
+    private Labels generalSelector;
+    private List<String> generalOrderBy;
 
     public ConductorImpl(File rootDir) {
         this.root = rootDir.getAbsoluteFile();
@@ -82,4 +85,23 @@ public class ConductorImpl implements Conductor {
     public boolean isVerboseOutput() {
         return getProperties().getBoolean(ConUtil.PROPERTY_VERBOSE, false);
     }
+
+    @Override
+    public Labels getGeneralSelector() {
+        return generalSelector;
+    }
+
+    @Override
+    public List<String> getGeneralOrderBy() {
+        return generalOrderBy;
+    }
+
+    public void setGeneralSelector(Labels generalSelector) {
+        this.generalSelector = generalSelector;
+    }
+
+    public void setGeneralOrderBy(List<String> generalOrderBy) {
+        this.generalOrderBy = generalOrderBy;
+    }
+
 }

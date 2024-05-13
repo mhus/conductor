@@ -28,10 +28,10 @@ import java.io.Closeable;
 import java.io.File;
 
 @Slf4j
-@AMojo(name = "projectKindSwitch",target = "project.kind")
-public class ProjectKindSwitchMojo  implements ExecutePlugin {
+@AMojo(name = "vcsKindSwitch",target = "vcs.kind")
+public class VcsKindSwitchMojo implements ExecutePlugin {
 
-    public enum TYPES {UNKNOWN,MAVEN,GRADEL,IVY,ANT,SBT,NPM,MAKE}
+    public enum TYPES {UNKNOWN,GIT,SUBVERSION}
     
     @Override
     public boolean execute(Context context) throws Exception {
@@ -39,26 +39,11 @@ public class ProjectKindSwitchMojo  implements ExecutePlugin {
         File dir = context.getProject().getRootDir();
         TYPES type = TYPES.UNKNOWN;
         
-        if (new File(dir, "pom.xml").exists()) {
-            type = TYPES.MAVEN;
+        if (new File(dir, ".git").exists()) {
+            type = TYPES.GIT;
         } else
-        if (new File(dir, "build.gradel").exists()) {
-            type = TYPES.GRADEL;
-        } else
-        if (new File(dir, "build.sbt").exists()) {
-            type = TYPES.SBT;
-        } else
-        if (new File(dir, "ivy.xml").exists()) {
-            type = TYPES.IVY;
-        } else
-        if (new File(dir,"build.xml").exists()) {
-            type = TYPES.ANT;
-        } else
-        if (new File(dir,"Makefile").exists()) {
-            type = TYPES.MAKE;
-        } else
-        if (new File(dir, "package.json").exists()) {
-            type = TYPES.NPM;
+        if (new File(dir, ".svn").exists()) {
+            type = TYPES.SUBVERSION;
         }
         
         for (Step typeCaze : context.getStep().getSubSteps()) {
@@ -70,12 +55,13 @@ public class ProjectKindSwitchMojo  implements ExecutePlugin {
                         ((ExecutorImpl)context.getExecutor()).executeInternal( ((ContextStep)caze).getInstance(), context.getProject(), context.getCallLevel()+1 );
                         if (context.getProject().getStatus() == de.mhus.conductor.api.Project.STATUS.SUCCESS) success = true;
                     }
+                } catch (Exception e) {
+                    LOGGER.error("Error in sub step {}", type.name() , e);
                 }
                 return success;
             }
         }
 
-        
         return false;
     }
     

@@ -17,6 +17,7 @@ package de.mhus.conductor.api;
 
 import java.io.Closeable;
 import java.io.File;
+import java.util.List;
 
 import de.mhus.commons.tree.IReadProperties;
 
@@ -37,4 +38,8 @@ public interface Conductor extends Closeable {
     ClassLoader getClassLoader();
 
     boolean isVerboseOutput();
+
+    Labels getGeneralSelector();
+
+    List<String> getGeneralOrderBy();
 }

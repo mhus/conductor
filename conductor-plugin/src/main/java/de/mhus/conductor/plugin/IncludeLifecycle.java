@@ -27,14 +27,16 @@ public class IncludeLifecycle  implements ExecutePlugin {
 
     @Override
     public boolean execute(Context context) throws Exception {
+        boolean success = false;
         for (String arg : context.getStep().getArguments()) {
             LOGGER.debug(">>> Include Lifecycle", arg);
             Lifecycle lifecycle = context.getConductor().getLifecycles().get(arg);
             for (Step step : lifecycle.getSteps()) {
             	((ExecutorImpl)context.getExecutor()).executeInternal(step, context.getProject(), context.getCallLevel()+1);
+                if (context.getProject().getStatus() == Project.STATUS.SUCCESS) success = true;
             }
-            LOGGER.debug("<<< End Lifecycle ", arg);
+            LOGGER.debug("<<< End Lifecycle with sucess: {}", success, arg);
         }
-        return true;
+        return success;
     }
 }

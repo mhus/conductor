@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<article lang="en">
+<articleinfo>
+    <date>2024-03-11</date>
+</articleinfo>
+<section id="_quick_start">
+<title>Quick Start</title>
+<simpara>First follow the installation instructions.</simpara>
+<simpara>You should be able to see the conductor version.</simpara>
+<screen>$ con -version
+Conductor Version: 1.1.0</screen>
+<simpara>If no configuration file is present conductor uses the default configuration from
+It define a default project under the current path <emphasis>.</emphasis>.</simpara>
+<simpara>Therefore it is possible to use conductor in each project without configuration. Switch into your project directory and execute</simpara>
+<screen>con build</screen>
+<simpara>To build the project using the lifecycle <emphasis>build</emphasis>. Conductor detects and uses the build tool of the project. For example if a pom.xml
+present it will use maven to build the project.</simpara>
+<note><simpara>Detection for a wide range of build tools is build in but support for the tools must be enhanced in custom configurations.</simpara></note>
+<simpara>If you need to handle more then one project at once you need to create a configuration file <emphasis>conductor.yaml</emphasis>. Create a list of projects
+like this:</simpara>
+<screen>projects:
+  - name: parent
+    path: .
+    labels:
+      sort: 0
+  - name: core
+    path: ../sample-core
+    labels:
+      sort: 1
+  - name: api
+    path: ../sample-product
+    labels:
+      sort: 2</screen>
+<simpara>Use the project path relative to the configuration file location. Best practice is to create the file in the root of a parent project.</simpara>
+<simpara>This is a list of lifecycles out of the box:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>con git</emphasis> - clone and pull all projects
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>con git.pull</emphasis> - pull on all projects
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>con git.reset</emphasis> - remove all modifications on projects
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>con rebuild</emphasis> - clean and build all projects
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>con update</emphasis> - build all project with changed files (compare and set the timestamp of the project folder)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>con clean</emphasis> - clean the project temp files
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara>To test a real live example you can download and build the m.h.u. suite with the following commands:</simpara>
+<screen>Clone only the parent project:
+
+$ git clone https://github.com/mhus/mhus-parent.git
+
+change into the root directory of the project:
+
+$ cd mhus-parent
+
+now check out and build all other dependent projects with conductor
+
+$ con git - build</screen>
+</section>
+</article>

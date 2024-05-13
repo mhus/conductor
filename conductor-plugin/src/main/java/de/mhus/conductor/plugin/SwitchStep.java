@@ -31,7 +31,7 @@ public class SwitchStep  implements ExecutePlugin {
         for (Step caze : context.getStep().getSubSteps()) {
             if (caze.matchCondition(context)) {
                 ((ExecutorImpl)context.getExecutor()).execute( ((ContextStep)caze).getInstance() );
-                return true;
+                return context.getProject().getStatus() == de.mhus.conductor.api.Project.STATUS.SUCCESS;
             }
         }
         return false;

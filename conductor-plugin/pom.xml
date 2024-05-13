@@ -27,7 +27,6 @@
   </parent>
   
   <properties>
-       <site.path>..</site.path>
   </properties>
   
    <build>

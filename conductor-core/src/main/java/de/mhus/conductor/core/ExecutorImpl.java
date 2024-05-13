@@ -217,7 +217,7 @@ public class ExecutorImpl  implements Executor {
             // scope: project
 
             // select projects
-            Labels selector = step.getSelector();
+            Labels selector = con.getGeneralSelector() == null ? step.getSelector() : con.getGeneralSelector();
             LinkedList<Project> projects = null;
             if (selector != null) {
                 projects = new LinkedList<>(con.getProjects().select(selector));
@@ -226,7 +226,7 @@ public class ExecutorImpl  implements Executor {
             }
 
             // order
-            String[] order = step.getOrderBy();
+            String[] order = con.getGeneralOrderBy() == null ? step.getOrderBy() : con.getGeneralOrderBy().toArray(new String[0]);
             if (MCollection.isSet(order)) {
                 ConUtil.orderProjects(con, projects, order);
             }

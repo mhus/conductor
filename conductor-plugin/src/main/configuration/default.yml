@@ -24,11 +24,42 @@ projects:
 
 lifecycles:
 
+- name: pull
+  steps:
+  - title: Pull
+    target: vcs.kind
+    order:
+      - dependencies
+      - order
+    steps:
+      - target: git
+        steps:
+        - target: include
+          arguments: [git.pull]
+      - target: subversion
+        steps:
+        - target: include
+          arguments: [svn.update]
+
+- name: status
+  steps:
+    - title: Status
+      target: vcs.kind
+      steps:
+      - target: git
+        steps:
+        - target: include
+          arguments: [git.status]
+      - target: subversion
+        steps:
+        - target: include
+          arguments: [svn.status]
+
 - name: git.pull
   steps:
-  - title: Clone
+  - title: Git Clone
     target: con.git.clone
-  - title: Pull
+  - title: Git Pull
     target: con.git
     properties:
       ignoreReturnCode: true
@@ -47,14 +78,14 @@ lifecycles:
 
 - name: git
   steps:
-  - title: Execute
+  - title: Git Execute
     target: con.git
     arguments:
     - '@'
 
 - name: git.reset
   steps:
-  - title: Reset
+  - title: Git Reset
     target: con.git
     arguments:
     - reset
@@ -75,9 +106,9 @@ lifecycles:
     - add
     - .
 
-- name: git.st
+- name: git.status
   steps:
-    - title: Git
+    - title: Git Status
       target: con.git
       properties:
         ignoreReturnCode: true
@@ -91,7 +122,7 @@ lifecycles:
   usage:
   - 0 isset Message must be set
   steps:
-    - title: Commit
+    - title: Git Commit
       target: con.git
       properties:
         ignoreReturnCode: ${ignoreReturnCode:true}
@@ -100,7 +131,7 @@ lifecycles:
       - -m
       - '@'
 
-- name: git.aco
+- name: git.addcommit
   description: Add and Commit for all projects
   usage:
     - 0 isset Message must be set
@@ -136,7 +167,7 @@ lifecycles:
 - name: rebuild
   steps:
   - title: Rebuild
-    target: kind
+    target: project.kind
     order:
       - dependencies
       - order
@@ -184,7 +215,7 @@ lifecycles:
 - name: build
   steps:
   - title: Build
-    target: kind
+    target: project.kind
     order: dependencies
     steps:
     - target: maven
@@ -229,7 +260,7 @@ lifecycles:
 - name: update
   steps:
   - title: Update
-    target: kind
+    target: project.kind
     order:
       - dependencies
       - order
@@ -263,7 +294,7 @@ lifecycles:
 - name: clean
   steps:
   - title: Clean
-    target: kind
+    target: project.kind
     order:
       - dependencies
       - order

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<article lang="en">
+<articleinfo>
+    <date>2024-03-11</date>
+</articleinfo>
+<section id="_installation">
+<title>Installation</title>
+<section id="_simple">
+<title>Simple</title>
+<simpara>The simple way to install conductor on a unixoide os with wget and bash is
+to execute the following command:</simpara>
+<screen>version=&lt;latest&gt;
+wget -qO- https://repo1.maven.org/maven2/de/mhus/conductor/conductor-launcher/${version}/conductor-launcher-${version}-install.sh | bash</screen>
+<simpara>This will install the selected version of conductor in you $HOME/.conductor directory.</simpara>
+<note><simpara>Conductor is able to install multiple versions in the same time.</simpara></note>
+<simpara>Now you have to link the default version of conductor into a bin folder or add the directory to your $PATH variable. Then it is
+possible to use the conductor command <emphasis>con</emphasis>.</simpara>
+<simpara>For example link the command to /usr/local/bin</simpara>
+<screen>sudo ln -s $HOME/.conductor/bin/con /usr/local/bin</screen>
+</section>
+<section id="_build_from_source">
+<title>Build from source</title>
+<simpara>Clone the project from github. You need to download a tag version to fulfill all dependencies
+in release status.</simpara>
+<screen>git clone https://github.com/mhus/mhus-conductor.git -b 1.1.0
+cd mhus-conductor</screen>
+<simpara>The script <emphasis>./create.sh</emphasis> will build and install the selected version of conductor.</simpara>
+</section>
+</section>
+</article>

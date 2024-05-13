@@ -33,9 +33,7 @@
 		<relativePath/>
 	</parent>
 	<properties>
-  	   <maven-site-plugin.skip>false</maven-site-plugin.skip>
 	   <mhus-osgi-cache.version>${project.version}</mhus-osgi-cache.version>
-	   <site.path>.</site.path>
 		<commons.version>8.0.0-SNAPSHOT</commons.version>
 		<bouncycastle.version>1.77</bouncycastle.version>
 		<maven.java.version>21</maven.java.version>
@@ -94,7 +92,6 @@
 		<module>conductor-plugin</module>
         <module>conductor-itests</module>
         <module>conductor-launcher</module>
-		<module>manual</module>
 	</modules>
 
 </project>
