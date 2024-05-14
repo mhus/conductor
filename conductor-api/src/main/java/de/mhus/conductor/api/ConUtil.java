@@ -160,7 +160,7 @@ public class ConUtil {
                 return new String[] {"","","0"};
         }
         
-        LOGGER.info(name, "execute", cmd, rootDir);
+        LOGGER.info("{} {} {} {}", name, "execute", cmd, rootDir);
 
         final String shortName = shorten(name);
         final Console console = getConsole();
@@ -215,7 +215,7 @@ public class ConUtil {
 
         String stderr = stdErrBuilder.toString();
         String stdout = stdOutBuilder.toString();
-        LOGGER.info(name, "exitCode", exitCode);
+        LOGGER.info("{} {} {}",name, "exitCode", exitCode);
         return new String[] {stdout, stderr, String.valueOf(exitCode)};
     }
 
@@ -296,7 +296,7 @@ public class ConUtil {
 
     public static Console getConsole() {
         Console ret = Console.get();
-        LOGGER.trace("Console", ret.getClass());
+        LOGGER.trace("Console {}", ret.getClass());
         return ret;
         //	    if (console == null) {
         //	        String term = System.getenv("TERM");

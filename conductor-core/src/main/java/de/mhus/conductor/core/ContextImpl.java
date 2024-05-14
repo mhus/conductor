@@ -65,10 +65,10 @@ public class ContextImpl implements Context {
         if (in == null) return null;
         try {
             String ret = compiler.compileString(in).execute(properties);
-            LOGGER.trace("make", in, ret);
+            LOGGER.trace("make {} {}", in, ret);
             return ret;
         } catch (MException e) {
-            LOGGER.trace(in, e);
+            LOGGER.trace("{} {}", in, e);
             throw new MRuntimeException(e, in);
         }
     }
@@ -105,7 +105,7 @@ public class ContextImpl implements Context {
 
         putReadProperties("", con.getProperties());
 
-        LOGGER.trace("init", project, plugin, step, properties);
+        LOGGER.trace("init {} {} {} {}", project, plugin, step, properties);
     }
 
     @Override

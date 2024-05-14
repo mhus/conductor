@@ -62,7 +62,7 @@ public class ExecutorImpl  implements Executor {
         currentLifecycle = con.getLifecycles().get(lifecycle);
         checkUsage();
         try {
-            LOGGER.info("executeLifecycle", currentLifecycle);
+            LOGGER.info("executeLifecycle {}", currentLifecycle);
             Steps steps = currentLifecycle.getSteps();
             execute(lifecycle, steps);
         } catch (Throwable t) {
@@ -76,7 +76,7 @@ public class ExecutorImpl  implements Executor {
     private void printError(Throwable t, Object ... list ) {
          LOGGER.error("===================================================");
          LOGGER.error("*** Error: " + t);
-         LOGGER.error("TODO", list);
+         LOGGER.error("TODO {}", list);
         while (t != null) {
             t = t.getCause();
              LOGGER.error("--- Cause: " + t);
@@ -89,7 +89,7 @@ public class ExecutorImpl  implements Executor {
         boolean error = false;
         for (String arg : currentLifecycle.getUsage()) {
             String[] parts = arg.split(" ",3);
-            LOGGER.debug("validate",arg,parts);
+            LOGGER.debug("validate {} {}",arg,parts);
             if (parts.length < 3)
                 throw new InternalRuntimeException("Usage rule malformed", currentLifecycle,arg);
             String name = parts[0];
@@ -100,13 +100,13 @@ public class ExecutorImpl  implements Executor {
             if (check.equals("isset")) {
                 if (!MString.isSet(value)) {
                     error = true;
-                     LOGGER.error(name, check, msg);
+                     LOGGER.error("{} {} {}", name, check, msg);
                 }
             } else
             if (check.equals("notnull")) {
                 if (value != null) {
                     error = true;
-                     LOGGER.error(name, check, msg);
+                     LOGGER.error("{} {} {}", name, check, msg);
                 }
             } else
             if (check.equals("isint")) {
@@ -114,12 +114,12 @@ public class ExecutorImpl  implements Executor {
                     Integer.valueOf(value);
                 } catch (NumberFormatException e) {
                     error = true;
-                     LOGGER.error(name, check, msg);
+                     LOGGER.error("{} {} {}", name, check, msg);
                 }
             } else
             if (check.equals("couldset")) {
                 if (!MString.isSet(value)) {
-                     LOGGER.warn(name, check, msg);
+                     LOGGER.warn("{} {} {}", name, check, msg);
                 }
             }
         }
@@ -159,7 +159,7 @@ public class ExecutorImpl  implements Executor {
             if (!ConUtil.confirmAction(con, step, projects, "Execute Sub-Step " + step))
                 return false;
         }
-        LOGGER.debug("executeInternalStep", step);
+        LOGGER.debug("executeInternalStep {}", step);
         boolean done = false;
         String target = step.getTarget();
         Plugin plugin = con.getPlugins().get(target);
@@ -175,7 +175,7 @@ public class ExecutorImpl  implements Executor {
     }
     
     public boolean executeInternal(Step step, Project project, int callLevel) {
-        LOGGER.debug("executeInternal", step, project);
+        LOGGER.debug("executeInternal {} {}", step, project);
         try {
             // load plugin
             String target = step.getTarget();
@@ -195,7 +195,7 @@ public class ExecutorImpl  implements Executor {
     
     public void execute(Step step) {
         currentStepCount++;
-        LOGGER.debug("executeStep", step);
+        LOGGER.debug("executeStep {}", step);
 
         try {
             // load plugin
@@ -251,7 +251,7 @@ public class ExecutorImpl  implements Executor {
                 && step.getProperties().getInt(ConUtil.PROPERTY_THREADS, 0) > 0) {
             LinkedList<Project> queue = new LinkedList<>(projects);
             Thread[] threads = new Thread[step.getProperties().getInt(ConUtil.PROPERTY_THREADS, 0)];
-            LOGGER.debug("Parallel", threads.length);
+            LOGGER.debug("Parallel {}", threads.length);
             for (int i = 0; i < threads.length; i++) {
                 threads[i] =
                         new Thread(
@@ -259,7 +259,7 @@ public class ExecutorImpl  implements Executor {
 
                                     @Override
                                     public void run() {
-                                        LOGGER.debug("TODO", Thread.currentThread().getId(), "Started");
+                                        LOGGER.debug("TODO {} {}", Thread.currentThread().getId(), "Started");
                                         while (queue.size() > 0) {
                                             Project task = null;
                                             synchronized (queue) {
@@ -270,10 +270,10 @@ public class ExecutorImpl  implements Executor {
                                                 }
                                             }
                                             if (task == null) break; // paranoia
-                                            LOGGER.debug("TODO",Thread.currentThread().getId(), "Task", task);
+                                            LOGGER.debug("TODO {} {} {}",Thread.currentThread().getId(), "Task", task);
                                             execute(step, task, plugin, projects, 0);
                                         }
-                                        LOGGER.debug("TODO",Thread.currentThread().getId(), "Finished");
+                                        LOGGER.debug("TODO {} {}",Thread.currentThread().getId(), "Finished");
                                     }
                                 });
                 threads[i].start();
@@ -310,15 +310,15 @@ public class ExecutorImpl  implements Executor {
             Step step, Project project, Plugin plugin, LinkedList<Project> projectList, int callLevel) {
         if (con.isVerboseOutput())
             System.out.println(">>> execute " + currentLifecycle.getName() + "." + step.getTitle() + "[" + (project == null ? "?" : project.getName()) + "] " + plugin.getMojo() + "]"  );
-        LOGGER.debug(">>>", step.getTitle(), project == null ? "-none-" : project.getName());
-        LOGGER.trace("execute", step, project, plugin);
+        LOGGER.debug(">>> {} {}", step.getTitle(), project == null ? "-none-" : project.getName());
+        LOGGER.trace("execute {} {} {}", step, project, plugin);
         try {
             ContextImpl context = new ContextImpl(con, callLevel);
 
             context.init(this, projectList, project, plugin, step);
 
             if (!step.matchCondition(context)) {
-                LOGGER.debug("condition not successful", step);
+                LOGGER.debug("condition not successful {}", step);
                 return false;
             }
             interceptors.forEach(i -> i.executeBegin(context));
@@ -332,7 +332,7 @@ public class ExecutorImpl  implements Executor {
                 interceptors.forEach(i -> i.executeError(context, t));
                 errors.add(new ErrorsInfoImpl(context, t));
                 if (!(t instanceof StopLifecycleException) && con.getProperties().getBoolean(ConUtil.PROPERTY_FAE, false)) {
-                     LOGGER.error("TODO", context, t);
+                     LOGGER.error("TODO {}", context, t);
                     return false;
                 } else throw t;
             }
@@ -361,7 +361,7 @@ public class ExecutorImpl  implements Executor {
 
     public ConductorPlugin createMojo(Conductor con, Plugin plugin)
             throws IOException, NotFoundException {
-        LOGGER.debug("createMojo", plugin.getUri(), plugin.getMojo());
+        LOGGER.debug("createMojo {} {}", plugin.getUri(), plugin.getMojo());
         String mojoName = plugin.getMojo();
 
         Object[] entry = pluginClassLoaders.get(plugin.getUri());
@@ -380,7 +380,7 @@ public class ExecutorImpl  implements Executor {
             ArrayList<String> classes = new ArrayList<>();
             LinkedList<URL> urls = new LinkedList<>();
             urls.add(pFile.toURI().toURL());
-            LOGGER.debug("Add main JAR", pFile);
+            LOGGER.debug("Add main JAR {}", pFile);
             try (JarFile jar = new JarFile(pFile)) {
                 jar.stream()
                         .forEach(
@@ -414,7 +414,7 @@ public class ExecutorImpl  implements Executor {
                             Scheme schemeDep = con.getSchemes().get(uriDep);
                             File depFile = schemeDep.load(con, uriDep);
                             urls.add(depFile.toURI().toURL());
-                            LOGGER.debug("Add dependency JAR", depFile);
+                            LOGGER.debug("Add dependency JAR {}", depFile);
                         }
                     }
                 }
@@ -434,7 +434,7 @@ public class ExecutorImpl  implements Executor {
             try {
                 Class<?> clazz = cl.loadClass(className);
                 AMojo mojoDef = clazz.getAnnotation(AMojo.class);
-                LOGGER.trace("class", clazz, mojoDef);
+                LOGGER.trace("class {} {}", clazz, mojoDef);
                 if (mojoDef != null) {
                     if (mojoDef.name().equals(mojoName)) {
                         ConductorPlugin inst =
@@ -454,7 +454,7 @@ public class ExecutorImpl  implements Executor {
             }
         }
 
-        throw new NotFoundException("Plugin not found", plugin, plugin.getUri(), mojoName);
+        throw new NotFoundException("Plugin not found {} {} {}", plugin, plugin.getUri(), mojoName);
     }
 
     @Override

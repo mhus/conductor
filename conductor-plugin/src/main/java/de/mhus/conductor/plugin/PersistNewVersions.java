@@ -39,7 +39,7 @@ public class PersistNewVersions  implements ExecutePlugin {
             if (version != null) history.setString(name, version);
         }
 
-        LOGGER.trace("persist", history, historyFile);
+        LOGGER.trace("persist {} {}", history, historyFile);
         history.save(historyFile);
 
         return true;

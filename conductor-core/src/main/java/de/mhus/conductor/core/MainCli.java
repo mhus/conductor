@@ -17,6 +17,19 @@ package de.mhus.conductor.core;
 
 import de.mhus.conductor.api.meta.Version;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
+import org.apache.logging.log4j.core.config.builder.api.LayoutComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.RootLoggerComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 import org.reflections.Reflections;
 import de.mhus.commons.errors.MException;
 import de.mhus.commons.errors.NotFoundException;
@@ -51,6 +64,8 @@ public class MainCli  implements Cli {
 
     public static void main(String[] args) throws Exception {
 
+        configureLog4j();
+
         ConUtil.getConsole();
 
         if (args == null || args.length == 0) {
@@ -64,70 +79,111 @@ public class MainCli  implements Cli {
         new MainCli().execute(queue);
     }
 
+    private static void configureLog4j() {
+
+        Level level = Level.INFO;
+        String pattern = "[%p] %m [%d %c %t]%n";
+
+        ConfigurationBuilder<BuiltConfiguration> builder
+                = ConfigurationBuilderFactory.newConfigurationBuilder();
+
+        LayoutComponentBuilder layoutBuilder = builder.newLayout("PatternLayout")
+                .addAttribute("pattern", pattern);
+
+        AppenderComponentBuilder console
+                = builder.newAppender("stdout", "Console")
+                        .addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT)
+                        .add(layoutBuilder);
+
+        builder.add(console);
+
+        RootLoggerComponentBuilder rootLogger
+                = builder.newRootLogger(level)
+                    .add(builder.newAppenderRef("stdout"));
+
+        builder.add(rootLogger);
+
+        // builder.setStatusLevel(level);
+
+        org.apache.logging.log4j.core.config.Configurator.initialize(builder.build());
+    }
+
+    public static void configureLog4jLevel(Level level) {
+        try {
+            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+            Configuration config = ctx.getConfiguration();
+            LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
+            loggerConfig.setLevel(level);
+            ctx.updateLoggers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public MainCli()
             throws ClassNotFoundException, IOException, InstantiationException,
                     IllegalAccessException, IllegalArgumentException, InvocationTargetException,
                     NoSuchMethodException, SecurityException {
         Object[] pack = ConUtil.getMainPackageName();
-        LOGGER.trace("Scan Package", pack);
+        LOGGER.trace("Scan Package {}", pack);
 
         Reflections reflections = new Reflections(pack);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AOption.class)) {
             AOption def = clazz.getAnnotation(AOption.class);
-            LOGGER.trace("AOption", clazz, def);
+            LOGGER.trace("AOption {} {}", clazz, def);
             if (def != null) {
                 Object inst = clazz.getConstructor().newInstance();
                 for (String alias : def.alias()) {
                     MainOptionHandler old = optionHandlers.put(alias, (MainOptionHandler) inst);
-                    if (old != null)  LOGGER.warn("Overwrite", alias, old.getClass(), clazz);
+                    if (old != null)  LOGGER.warn("Overwrite {} {} {}", alias, old.getClass(), clazz);
                 }
             }
         }
-        LOGGER.trace("optionHandlers", optionHandlers);
+        LOGGER.trace("optionHandlers {}", optionHandlers);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AScheme.class)) {
             AScheme def = clazz.getAnnotation(AScheme.class);
-            LOGGER.trace("AScheme", clazz, def);
+            LOGGER.trace("AScheme {} {}", clazz, def);
             if (def != null) {
                 Object inst = clazz.getConstructor().newInstance();
                 for (String alias : def.name()) {
                     Scheme old = schemes.put(alias, (Scheme) inst);
-                    if (old != null)  LOGGER.warn("Overwrite", alias, old.getClass(), clazz);
+                    if (old != null)  LOGGER.warn("Overwrite {} {} {}", alias, old.getClass(), clazz);
                 }
             }
         }
-        LOGGER.trace("schemes",schemes);
+        LOGGER.trace("schemes {}",schemes);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AConfigType.class)) {
             AConfigType def = clazz.getAnnotation(AConfigType.class);
-            LOGGER.trace("AConfigType", clazz, def);
+            LOGGER.trace("AConfigType {} {}", clazz, def);
             if (def != null) {
                 Object inst = clazz.getConstructor().newInstance();
                 for (String alias : def.name()) {
                     ConfigType old = configTypes.put(alias, (ConfigType) inst);
-                    if (old != null)  LOGGER.warn("Overwrite", alias, old.getClass(), clazz);
+                    if (old != null)  LOGGER.warn("Overwrite {} {} {}", alias, old.getClass(), clazz);
                 }
             }
         }
-        LOGGER.trace("configTypes",configTypes);
+        LOGGER.trace("configTypes {}",configTypes);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AValidator.class)) {
             AValidator def = clazz.getAnnotation(AValidator.class);
-            LOGGER.trace("AValidator", clazz, def);
+            LOGGER.trace("AValidator {} {}", clazz, def);
             if (def != null) {
                 Object inst = clazz.getConstructor().newInstance();
                 for (String alias : def.name()) {
                     Validator old = validators.put(alias, (Validator) inst);
-                    if (old != null)  LOGGER.warn("Overwrite", alias, old.getClass(), clazz);
+                    if (old != null)  LOGGER.warn("Overwrite {} {} {}", alias, old.getClass(), clazz);
                 }
             }
         }
-        LOGGER.trace("validators",validators);
+        LOGGER.trace("validators {}",validators);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AMojo.class)) {
             AMojo def = clazz.getAnnotation(AMojo.class);
-            LOGGER.trace("AMojo", clazz, def);
+            LOGGER.trace("AMojo {} {}", clazz, def);
             if (def != null) {
                 if (MString.isSet(def.target())) {
                     PluginImpl impl = new PluginImpl();
@@ -139,7 +195,7 @@ public class MainCli  implements Cli {
                 }
             }
         }
-        LOGGER.trace("defaultPlugins",defaultPlugins);
+        LOGGER.trace("defaultPlugins {}",defaultPlugins);
         
     }
 

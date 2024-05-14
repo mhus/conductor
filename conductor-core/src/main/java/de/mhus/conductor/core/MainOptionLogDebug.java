@@ -20,6 +20,7 @@ import de.mhus.conductor.api.AOption;
 import de.mhus.conductor.api.Cli;
 import de.mhus.conductor.api.ConUtil;
 import de.mhus.conductor.api.MainOptionHandler;
+import org.apache.logging.log4j.Level;
 
 import java.util.LinkedList;
 
@@ -35,19 +36,14 @@ public class MainOptionLogDebug implements MainOptionHandler {
             return;
         }
         if (cmd.equals("-!v")) {
-//            MApi.setDirtyTrace(false);
-//            MApi.get()
-//            .getLogFactory()
-//            .setDefaultLevel(Log.LEVEL.INFO);
+            MainCli.configureLog4jLevel(Level.INFO);
             ((MainCli)cli).getOverlayProperties().setBoolean(ConUtil.PROPERTY_VERBOSE, false);
             if (((MainCli)cli).isConductor())
                 ((MProperties)cli.getConductor().getProperties()).setBoolean(ConUtil.PROPERTY_VERBOSE, false);
             return;
         }
-//        MApi.setDirtyTrace(cmd.equals("-vv"));
-//        MApi.get()
-//                .getLogFactory()
-//                .setDefaultLevel(cmd.equals("-vvv") ? Log.LEVEL.TRACE : Log.LEVEL.DEBUG);
+        MainCli.configureLog4jLevel(cmd.equals("-vvv") ? Level.TRACE : Level.DEBUG);
+
         ((MainCli)cli).getOverlayProperties().setBoolean(ConUtil.PROPERTY_VERBOSE, true);
         if (((MainCli)cli).isConductor())
             ((MProperties)cli.getConductor().getProperties()).setBoolean(ConUtil.PROPERTY_VERBOSE, true);

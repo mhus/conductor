@@ -45,7 +45,7 @@ public class VmScheme implements DirectLoadScheme {
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AMojo.class)) {
             AMojo def = clazz.getAnnotation(AMojo.class);
-            LOGGER.trace("AMojo", clazz, def);
+            LOGGER.trace("AMojo {} {}", clazz, def);
             if (def != null && def.name().equals(mojoName)) {
                 try {
                     Object inst = clazz.getConstructor().newInstance();
