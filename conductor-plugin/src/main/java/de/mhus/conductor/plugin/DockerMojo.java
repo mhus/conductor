@@ -45,7 +45,7 @@ public class DockerMojo  implements ExecutePlugin {
 
         File dir = new File(context.getProject().getRootDir(), path);
         if (!dir.exists() || !dir.isDirectory()) {
-            LOGGER.debug("dockerPath not exists", path, dir.getAbsolutePath());
+            LOGGER.debug("dockerPath '{}' not exists: {}", path, dir.getAbsolutePath());
             return false;
         }
 

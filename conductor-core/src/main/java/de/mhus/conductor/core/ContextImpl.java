@@ -65,10 +65,10 @@ public class ContextImpl implements Context {
         if (in == null) return null;
         try {
             String ret = compiler.compileString(in).execute(properties);
-            LOGGER.trace("make {} {}", in, ret);
+            LOGGER.trace("make '{}' returns '{}'", in, ret);
             return ret;
         } catch (MException e) {
-            LOGGER.trace("{} {}", in, e);
+            LOGGER.trace("Error '{}'", in, e);
             throw new MRuntimeException(e, in);
         }
     }

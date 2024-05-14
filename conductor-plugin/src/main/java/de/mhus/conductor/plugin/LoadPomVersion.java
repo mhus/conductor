@@ -63,7 +63,7 @@ public class LoadPomVersion  implements ExecutePlugin {
             return false;
         }
 
-        LOGGER.info("TODO", context.getProject(), "version", version);
+        LOGGER.info("Project: {}, version: {}", context.getProject(), version);
         ((MProperties) ((ContextProject) context.getProject()).getInstance().getProperties())
                 .setString("version", version);
 

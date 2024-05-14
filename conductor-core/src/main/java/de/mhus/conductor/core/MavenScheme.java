@@ -80,7 +80,7 @@ public class MavenScheme  implements Scheme {
                 && version.endsWith("-SNAPSHOT"))
             throw new NotFoundException("maven SNAPSHOT artifact not found", uri, location);
 
-        LOGGER.info("Load Maven Resource", location, group, artifact, version, ext, classifier);
+        LOGGER.info("Load Maven Resource location: {}, group: {}, artifact: {}, version: {}, ext: {}, classifier: {}", location, group, artifact, version, ext, classifier);
 
         // mvn org.apache.maven.plugins:maven-dependency-plugin:2.1:get
         // -Dartifact=com.google.guava:guava:15.0 -DrepoUrl=

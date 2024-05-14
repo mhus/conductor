@@ -69,7 +69,7 @@ public abstract class AbstractMavenExecute  implements ExecutePlugin {
             if (context.getStep().getProperties().getBoolean("modifiedOnly", false)) {
                 long lastModified = dir.lastModified();
                 if (!hasYounger(dir, lastModified)) {
-                    LOGGER.debug("not modified, skip", module);
+                    LOGGER.debug("not modified, skip module: {}", module);
                     continue;
                 }
                 needTouch = true;
@@ -81,7 +81,7 @@ public abstract class AbstractMavenExecute  implements ExecutePlugin {
 
             if (needTouch) {
                 long time = System.currentTimeMillis();
-                LOGGER.debug("Touch project folder", dir, time);
+                LOGGER.debug("Touch project folder: {}, time: {}", dir, time);
                 dir.setLastModified(time);
             }
         }

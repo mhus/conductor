@@ -296,6 +296,6 @@ public class ExecutionInterceptorDefault  implements ExecutionInterceptorPlugin 
     public void leaveSubSteps(Conductor con, Step step) {
         Step s = subSteps.removeLast();
         if (s != step)
-            LOGGER.debug("enter and leave are not the same steps",s,step);
+            LOGGER.debug("enter '{}' and leave '{}' are not the same steps",s,step);
     }
 }

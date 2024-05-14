@@ -49,14 +49,14 @@ public class VcsKindSwitchMojo implements ExecutePlugin {
         for (Step typeCaze : context.getStep().getSubSteps()) {
             if (typeCaze.getTarget().equalsIgnoreCase(type.name())) {
                 boolean success = false;
-                LOGGER.debug("Found management type",type);
+                LOGGER.debug("Found management type: {}",type);
                 try ( Closeable x = ((ExecutorImpl)context.getExecutor()).enterSubSteps(context.getStep()) ) {
                     for (Step caze : typeCaze.getSubSteps()) {
                         ((ExecutorImpl)context.getExecutor()).executeInternal( ((ContextStep)caze).getInstance(), context.getProject(), context.getCallLevel()+1 );
                         if (context.getProject().getStatus() == de.mhus.conductor.api.Project.STATUS.SUCCESS) success = true;
                     }
                 } catch (Exception e) {
-                    LOGGER.error("Error in sub step {}", type.name() , e);
+                    LOGGER.error("Error in sub step: {}", type.name() , e);
                 }
                 return success;
             }

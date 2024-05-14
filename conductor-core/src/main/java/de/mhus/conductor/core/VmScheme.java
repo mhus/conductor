@@ -39,13 +39,13 @@ public class VmScheme implements DirectLoadScheme {
     public ConductorPlugin loadPlugin(MUri uri, String mojoName)
             throws NotFoundException, IOException {
         Object[] pack = ConUtil.getMainPackageName();
-        LOGGER.trace("Scan Package", pack);
+        LOGGER.trace("Scan Package: {}", pack);
 
         Reflections reflections = new Reflections(pack);
 
         for (Class<?> clazz : reflections.getTypesAnnotatedWith(AMojo.class)) {
             AMojo def = clazz.getAnnotation(AMojo.class);
-            LOGGER.trace("AMojo {} {}", clazz, def);
+            LOGGER.trace("AMojo class: {}, def: {}", clazz, def);
             if (def != null && def.name().equals(mojoName)) {
                 try {
                     Object inst = clazz.getConstructor().newInstance();

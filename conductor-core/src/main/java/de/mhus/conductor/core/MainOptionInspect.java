@@ -137,7 +137,7 @@ public class MainOptionInspect implements MainOptionHandler {
 
     @Override
     public String getUsage(String cmd) {
-        return "[projects|cli|lifecycles]";
+        return "[environment|projects|cli|lifecycles|conductor|plugins|all]";
     }
 
     @Override

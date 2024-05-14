@@ -28,7 +28,7 @@ public class FileReplaceMojo  implements ExecutePlugin  {
     private boolean replaceInFile(Context context, File file) {
         if (!file.exists() || !file.isFile())
             return false;
-        LOGGER.debug("Replace in file {}", file);
+        LOGGER.debug("Replace in file: {}", file);
         var content = MFile.readFile(file);
         var newContent = content;
         boolean found = false;
@@ -51,7 +51,7 @@ public class FileReplaceMojo  implements ExecutePlugin  {
             }
         }
         if (!content.equals(newContent)) {
-            LOGGER.info("Save {}", file);
+            LOGGER.info("Save file: {}", file);
             MFile.writeFile(file, newContent);
             return true;
         }

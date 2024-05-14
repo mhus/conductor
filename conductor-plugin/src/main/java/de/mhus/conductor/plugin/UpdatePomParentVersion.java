@@ -55,13 +55,13 @@ public class UpdatePomParentVersion  implements ExecutePlugin {
         }
 
         String version = context.getStep().getProperties().getString("version").get();
-        LOGGER.trace("parent version", version);
+        LOGGER.trace("parent version: {}", version);
         if (MString.isEmptyTrim(version) || version.equals("null")) {
              LOGGER.warn("new parent version is empty, skip. Tip: set step property 'version'");
             return false;
         }
         if (MXml.getValue(versionE, false).equals(version)) {
-            LOGGER.info("version not changed", version);
+            LOGGER.info("version not changed: {}", version);
             return false;
         }
 
@@ -74,7 +74,7 @@ public class UpdatePomParentVersion  implements ExecutePlugin {
         Text versionTE = pomDoc.createTextNode(version);
         versionE.appendChild(versionTE);
 
-        LOGGER.debug("update pom", pomFile);
+        LOGGER.debug("update pom file: {}", pomFile);
         String out = MXml.toString(pomDoc, false);
         out = out.replace("?><!--", "?>\n<!--").replace("--><project", "-->\n<project");
         MFile.writeFile(pomFile, out);

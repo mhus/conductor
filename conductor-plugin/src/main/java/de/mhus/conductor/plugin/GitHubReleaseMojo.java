@@ -43,7 +43,7 @@ public class GitHubReleaseMojo  implements ExecutePlugin {
             return false;
         }
         if (!gitUrl.startsWith("https://github.com/")) {
-             LOGGER.warn("project is not a github project, skip",gitUrl);
+             LOGGER.warn("project is not a github project, skip url: {}",gitUrl);
             return false;
         }
         
@@ -61,12 +61,12 @@ public class GitHubReleaseMojo  implements ExecutePlugin {
         HttpResponse resp = client.execute(request);
         try {
             if (resp.getStatusLine().getStatusCode() != 201) {
-                 LOGGER.error("TODO", resp);
+                 LOGGER.error("Error response: {}", resp);
                 throw new InternalException("Creation of github release failed");
             }
             
             String respContent = MFile.readFile( resp.getEntity().getContent() );
-            LOGGER.info("GitHub Release created",tag);
+            LOGGER.info("GitHub Release created with tag: {}",tag);
             if (context.getConductor().isVerboseOutput())
                 LOGGER.info(respContent);
         } finally {

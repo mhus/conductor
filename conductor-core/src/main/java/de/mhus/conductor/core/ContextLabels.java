@@ -16,9 +16,11 @@
 package de.mhus.conductor.core;
 
 import de.mhus.conductor.api.Labels;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 
+@Slf4j
 public class ContextLabels implements Labels {
 
     private ContextImpl context;
@@ -65,7 +67,7 @@ public class ContextLabels implements Labels {
             String sValue = selector.get(sKey)[0];
             String[] lValues = getOrNull(sKey);
             if (lValues == null) {
-//                LOGGER.trace(sKey, "not found in project");
+                LOGGER.trace("key not found in project: {}", sKey);
                 return false;
             }
             boolean ok = false;
@@ -76,7 +78,7 @@ public class ContextLabels implements Labels {
                 }
             }
             if (!ok) {
-//                LOGGER.trace(lValues, "not matches", sValue);
+                LOGGER.trace("key '{}' not matches: {} != {}", sKey, lValues, sValue);
                 return false;
             }
         }

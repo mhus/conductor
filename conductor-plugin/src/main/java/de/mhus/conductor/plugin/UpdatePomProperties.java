@@ -82,7 +82,7 @@ public class UpdatePomProperties  implements ExecutePlugin {
         }
 
         if (changed) {
-            LOGGER.debug("update pom", pomFile);
+            LOGGER.debug("update pom file: {}", pomFile);
             String out = MXml.toString(pomDoc, false);
             out = out.replace("?><!--", "?>\n<!--").replace("--><project", "-->\n<project");
             MFile.writeFile(pomFile, out);

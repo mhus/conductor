@@ -31,7 +31,7 @@ public class LabelsImpl extends XCollection<String[]> implements Labels {
             String sValue = selector.get(sKey)[0];
             String[] lValues = getOrNull(sKey);
             if (lValues == null) {
-                LOGGER.trace("{} {}", sKey, "not found in project");
+                LOGGER.trace("key not found in project: {}", sKey);
                 return false;
             }
             boolean ok = false;
@@ -42,7 +42,7 @@ public class LabelsImpl extends XCollection<String[]> implements Labels {
                 }
             }
             if (!ok) {
-                LOGGER.trace("TODO {} {} {}", lValues, "not matches", sValue);
+                LOGGER.trace("values for key {} dose not match: {} != {}", sKey, sValue, lValues);
                 return false;
             }
         }

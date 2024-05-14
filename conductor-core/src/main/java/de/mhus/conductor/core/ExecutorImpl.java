@@ -62,7 +62,7 @@ public class ExecutorImpl  implements Executor {
         currentLifecycle = con.getLifecycles().get(lifecycle);
         checkUsage();
         try {
-            LOGGER.info("executeLifecycle {}", currentLifecycle);
+            LOGGER.info("executeLifecycle: {}", currentLifecycle);
             Steps steps = currentLifecycle.getSteps();
             execute(lifecycle, steps);
         } catch (Throwable t) {
@@ -89,7 +89,7 @@ public class ExecutorImpl  implements Executor {
         boolean error = false;
         for (String arg : currentLifecycle.getUsage()) {
             String[] parts = arg.split(" ",3);
-            LOGGER.debug("validate {} {}",arg,parts);
+            LOGGER.debug("validate usage: '{}' with parts: {}",arg,parts);
             if (parts.length < 3)
                 throw new InternalRuntimeException("Usage rule malformed", currentLifecycle,arg);
             String name = parts[0];
@@ -259,7 +259,7 @@ public class ExecutorImpl  implements Executor {
 
                                     @Override
                                     public void run() {
-                                        LOGGER.debug("TODO {} {}", Thread.currentThread().getId(), "Started");
+                                        LOGGER.debug("Started");
                                         while (queue.size() > 0) {
                                             Project task = null;
                                             synchronized (queue) {
@@ -270,10 +270,10 @@ public class ExecutorImpl  implements Executor {
                                                 }
                                             }
                                             if (task == null) break; // paranoia
-                                            LOGGER.debug("TODO {} {} {}",Thread.currentThread().getId(), "Task", task);
+                                            LOGGER.debug("Execute task {}",task);
                                             execute(step, task, plugin, projects, 0);
                                         }
-                                        LOGGER.debug("TODO {} {}",Thread.currentThread().getId(), "Finished");
+                                        LOGGER.debug("Finished");
                                     }
                                 });
                 threads[i].start();
@@ -311,14 +311,14 @@ public class ExecutorImpl  implements Executor {
         if (con.isVerboseOutput())
             System.out.println(">>> execute " + currentLifecycle.getName() + "." + step.getTitle() + "[" + (project == null ? "?" : project.getName()) + "] " + plugin.getMojo() + "]"  );
         LOGGER.debug(">>> {} {}", step.getTitle(), project == null ? "-none-" : project.getName());
-        LOGGER.trace("execute {} {} {}", step, project, plugin);
+        LOGGER.trace("execute step: {}, project: {}, plugin: {}", step, project, plugin);
         try {
             ContextImpl context = new ContextImpl(con, callLevel);
 
             context.init(this, projectList, project, plugin, step);
 
             if (!step.matchCondition(context)) {
-                LOGGER.debug("condition not successful {}", step);
+                LOGGER.debug("condition not successful for step: {}", step);
                 return false;
             }
             interceptors.forEach(i -> i.executeBegin(context));
@@ -332,7 +332,7 @@ public class ExecutorImpl  implements Executor {
                 interceptors.forEach(i -> i.executeError(context, t));
                 errors.add(new ErrorsInfoImpl(context, t));
                 if (!(t instanceof StopLifecycleException) && con.getProperties().getBoolean(ConUtil.PROPERTY_FAE, false)) {
-                     LOGGER.error("TODO {}", context, t);
+                     LOGGER.error("Execution of step '{}' failed", context, t);
                     return false;
                 } else throw t;
             }
@@ -361,7 +361,7 @@ public class ExecutorImpl  implements Executor {
 
     public ConductorPlugin createMojo(Conductor con, Plugin plugin)
             throws IOException, NotFoundException {
-        LOGGER.debug("createMojo {} {}", plugin.getUri(), plugin.getMojo());
+        LOGGER.debug("createMojo '{}' with uri: {} {}", plugin.getMojo(), plugin.getUri());
         String mojoName = plugin.getMojo();
 
         Object[] entry = pluginClassLoaders.get(plugin.getUri());
@@ -380,7 +380,7 @@ public class ExecutorImpl  implements Executor {
             ArrayList<String> classes = new ArrayList<>();
             LinkedList<URL> urls = new LinkedList<>();
             urls.add(pFile.toURI().toURL());
-            LOGGER.debug("Add main JAR {}", pFile);
+            LOGGER.debug("Add main JAR: {}", pFile);
             try (JarFile jar = new JarFile(pFile)) {
                 jar.stream()
                         .forEach(
@@ -414,7 +414,7 @@ public class ExecutorImpl  implements Executor {
                             Scheme schemeDep = con.getSchemes().get(uriDep);
                             File depFile = schemeDep.load(con, uriDep);
                             urls.add(depFile.toURI().toURL());
-                            LOGGER.debug("Add dependency JAR {}", depFile);
+                            LOGGER.debug("Add dependency JAR: {}", depFile);
                         }
                     }
                 }

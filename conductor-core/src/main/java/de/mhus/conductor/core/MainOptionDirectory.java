@@ -30,7 +30,7 @@ public class MainOptionDirectory implements MainOptionHandler {
     @Override
     public void execute(Cli cli, String cmd, LinkedList<String> queue) {
         String path = queue.removeFirst();
-        LOGGER.debug("Set Main Directory",path);
+        LOGGER.debug("Set Main Directory {}",path);
         ((MainCli) cli).rootDir = new File(path);
     }
 

@@ -32,7 +32,7 @@ public class CalculateNewVersion  implements ExecutePlugin {
         String versionsFilePath =
                 context.getStep().getProperties().getString("versionsFile", "versions.properties");
         File versionsFile = ConUtil.getFile(context.getConductor().getRoot(), versionsFilePath);
-        LOGGER.trace("versions file", versionsFile);
+        LOGGER.trace("versions file: {}", versionsFile);
         if (versionsFile.exists() && versionsFile.isFile()) {
             MProperties versions = MProperties.load(versionsFile);
 
@@ -42,12 +42,12 @@ public class CalculateNewVersion  implements ExecutePlugin {
                             .getProperties()
                             .getString("historyFile", "history.properties");
             File historyFile = ConUtil.getFile(context.getConductor().getRoot(), historyFilePath);
-            LOGGER.trace("histroy file", historyFile);
+            LOGGER.trace("histroy file: {}", historyFile);
             MProperties history = new MProperties();
             if (historyFile.exists() && historyFile.isFile())
                 history = MProperties.load(historyFile);
 
-            LOGGER.trace("versions", versions, history);
+            LOGGER.trace("versions: {}, history: {}", versions, history);
 
             // find versions for projects
             for (Project project : context.getConductor().getProjects()) {
@@ -55,22 +55,22 @@ public class CalculateNewVersion  implements ExecutePlugin {
                 String name = project.getName();
                 String version = versions.getString(name, null);
                 if (version != null && version.equals("0.0.0")) {
-                    LOGGER.info("Ignore project version",project.getName());
+                    LOGGER.info("Ignore project '{}' version",project.getName());
                     changed = false;
                 } else
                 if (version == null) {
                     version = history.getString(name, null);
                     changed = false;
-                    LOGGER.debug("version from history", name, version);
+                    LOGGER.debug("version from history, name: {}, version: {}", name, version);
                 } else if (version.equals(history.getString(name, null))) {
                     changed = false;
-                    LOGGER.debug("version not changed", name, version);
+                    LOGGER.debug("version not changed, name: {}, version: {}", name, version);
                 }
                 if (version == null) {
-                     LOGGER.warn("project version not found", name);
+                     LOGGER.warn("project version not found for name: {}", name);
                 } else {
                     if (changed) {
-                        LOGGER.info("Project changed", name, version);
+                        LOGGER.info("Project changed for name: {}, version: {}", name, version);
                     }
                     ((MProperties) project.getProperties()).setString("version", version);
                     ((LabelsImpl) project.getLabels())
@@ -79,7 +79,7 @@ public class CalculateNewVersion  implements ExecutePlugin {
             }
 
         } else {
-            LOGGER.info("versions file not found", versionsFile);
+            LOGGER.info("versions file not found: {}", versionsFile);
         }
         return true;
     }

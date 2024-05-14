@@ -103,12 +103,12 @@ public class ConfiguratorImpl  implements Configurator {
             Validator validator = validators.get(name);
             if (validator != null) {
                 validator.validate(con);
-            } else  LOGGER.warn("Validator not found", name);
+            } else  LOGGER.warn("Validator not found: {}", name);
         }
     }
 
     protected void overwrite(MUri uri, boolean rebase) throws MException {
-        LOGGER.debug("load uri", uri);
+        LOGGER.debug("load uri: {}", uri);
         loadedUris.add(uri.toString());
         // 1 load resource
         Scheme scheme = schemes.get(uri);
@@ -131,7 +131,7 @@ public class ConfiguratorImpl  implements Configurator {
         ConfigType type = types.getForPath(path);
         YMap docE = type.create(con, content);
         if (docE.isEmpty()) {
-             LOGGER.warn("Content is empty", uri);
+             LOGGER.warn("Content is empty for uri {}", uri);
             return;
         }
         YList importE = docE.getList("import");

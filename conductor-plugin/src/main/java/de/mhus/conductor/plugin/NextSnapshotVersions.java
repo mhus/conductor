@@ -74,7 +74,7 @@ public class NextSnapshotVersions  implements ExecutePlugin {
         
         if (staticVersion != null) {
             if (orgiginalVersion != null && orgiginalVersion.equals("0.0.0"))
-                LOGGER.info("Ignore project version",project.getName());
+                LOGGER.info("Ignore project '{}' version",project.getName());
             else
                 version = staticVersion;
         } else {
@@ -126,12 +126,12 @@ public class NextSnapshotVersions  implements ExecutePlugin {
                     }
                 }
             } else
-                LOGGER.info("Ignore project version",project.getName());
+                LOGGER.info("Ignore project '{}' version",project.getName());
 
         }
 
         if (version != null) {
-            LOGGER.info("Next project version", project.getName(), version);
+            LOGGER.info("Next project '{}' version: {}", project.getName(), version);
             ((MProperties) ((ContextProject) project).getInstance().getProperties())
                 .setString("version", version);
             if (orgiginalVersion != null) {
